@@ -24,16 +24,14 @@
                   ],
                   "styles": [
                      "src/styles.css",
-                     "src/assets/theme/vendor/bootstrap/css/bootstrap.min.css",
-                     "src/assets/theme/vendor/metisMenu/metisMenu.min.css",
-                     "src/assets/theme/dist/css/template.css",
-                     "src/assets/theme/vendor/font-awesome/css/font-awesome.min.css"
+                     "src/assets/theme/css/sb-admin-2.min.css",
+                     "src/assets/theme/vendor/fontawesome-free/css/all.min.css"
                   ],
                   "scripts": [
                      "src/assets/theme/vendor/jquery/jquery.min.js",
-                     "src/assets/theme/vendor/bootstrap/js/bootstrap.min.js",
-                     "src/assets/theme/vendor/metisMenu/metisMenu.min.js",
-                     "src/assets/theme/dist/js/template.js"
+                     "src/assets/theme/vendor/bootstrap/js/bootstrap.bundle.min.js",
+                     "src/assets/theme/vendor/jquery-easing/jquery.easing.min.js",
+                     "src/assets/theme/js/sb-admin-2.min.js"
                   ]
                },
                "configurations": {
