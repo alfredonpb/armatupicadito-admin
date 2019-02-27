@@ -2,3 +2,12 @@
 #toast-container > div {
    opacity: 1 !important;
 }
+.container-not-found {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   width: 360px;
+   height: 220px;
+   margin-left: -180px;
+   margin-top: -110px;
+}

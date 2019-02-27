@@ -8,8 +8,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 
 /** componenetes */
+import { NotFoundComponent } from './shared/not-found';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { LoginComponent } from './login/login.component';
 
 /** env */
 import { environment } from '../environments/environment';
@@ -19,7 +21,9 @@ import { AlertService } from './shared/alert.service';
 
 @NgModule({
    declarations: [
-      AppComponent
+      AppComponent,
+      NotFoundComponent,
+      LoginComponent
    ],
    imports: [
       BrowserModule,
