@@ -21,6 +21,7 @@ module.exports = {
       'padded-blocks': 0,
       'consistent-return': 0,
       'arrow-body-style': 0,
-      'comma-dangle': ['error', 'never']
+      'comma-dangle': ['error', 'never'],
+      'eol-last': 0
    },
 };
