@@ -9,6 +9,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 /** directives */
 
 /** componenets */
+import { NotFoundComponent } from '../shared/not-found/index';
 import { LayoutRoutingModule } from './layout-routing.module';
 import { LayoutComponent } from './layout.component';
 
@@ -32,7 +33,8 @@ import { HomeComponent } from './home/index';
       HeaderComponent,
       SidebarComponent,
       FooterComponent,
-      HomeComponent
+      HomeComponent,
+      NotFoundComponent
    ],
    providers: [
      
