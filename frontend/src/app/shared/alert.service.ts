@@ -21,7 +21,7 @@ export class AlertService {
    }
 
    /** mensajes de alerta */
-   showMessage(title: string, message: string, type: string) {
+   showMessage(title: string, message: string, type: string): void {
       if (type === 'success') { this.toastr.success(message, title, this.optionsToastr); }
       if (type === 'info') { this.toastr.info(message, title, this.optionsToastr); }
       if (type === 'warning') { this.toastr.warning(message, title, this.optionsToastr); }

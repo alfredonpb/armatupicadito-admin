@@ -1,11 +1,11 @@
-<ul (click)="toggleSidebar()" class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" [ngClass]="{ 'toggled': toggleMenu }" id="accordionSidebar">
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
    <!-- Sidebar - Brand -->
    <a class="sidebar-brand d-flex align-items-center justify-content-center" [routerLink]="['/home']">
       <div class="sidebar-brand-icon rotate-n-15">
-         <i class="fas fa-laugh-wink"></i>
+         <i class="fas fa-tools"></i>
       </div>
-      <div class="sidebar-brand-text mx-3">Home</div>
+      <div class="sidebar-brand-text mx-3">Admin</div>
    </a>
 
    <!-- Divider -->
@@ -110,8 +110,8 @@
    <hr class="sidebar-divider d-none d-md-block">
 
    <!-- Sidebar Toggler (Sidebar) -->
-   <div class="text-center d-none d-md-inline">
-      <button class="rounded-circle border-0" id="sidebarToggle"></button>
-   </div>
+   <!-- <div class="text-center d-none d-md-inline">
+      <button (click)="toggleSidebar()" class="rounded-circle border-0" id="sidebarToggle"></button>
+   </div> -->
 
 </ul>

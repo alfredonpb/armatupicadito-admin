@@ -6,15 +6,8 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class SidebarComponent implements OnInit {
-   toggleMenu: boolean = false;
-
    constructor(
    ) { }
 
    ngOnInit() { }
-
-   /** toggle sidebar */
-   toggleSidebar() {
-      this.toggleMenu = this.toggleMenu ? false : true;
-   }
 }
