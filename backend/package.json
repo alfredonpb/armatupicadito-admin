@@ -4,8 +4,24 @@
    "description": "",
    "main": "app.js",
    "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1"
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "run-server": "pm2 start app/run.js --name 'server' -o ./server-out.log -e ./server-error.log"
    },
    "author": "Darryn Josue",
-   "license": "MIT"
+   "license": "MIT",
+   "dependencies": {
+      "@types/node": "^11.9.5",
+      "bcrypt": "^3.0.4",
+      "body-parser": "^1.18.3",
+      "console-stamp": "^0.2.7",
+      "dotenv": "^6.2.0",
+      "express": "^4.16.4",
+      "jwt-simple": "^0.5.5",
+      "moment": "^2.24.0"
+   },
+   "devDependencies": {
+      "eslint": "^5.14.1",
+      "eslint-config-airbnb-base": "^13.1.0",
+      "eslint-plugin-import": "^2.16.0"
+   }
 }
