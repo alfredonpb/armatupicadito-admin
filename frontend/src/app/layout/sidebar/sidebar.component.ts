@@ -1,3 +1,4 @@
+import { AlertService } from './../../shared/alert.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,12 +9,15 @@ import { Component, OnInit } from '@angular/core';
 export class SidebarComponent implements OnInit {
    toggle: boolean = false;
 
-   constructor() { }
+   constructor(
+      private alertService: AlertService
+   ) { }
 
    ngOnInit() { }
 
    /** toggle sidebar */
    toggleSidebar() {
       this.toggle = this.toggle ? false : true;
+      this.alertService.showMessage('Título', 'Esto es una alerta', 'success');
    }
 }

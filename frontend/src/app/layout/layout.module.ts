@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-// plugins
+/** plugins */
 import { ModalModule } from 'ngx-bootstrap';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
-// directives
+/** directives */
 
-// components
+/** componenets */
 import { LayoutRoutingModule } from './layout-routing.module';
 import { LayoutComponent } from './layout.component';
 
@@ -35,7 +35,7 @@ import { HomeComponent } from './home/index';
       HomeComponent
    ],
    providers: [
-
+     
    ]
 })
 export class LayoutModule { }

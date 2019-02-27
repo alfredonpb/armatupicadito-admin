@@ -2,13 +2,20 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { APP_BASE_HREF } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-// components
+/** plugins */
+import { ToastrModule } from 'ngx-toastr';
+
+/** componenetes */
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-// environment
+/** env */
 import { environment } from '../environments/environment';
+
+/** services */
+import { AlertService } from './shared/alert.service';
 
 @NgModule({
    declarations: [
@@ -16,9 +23,12 @@ import { environment } from '../environments/environment';
    ],
    imports: [
       BrowserModule,
-      AppRoutingModule
+      BrowserAnimationsModule,
+      AppRoutingModule,
+      ToastrModule.forRoot()
    ],
    providers: [
+      AlertService,
       {
          provide: LocationStrategy,
          useClass: HashLocationStrategy
