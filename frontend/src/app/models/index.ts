@@ -1,2 +1,2 @@
-export { ProfileModel } from './profile.model';
-export { UserModule } from './user.model';
+export { Profile } from './profile.model';
+export { User } from './user.model';
