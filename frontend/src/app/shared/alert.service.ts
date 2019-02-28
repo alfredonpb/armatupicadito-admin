@@ -30,7 +30,8 @@ export class AlertService {
 
    /** mensajes de alerta de server */
    showMessageServer(error: any): void {
-      this.toastr.error(error.error.error, 'Error', this.optionsToastr);
+      const message = error.error.error;
+      this.toastr.error(message, 'Error', this.optionsToastr);
       if (error.status === 401) { this.router.navigate(['/login']); }
    }
 

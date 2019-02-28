@@ -22,6 +22,9 @@ import { environment } from '../environments/environment';
 import { AuthService } from './services/auth.service';
 import { AlertService } from './shared/alert.service';
 
+/** guards */
+import { AuthGuard } from './guards/index';
+
 @NgModule({
    declarations: [
       AppComponent,
@@ -38,6 +41,7 @@ import { AlertService } from './shared/alert.service';
       ToastrModule.forRoot()
    ],
    providers: [
+      AuthGuard,
       AuthService,
       AlertService,
       {

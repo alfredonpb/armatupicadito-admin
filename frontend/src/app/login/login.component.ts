@@ -1,8 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AuthService } from './../services/auth.service';
-import { AlertService } from './../shared/alert.service';
-import { User } from './../models/user.model';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+import { AlertService } from '../shared/alert.service';
+import { Storage } from '../shared/storage.class';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { environment } from '../../environments/environment';
 import * as $ from 'jquery';
 
 @Component({
@@ -14,6 +16,7 @@ export class LoginComponent implements OnInit, OnDestroy {
    form: FormGroup;
    
    constructor(
+      private router: Router,
       private authService: AuthService,
       private fb: FormBuilder,
       private alertService: AlertService
@@ -23,6 +26,7 @@ export class LoginComponent implements OnInit, OnDestroy {
    ngOnInit() { 
       $('#page-top').addClass('bg-gradient-primary');
       this.createForm();
+      this.authService.logout();
    }
 
    /** destroy component */
@@ -48,10 +52,10 @@ export class LoginComponent implements OnInit, OnDestroy {
       if (this.form.valid) {
          this.authService.login(credentials).subscribe(
             (data) => {
-               console.log(data);
+               this.router.navigate(['/home']);
+               Storage.setItem(environment.keySessionStorage, data.data);
             },
             (error) => {
-               debugger
                this.alertService.showMessageServer(error);
             }
          );
