@@ -18,9 +18,6 @@ import { FooterComponent } from './footer/index';
 
 import { HomeComponent } from './home/index';
 
-/** services */
-import { TestService } from '../services/test.service';
-
 @NgModule({
    imports: [
       CommonModule,
@@ -38,7 +35,7 @@ import { TestService } from '../services/test.service';
       HomeComponent
    ],
    providers: [
-      TestService
+      
    ]
 })
 export class LayoutModule { }

@@ -22,6 +22,7 @@ module.exports = {
       'consistent-return': 0,
       'arrow-body-style': 0,
       'comma-dangle': ['error', 'never'],
-      'eol-last': 0
+      'eol-last': 0,
+      'no-empty': 0
    },
 };

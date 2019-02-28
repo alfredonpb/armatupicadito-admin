@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 @Injectable()
 export class AlertService {
    optionsToastr: any = {
-      timeOut: 7000,
+      timeOut: 5000,
       closeButton: true,
       positionClass: 'toast-top-center',
       tapToDismiss: false,

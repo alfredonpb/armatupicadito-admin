@@ -22,10 +22,10 @@ const User = database.instanceSequelize.define('users', {
       type: database.Sequelize.INTEGER
    },
    created_at: {
-      type: database.Sequelize.DATETIME
+      type: database.Sequelize.DATE
    },
    updated_at: {
-      type: database.Sequelize.DATETIME
+      type: database.Sequelize.DATE
    }
 });
 

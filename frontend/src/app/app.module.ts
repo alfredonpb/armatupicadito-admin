@@ -4,6 +4,7 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { APP_BASE_HREF } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 /** plugins */
 import { ToastrModule } from 'ngx-toastr';
@@ -18,6 +19,7 @@ import { LoginComponent } from './login/login.component';
 import { environment } from '../environments/environment';
 
 /** services */
+import { AuthService } from './services/auth.service';
 import { AlertService } from './shared/alert.service';
 
 @NgModule({
@@ -27,6 +29,8 @@ import { AlertService } from './shared/alert.service';
       LoginComponent
    ],
    imports: [
+      FormsModule,
+      ReactiveFormsModule,
       HttpClientModule,
       BrowserModule,
       BrowserAnimationsModule,
@@ -34,6 +38,7 @@ import { AlertService } from './shared/alert.service';
       ToastrModule.forRoot()
    ],
    providers: [
+      AuthService,
       AlertService,
       {
          provide: LocationStrategy,

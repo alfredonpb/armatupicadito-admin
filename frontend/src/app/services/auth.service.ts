@@ -4,16 +4,17 @@ import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 
 @Injectable()
-export class TestService {
-   apiUrl = `${environment.apiUrl}/`;
+export class AuthService {
+   apiUrl = `${environment.apiUrl}/auth`;
 
    constructor(
-      private _http: HttpClient
+      private http: HttpClient
    ) {
    }
 
-   test(): Observable<any> {
-      return this._http.get(this.apiUrl);
+   /** login */
+   login(credentials: any): Observable<any> {
+      return this.http.post(`${this.apiUrl}/login`, credentials);
    }
 
 }

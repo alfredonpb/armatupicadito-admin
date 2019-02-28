@@ -11,17 +11,27 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const response = require('./shared/response');
 
+/** routing */
+const authRoute = require('./routes/auth.route');
+const usersRoute = require('./routes/user.route');
+
 const app = express();
 
-// rutas base y cors
+/** config routing */
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// ruta base
+/** routing base */
 app.get(`${PREFIX}/`, (req, res) => {
-   response.success(res, '¡Hola mundo!');
+   response.success(res, 'welcome api v1');
 });
+
+/** routing auth */
+app.use(`${PREFIX}/auth`, authRoute);
+
+/** routing users */
+app.use(`${PREFIX}/users`, usersRoute);
 
 // server corriendo
 app.listen(PORT, SERVER_HOST, () => {
