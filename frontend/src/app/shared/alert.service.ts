@@ -7,7 +7,7 @@ export class AlertService {
    optionsToastr: any = {
       timeOut: 5000,
       closeButton: true,
-      positionClass: 'toast-top-center',
+      positionClass: 'toast-top-right',
       tapToDismiss: false,
       progressBar: true,
       progressAnimation: 'increasing',

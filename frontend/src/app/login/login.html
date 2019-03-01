@@ -32,7 +32,7 @@
                               </small>
                            </div>
 
-                           <button (click)="login(form.value)" class="btn btn-primary btn-block">
+                           <button (click)="login(form.value)" [disabled]="loaderButton" class="btn btn-primary btn-block">
                               Entrar
                               <loader-button [loaderButton]="loaderButton"></loader-button>
                            </button>
