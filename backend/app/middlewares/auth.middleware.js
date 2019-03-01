@@ -1,7 +1,7 @@
 'use strict';
 
 const moment = require('moment');
-const jwt = require('jwt-simple');
+const jwt = require('jsonwebtoken');
 const response = require('../shared/response');
 
 const SECRET = process.env.SECRET_JWT;
@@ -17,14 +17,20 @@ function validate(req, res, next) {
       }
 
       const token = headers.replace('Bearer ', '');
-      const payload = jwt.decode(token, SECRET, 'HS512');
 
-      // token expirado
-      if (payload.exp <= moment.unix()) {
-         return response.error(res, 'El token de seguridad ha expirado', 401);
-      }
+      jwt.verify(token, SECRET, (error, decoded) => {
+         if (error) {
+            response.error(res, `${error.name}: ${error.message}`, 401);
+         }
+         if (decoded) {
+            // token expirado
+            if (decoded.exp <= moment.unix()) {
+               return response.error(res, 'El token de seguridad ha expirado', 401);
+            }
 
-      req.userLogged = payload;
+            req.userActive = decoded;
+         }
+      });
 
       next();
 
