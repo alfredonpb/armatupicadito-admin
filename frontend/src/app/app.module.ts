@@ -6,6 +6,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+/** shared */
+import { LoaderButtonComponent } from './shared/loader-button/index';
+
 /** plugins */
 import { ToastrModule } from 'ngx-toastr';
 
@@ -27,6 +30,7 @@ import { AuthGuard } from './guards/index';
 
 @NgModule({
    declarations: [
+      LoaderButtonComponent,
       AppComponent,
       NotFoundComponent,
       LoginComponent

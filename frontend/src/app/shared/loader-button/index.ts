@@ -1,0 +1,1 @@
+export { LoaderButtonComponent } from './loader-button.component';

@@ -26,12 +26,12 @@
 
                            <button (click)="login(form.value)" [disabled]="form.invalid" class="btn btn-primary btn-block">
                               Entrar
+                              <loader-button [loaderButton]="loaderButton"></loader-button>
                            </button>
                         </form>
                         <hr>
                         <div class="text-center">
                            <a class="small" href="forgot-password.html">
-                              <i class="fas fa-key"></i>
                               Recuperar contraseña
                            </a>
                         </div>

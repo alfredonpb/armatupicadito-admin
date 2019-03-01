@@ -14,6 +14,7 @@ import * as $ from 'jquery';
 
 export class LoginComponent implements OnInit, OnDestroy {
    form: FormGroup;
+   loaderButton: boolean = false;
    
    constructor(
       private router: Router,
@@ -50,13 +51,16 @@ export class LoginComponent implements OnInit, OnDestroy {
    /** buttom login */
    login(credentials: any) {
       if (this.form.valid) {
+         this.loaderButton = true;
          this.authService.login(credentials).subscribe(
             (data) => {
                this.router.navigate(['/home']);
                SessionStorageClass.setItem(environment.keySessionStorage, data.data);
+               this.loaderButton = false;
             },
             (error) => {
                this.alertService.showMessageServer(error);
+               this.loaderButton = false;
             }
          );
       } else {
