@@ -2,14 +2,16 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
-import { SessionStorage } from '../shared/session-storage.class';
+import { SessionStorageClass } from '../shared/session-storage/index';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthService {
    apiUrl = `${environment.apiUrl}/auth`;
 
    constructor(
-      private http: HttpClient
+      private http: HttpClient,
+      private router: Router,
    ) {
    }
 
@@ -20,7 +22,9 @@ export class AuthService {
 
    /** logout */
    logout() {
-      SessionStorage.remoteItem(environment.keySessionStorage);
+      SessionStorageClass.remoteItem(environment.keySessionStorage);
+      this.router.navigate(['/login']);
+      
    }
 
 }

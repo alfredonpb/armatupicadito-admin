@@ -1,6 +1,6 @@
-import { SessionStorageInterface } from '../models/index';
+import { SessionStorageModel } from './index';
 
-export class SessionStorage {
+export class SessionStorageClass {
 
    /** set storage */
    public static setItem(key: string, value: any): void {
@@ -9,7 +9,7 @@ export class SessionStorage {
 
    /** get storage */
    public static getItem(key: string) {
-      let storageData: SessionStorageInterface;
+      let storageData: SessionStorageModel;
       storageData = JSON.parse(sessionStorage.getItem(key));
 
       return  storageData;

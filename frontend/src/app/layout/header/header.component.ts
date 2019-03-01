@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
-import { SessionStorageInterface } from 'src/app/models';
-import { SessionStorage } from 'src/app/shared/session-storage.class';
+import { SessionStorageClass, SessionStorageModel } from 'src/app/shared/session-storage/index';
 import { environment } from 'src/environments/environment';
 import * as $ from 'jquery';
 
@@ -12,14 +11,14 @@ import * as $ from 'jquery';
 
 export class HeaderComponent implements OnInit {
    toggleMenu: boolean = false;
-   sessionUser: SessionStorageInterface;
+   sessionUser: SessionStorageModel;
    
    constructor(
       private authService: AuthService
    ) { }
 
    ngOnInit() { 
-      this.sessionUser = SessionStorage.getItem(environment.keySessionStorage);
+      this.sessionUser = SessionStorageClass.getItem(environment.keySessionStorage);
    }
 
    /** toggle sidebar */

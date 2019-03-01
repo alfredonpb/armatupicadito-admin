@@ -1,4 +1,4 @@
-export interface SessionStorageInterface {
+export interface SessionStorageModel {
    name: string;
    lastname: string;
    email: string;
