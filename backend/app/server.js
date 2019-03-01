@@ -15,6 +15,9 @@ const response = require('./shared/response');
 const authRoute = require('./routes/auth.route');
 const usersRoute = require('./routes/user.route');
 
+/** middlewares */
+const middlewares = require('./middlewares/index');
+
 const app = express();
 
 /** config routing */
@@ -31,7 +34,8 @@ app.get(`${PREFIX}/`, (req, res) => {
 app.use(`${PREFIX}/auth`, authRoute);
 
 /** routing users */
-app.use(`${PREFIX}/users`, usersRoute);
+app.use(`${PREFIX}/users/register`, usersRoute);
+app.use(`${PREFIX}/users`, middlewares.AuthMiddleware.validToken, usersRoute);
 
 // server corriendo
 app.listen(PORT, SERVER_HOST, () => {

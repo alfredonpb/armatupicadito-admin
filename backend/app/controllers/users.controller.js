@@ -9,8 +9,8 @@ const services = require('../services/index');
 
 /**
  * Registro de usuarios
- * @param {*} req 
- * @param {*} res 
+ * @param {*} req [request recibidos por http]
+ * @param {*} res [response respuesta http]
  */
 function register(req, res) {
 
