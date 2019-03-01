@@ -15,6 +15,7 @@ import * as $ from 'jquery';
 export class LoginComponent implements OnInit, OnDestroy {
    form: FormGroup;
    loaderButton: boolean = false;
+   submit: boolean = false;
    
    constructor(
       private router: Router,
@@ -50,6 +51,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
    /** buttom login */
    login(credentials: any) {
+      this.submit = true;
+
       if (this.form.valid) {
          this.loaderButton = true;
          this.authService.login(credentials).subscribe(
@@ -64,7 +67,7 @@ export class LoginComponent implements OnInit, OnDestroy {
             }
          );
       } else {
-         this.alertService.showMessage('Formulario', 'Los campos son requeridos', 'error');
+         this.form.markAsPristine();
       }
    }
 
