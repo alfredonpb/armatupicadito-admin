@@ -13,7 +13,7 @@ function generateToken(user) {
 
    const payload = {
       sub: user.id,
-      fullname: `${user.nombre}${user.apellido}`,
+      fullname: `${user.id}${user.nombre}${user.apellido}`,
       iat: moment().unix(),
       exp: moment().add(30, 'd').unix()
    };

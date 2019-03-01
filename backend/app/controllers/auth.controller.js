@@ -48,7 +48,7 @@ function login(req, res) {
 
                      } 
 
-                     return response.error(res, 'No se pudo verificar el password', 500);
+                     return response.error(res, 'Verificar el password', 500);
                      
                   }
                );
@@ -73,7 +73,16 @@ function login(req, res) {
    }
 
 }
+/**
+ * logout invalidar token
+ * @param {*} req 
+ * @param {*} res 
+ */
+function logout(req, res) {
+
+}
 
 module.exports = { 
-   login 
+   login,
+   logout
 };

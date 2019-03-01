@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { AlertService } from '../shared/alert.service';
-import { Storage } from '../shared/storage.class';
+import { SessionStorage } from '../shared/session-storage.class';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { environment } from '../../environments/environment';
 import * as $ from 'jquery';
@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit, OnDestroy {
          this.authService.login(credentials).subscribe(
             (data) => {
                this.router.navigate(['/home']);
-               Storage.setItem(environment.keySessionStorage, data.data);
+               SessionStorage.setItem(environment.keySessionStorage, data.data);
             },
             (error) => {
                this.alertService.showMessageServer(error);

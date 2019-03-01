@@ -1,13 +1,6 @@
-interface StorageInterface {
-   name: string;
-   lastname: string;
-   email: string;
-   phone: string;
-   profile_id: number;
-   token: string;
-}
+import { SessionStorageInterface } from '../models/index';
 
-export class Storage {
+export class SessionStorage {
 
    /** set storage */
    public static setItem(key: string, value: any): void {
@@ -16,7 +9,7 @@ export class Storage {
 
    /** get storage */
    public static getItem(key: string) {
-      let storageData: StorageInterface;
+      let storageData: SessionStorageInterface;
       storageData = JSON.parse(sessionStorage.getItem(key));
 
       return  storageData;
