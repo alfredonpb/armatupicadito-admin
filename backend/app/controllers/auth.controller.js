@@ -6,8 +6,8 @@ const services = require('../services/index');
 
 /**
  * login a sistema
- * @param {*} req 
- * @param {*} res 
+ * @param {*} req [request recibidos por http]
+ * @param {*} res [response respuesta http]
  */
 function login(req, res) {
 
@@ -75,8 +75,8 @@ function login(req, res) {
 }
 /**
  * logout invalidar token
- * @param {*} req 
- * @param {*} res 
+ * @param {*} req [request recibidos por http]
+ * @param {*} res [response respuesta http]
  */
 function logout(req, res) {
 

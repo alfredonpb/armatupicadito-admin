@@ -35,7 +35,7 @@ app.use(`${PREFIX}/auth`, authRoute);
 
 /** routing users */
 app.use(`${PREFIX}/users/register`, usersRoute);
-app.use(`${PREFIX}/users`, middlewares.AuthMiddleware.validate, usersRoute);
+app.use(`${PREFIX}/users`, middlewares.AuthMiddleware.validToken, usersRoute);
 
 // server corriendo
 app.listen(PORT, SERVER_HOST, () => {

@@ -6,7 +6,15 @@ const response = require('../shared/response');
 
 const SECRET = process.env.SECRET_JWT;
 
-function validate(req, res, next) {
+/**
+ * verificador de token valido para peticiones
+ *
+ * @param {*} req [request recibidos por http]
+ * @param {*} res [response respuesta http]
+ * @param {*} next [sequir con la peticion]
+ *
+ */
+function validToken(req, res, next) {
 
    try {
 
@@ -41,4 +49,4 @@ function validate(req, res, next) {
 
 }
 
-module.exports = { validate };
+module.exports = { validToken };

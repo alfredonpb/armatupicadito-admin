@@ -7,7 +7,7 @@ const SECRET = process.env.SECRET_JWT;
 
 /**
  * generar token dado usuario
- * @param {User} user 
+ * @param {User} user [objeto usuario] 
  */
 function generateToken(user) {
 
