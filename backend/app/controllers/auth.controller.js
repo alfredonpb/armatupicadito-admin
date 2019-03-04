@@ -73,16 +73,7 @@ function login(req, res) {
    }
 
 }
-/**
- * logout invalidar token
- * @param {*} req [request recibidos por http]
- * @param {*} res [response respuesta http]
- */
-function logout(req, res) {
-
-}
 
 module.exports = { 
-   login,
-   logout
+   login
 };

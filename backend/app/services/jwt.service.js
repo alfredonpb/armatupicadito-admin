@@ -12,7 +12,7 @@ const SECRET = process.env.SECRET_JWT;
 function generateToken(user) {
 
    const payload = {
-      user,
+      data: user,
       iat: moment().unix(),
       exp: moment().add(30, 'd').unix()
    };
