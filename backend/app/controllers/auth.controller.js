@@ -19,13 +19,13 @@ function login(req, res) {
          return response.error(res, 'Faltan datos por completar', 500);
       }   
 
-      const user = services.UserService.getUserByEmail(params.email);
+      const User = services.UserService.getUserByEmail(params.email);
 
-      user.then(
-         (dataUser) => {
+      User.then(
+         (userData) => {
 
-            if (dataUser) {
-               const hash = dataUser.password;
+            if (userData) {
+               const hash = userData.password;
                const password = params.password;
 
                bcrypt.compare(password, hash).then(
@@ -33,15 +33,15 @@ function login(req, res) {
 
                      if (dataPassword) {
 
-                        const generatedToken = services.JwtService.generateToken(dataUser);  
+                        const generatedToken = services.JwtService.generateToken(userData);  
 
                         const userLogged = {
-                           name: dataUser.name,
-                           lastname: dataUser.lastname,
-                           email: dataUser.email,
-                           phone: dataUser.phone,
-                           profile: dataUser.profile,
-                           profile_id: dataUser.profile_id,
+                           name: userData.name,
+                           lastname: userData.lastname,
+                           email: userData.email,
+                           phone: userData.phone,
+                           profile: userData.profile,
+                           profile_id: userData.profile_id,
                            token: generatedToken
                         };
 
@@ -49,11 +49,16 @@ function login(req, res) {
 
                      } 
 
-                     return response.error(res, 'Verificar el password', 500);
+                     return response.error(res, 'Password incorrecto', 500);
                      
                   }
+
+               ).catch(
+                  (exception) => { 
+                     return response.error(res, exception.message, 500); 
+                  }
                );
-               
+
             } else {
                return response.error(res, 'Credenciales incorrectas', 500);
             }

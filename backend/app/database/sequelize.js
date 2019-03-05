@@ -7,7 +7,7 @@ const MYSQL_TABLE = process.env.MYSQL_TABLE;
 
 const Sequelize = require('sequelize');
 
-const instanceSequelize = new Sequelize(MYSQL_TABLE, MYSQL_USER, MYSQL_PASSWORD, {
+const connection = new Sequelize(MYSQL_TABLE, MYSQL_USER, MYSQL_PASSWORD, {
    host: MYSQL_HOST,
    dialect: 'mysql',
    operatorsAliases: false,
@@ -22,4 +22,4 @@ const instanceSequelize = new Sequelize(MYSQL_TABLE, MYSQL_USER, MYSQL_PASSWORD,
    }
 });
 
-module.exports = { Sequelize, instanceSequelize };
+module.exports = { connection, Sequelize };

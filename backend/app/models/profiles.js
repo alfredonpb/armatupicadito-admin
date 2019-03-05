@@ -1,15 +1,15 @@
 'use strict';
 
-const database = require('../database/sequelize');
+const db = require('../database/sequelize');
 
-const Profile = database.instanceSequelize.define('profiles', {
+const Profile = db.connection.define('profiles', {
    id: {
-      type: database.Sequelize.INTEGER,
+      type: db.Sequelize.INTEGER,
       primaryKey: true,
       autoIncrement: true
    },
    name: {
-      type: database.Sequelize.STRING
+      type: db.Sequelize.STRING
    }
 
 });

@@ -1,36 +1,36 @@
 'use strict';
 
-const database = require('../database/sequelize');
+const db = require('../database/sequelize');
 
-const User = database.instanceSequelize.define('users', {
+const User = db.connection.define('users', {
    id: {
-      type: database.Sequelize.INTEGER,
+      type: db.Sequelize.INTEGER,
       primaryKey: true,
       autoIncrement: true
    },
    name: {
-      type: database.Sequelize.STRING
+      type: db.Sequelize.STRING
    },
    lastname: {
-      type: database.Sequelize.STRING
+      type: db.Sequelize.STRING
    },
    email: {
-      type: database.Sequelize.STRING
+      type: db.Sequelize.STRING
    },
    phone: {
-      type: database.Sequelize.STRING
+      type: db.Sequelize.STRING
    },
    password: {
-      type: database.Sequelize.STRING
+      type: db.Sequelize.STRING
    },
    profile_id: {
-      type: database.Sequelize.INTEGER
+      type: db.Sequelize.INTEGER
    },
    created_at: {
-      type: database.Sequelize.DATE
+      type: db.Sequelize.DATE
    },
    updated_at: {
-      type: database.Sequelize.DATE
+      type: db.Sequelize.DATE
    }
 });
 
