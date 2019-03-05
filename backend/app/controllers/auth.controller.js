@@ -22,25 +22,26 @@ function login(req, res) {
       const user = services.UserService.getUserByEmail(params.email);
 
       user.then(
-         (resolved) => {
+         (dataUser) => {
 
-            if (resolved) {
-               const hash = resolved.password;
+            if (dataUser) {
+               const hash = dataUser.password;
                const password = params.password;
 
                bcrypt.compare(password, hash).then(
-                  (data) => {
+                  (dataPassword) => {
 
-                     if (data) {
+                     if (dataPassword) {
 
-                        const generatedToken = services.JwtService.generateToken(resolved);  
+                        const generatedToken = services.JwtService.generateToken(dataUser);  
 
                         const userLogged = {
-                           name: resolved.name,
-                           lastname: resolved.lastname,
-                           email: resolved.email,
-                           phone: resolved.phone,
-                           profile_id: resolved.profile_id,
+                           name: dataUser.name,
+                           lastname: dataUser.lastname,
+                           email: dataUser.email,
+                           phone: dataUser.phone,
+                           profile: dataUser.profile,
+                           profile_id: dataUser.profile_id,
                            token: generatedToken
                         };
 
@@ -54,12 +55,9 @@ function login(req, res) {
                );
                
             } else {
-               return response.error(res, 'Datos incorrectos', 500);
+               return response.error(res, 'Credenciales incorrectas', 500);
             }
 
-         },
-         (rejected) => {
-            return response.error(res, rejected, 500);
          }
       ).catch(
          (exception) => { 

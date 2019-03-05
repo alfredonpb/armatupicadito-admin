@@ -10,25 +10,16 @@ const models = require('../models/index');
  */
 function getUserByEmail(email) {
 
-   const promise = new Promise((resolve, reject) => {
-
-      models.User.findOne({
-         where: {
-            email
-         }
-      }).then(
-         (data) => {
-            resolve(data);
-         }
-      ).catch(
-         (error) => {
-            reject(error);
-         }
-      );
-
+   const query = models.User.findOne({
+      where: {
+         email
+      },
+      include: [{
+         model: models.Profile
+      }]
    });
 
-   return promise;
+   return query;
 
 }
 

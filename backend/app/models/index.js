@@ -1,7 +1,3 @@
-const User = require('./users');
-const Profile = require('./profiles');
+const relationships = require('./relationships');
 
-module.exports = { 
-   User, 
-   Profile 
-};
+module.exports = relationships;

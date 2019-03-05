@@ -23,6 +23,7 @@ module.exports = {
       'arrow-body-style': 0,
       'comma-dangle': ['error', 'never'],
       'eol-last': 0,
-      'no-empty': 0
+      'no-empty': 0,
+      'import/newline-after-import': 0
    },
 };
