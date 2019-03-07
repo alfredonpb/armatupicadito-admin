@@ -7,11 +7,10 @@ const response = require('../shared/response');
 
 /** rules validations to user model */
 const checkRules = [
-   check('email').exists().isEmpty().withMessage('Email is required'),
-   check('password').exists().isEmpty().withMessage('Password is required'),
+   check('email').exists().isLength({ min: 1 }).withMessage('Email is required'),
+   check('password').exists().isLength({ min: 1 }).withMessage('Password is required'),
 
-   check('email').isEmail().withMessage('Invalid email format'),
-   check('profile_id').isInt().withMessage('Porfile is numeric')
+   check('email').isEmail().withMessage('Invalid email format')
 ];
 
 /** middleware by validate user register */

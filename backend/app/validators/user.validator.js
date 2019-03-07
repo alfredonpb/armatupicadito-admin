@@ -7,12 +7,12 @@ const response = require('../shared/response');
 
 /** rules validations to user model */
 const checkRules = [
-   check('name').exists().isEmpty().withMessage('Name is required'),
-   check('lastname').exists().isEmpty().withMessage('Lastname is required'),
-   check('email').exists().isEmpty().withMessage('Email is required'),
-   check('password').exists().isEmpty().withMessage('Password is required'),
-   check('phone').exists().isEmpty().withMessage('Phone is required'),
-   check('profile_id').exists().isEmpty().withMessage('Profile is required'),
+   check('name').exists().isLength({ min: 1 }).withMessage('Name is required'),
+   check('lastname').exists().isLength({ min: 1 }).withMessage('Lastname is required'),
+   check('email').exists().isLength({ min: 1 }).withMessage('Email is required'),
+   check('password').exists().isLength({ min: 1 }).withMessage('Password is required'),
+   check('phone').exists().isLength({ min: 1 }).withMessage('Phone is required'),
+   check('profile_id').exists().isLength({ min: 1 }).withMessage('Profile is required'),
 
    check('email').isEmail().withMessage('Invalid email format'),
    check('profile_id').isInt().withMessage('Porfile is numeric')
