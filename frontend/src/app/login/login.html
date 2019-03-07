@@ -16,7 +16,7 @@
                         </div>
                         <form [formGroup]="form" novalidate class="user">
                            <div class="form-group" [ngClass]="{ 'has-error': form.controls.email.errors && form.controls.email.pristine && submit }">
-                              <input type="email" class="form-control" formControlName="email" placeholder="Correo electrónico">
+                              <input type="email" class="form-control input-error" formControlName="email" placeholder="Correo electrónico">
 
                               <small *ngIf="form.controls.email.errors && form.controls.email.pristine && submit" class="form-text text-danger">
                                  <b *ngIf="form.controls.email.errors.required">El correo electrónico es requerido</b>
@@ -25,7 +25,7 @@
                            </div>
 
                            <div class="form-group" [ngClass]="{ 'has-error': form.controls.password.errors && form.controls.password.pristine && submit }">
-                              <input type="password" class="form-control" formControlName="password" placeholder="Contraseña">
+                              <input type="password" class="form-control input-error" formControlName="password" placeholder="Contraseña">
 
                               <small *ngIf="form.controls.password.errors && form.controls.password.pristine && submit" class="form-text text-danger">
                                  <b *ngIf="form.controls.password.errors.required">La contraseña es requerida</b>

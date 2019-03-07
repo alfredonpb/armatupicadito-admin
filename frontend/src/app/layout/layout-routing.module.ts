@@ -2,15 +2,16 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 // components
-import { NotFoundComponent } from '../shared/not-found/index';
 import { LayoutComponent } from './layout.component';
 import { HomeComponent } from './home';
+import { ListUserComponent } from './components/users/index';
 
 const routes: Routes = [
    {
       path: '', component: LayoutComponent,
       children: [
-         { path: 'home', component: HomeComponent }
+         { path: 'home', component: HomeComponent },
+         { path: 'users', component: ListUserComponent }
       ]
    }
 ];

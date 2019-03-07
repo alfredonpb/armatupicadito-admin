@@ -18,6 +18,8 @@ import { FooterComponent } from './footer/index';
 
 import { HomeComponent } from './home/index';
 
+import { ListUserComponent } from './components/users/index';
+
 @NgModule({
    imports: [
       CommonModule,
@@ -32,7 +34,8 @@ import { HomeComponent } from './home/index';
       HeaderComponent,
       SidebarComponent,
       FooterComponent,
-      HomeComponent
+      HomeComponent,
+      ListUserComponent
    ],
    providers: [
       
