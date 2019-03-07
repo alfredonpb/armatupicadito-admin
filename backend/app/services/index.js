@@ -1,3 +1,5 @@
+'use strict';
+
 const UserService = require('./user.service');
 const JwtService = require('./jwt.service');
 

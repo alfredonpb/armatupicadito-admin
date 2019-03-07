@@ -24,6 +24,7 @@ module.exports = {
       'comma-dangle': ['error', 'never'],
       'eol-last': 0,
       'no-empty': 0,
-      'import/newline-after-import': 0
+      'import/newline-after-import': 0,
+      'eqeqeq': 0
    },
 };
