@@ -34,8 +34,7 @@ app.get(`${PREFIX}/`, (req, res) => {
 app.use(`${PREFIX}/auth`, authRoute);
 
 /** routing users */
-app.use(`${PREFIX}/users/register`, usersRoute);
-app.use(`${PREFIX}/users`, middlewares.AuthMiddleware.validToken, usersRoute);
+app.use(`${PREFIX}/users`, middlewares.AuthMiddleware.validToken, middlewares.UserEnabledMiddleware.validEnabled, usersRoute);
 
 // server corriendo
 app.listen(PORT, SERVER_HOST, () => {

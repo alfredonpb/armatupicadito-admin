@@ -8,6 +8,6 @@ const validators = require('../validators/index');
 const route = express.Router();
 
 /** register users */
-route.post('/', validators.UserValidator.checkRules, validators.UserValidator.validate, controllers.UserController.register);
+route.post('/register', validators.UserValidator.checkRules, validators.UserValidator.validate, controllers.UserController.register);
 
 module.exports = route;

@@ -25,6 +25,12 @@ function login(req, res) {
          (userData) => {
 
             if (userData) {
+
+               /** se valida que no este deshabilitado el usuario */
+               if (!userData.enabled) {
+                  return response.error(res, 'El usuario está deshabilitado', 401);
+               }
+
                const hash = userData.password;
                const password = params.password;
 

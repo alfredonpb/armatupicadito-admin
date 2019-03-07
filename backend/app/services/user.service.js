@@ -24,6 +24,19 @@ function getUserByEmail(email) {
 }
 
 /**
+ * get usaurio dado su id
+ * @param   {number}  id  id del usuario
+ * @return  {Promise}      Promise
+ */
+function getById(id) {
+
+   const query = models.User.findById(id);
+
+   return query;
+   
+}
+
+/**
  * creacion de usuario
  * @param   {request}  request  parametros para guardar usuario
  * @return  {Promise}          Promesa
@@ -58,5 +71,6 @@ function create(request) {
 
 module.exports = {
    getUserByEmail,
+   getById,
    create
 };
