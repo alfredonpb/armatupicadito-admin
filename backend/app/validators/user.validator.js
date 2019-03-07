@@ -13,9 +13,11 @@ const checkRules = [
    check('password').exists().isLength({ min: 1 }).withMessage('Password is required'),
    check('phone').exists().isLength({ min: 1 }).withMessage('Phone is required'),
    check('profile_id').exists().isLength({ min: 1 }).withMessage('Profile is required'),
+   check('enabled').exists().isLength({ min: 1 }).withMessage('Enabled is required'),
 
    check('email').isEmail().withMessage('Invalid email format'),
-   check('profile_id').isInt().withMessage('Porfile is numeric')
+   check('profile_id').isInt().withMessage('Porfile is numeric'),
+   check('enabled').isBoolean().withMessage('Enabled is boolean')
 ];
 
 /** middleware by validate user register */

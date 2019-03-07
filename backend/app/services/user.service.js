@@ -39,6 +39,7 @@ function create(request) {
          password: request.hash,
          phone: request.phone,
          profile_id: request.profile_id,
+         enabled: request.enabled,
          created_at: request.now,
          updated_at: request.now
       }, { transaction: t }).then((user) => {

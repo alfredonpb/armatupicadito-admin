@@ -41,7 +41,7 @@ function login(req, res) {
                            email: userData.email,
                            phone: userData.phone,
                            profile: userData.profile,
-                           profile_id: userData.profile_id,
+                           enabled: userData.enabled,
                            token: generatedToken
                         };
 

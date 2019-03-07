@@ -27,6 +27,9 @@ const User = db.connection.define('users', {
    profile_id: {
       type: db.Sequelize.INTEGER
    },
+   enabled: {
+      type: db.Sequelize.BOOLEAN
+   },
    created_at: {
       type: db.Sequelize.DATE
    },
