@@ -27,7 +27,7 @@ app.use(bodyParser.json());
 
 /** routing base */
 app.get(`${PREFIX}/`, (req, res) => {
-   response.success(res, 'welcome api v1');
+   return response.success(res, 'welcome api v1');
 });
 
 /** routing auth */

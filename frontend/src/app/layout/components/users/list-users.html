@@ -1,9 +1,18 @@
 <div class="container-fluid">
 
-   <h2 class="text-gray-800 text-left">
-      <i class="fas fa-users"></i>
-      Usuarios
-   </h2>
+   <div class="d-sm-flex align-items-center justify-content-between mb-4">
+      <h2 class="text-gray-800">
+         <i class="fas fa-users"></i>
+         Usuarios
+      </h2>
+
+      <button class="btn btn-primary btn-icon-split">
+         <span class="icon text-white">
+            <i class="fas fa-plus"></i>
+         </span>
+         <span class="text font-weight-bold">Nuevo usuario</span>
+      </button>
+   </div>
 
    <br>
 
@@ -15,7 +24,7 @@
 
             <div class="col-md-3">
                <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Buscar...">
+                  <input type="text" class="form-control" placeholder="Buscar..." tooltip="Búsqueda por nombre completo, email, telefóno y perfil">
                   <div class="input-group-append">
                      <button class="btn btn-primary" type="button">
                         <i class="fas fa-search fa-sm"></i>
@@ -26,19 +35,18 @@
 
             <div class="col-md-2">
                <select class="form-control">
-                  <option value="">Ninguno...</option>
+                  <option value="">Ningún perfil...</option>
                   <option value="true">Habilitados</option>
                   <option value="false">Deshabilitados</option>
                </select>
             </div>
 
-            <div class="offset-md-5 col-md-2" style="text-align: right;">
-               <button class="btn btn-primary btn-icon-split" tooltip="Agregar" placement="top">
-                  <span class="icon text-white-50">
-                     <i class="fas fa-plus"></i>
-                  </span>
-                  <span class="text font-weight-bold">Agregar usuario</span>
-               </button>
+            <div class="col-md-2">
+               <select class="form-control">
+                  <option value="">Ningún estado...</option>
+                  <option value="true">Habilitados</option>
+                  <option value="false">Deshabilitados</option>
+               </select>
             </div>
 
          </div>
@@ -54,7 +62,7 @@
                      <th width="20%">Email</th>
                      <th width="20%">Teléfono</th>
                      <th width="20%">Perfil</th>
-                     <th width="10%">Habilitado</th>
+                     <th width="10%">Estado</th>
                      <th width="10%">Acciones</th>
                   </tr>
                </thead>
