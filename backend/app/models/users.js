@@ -15,7 +15,8 @@ const User = db.connection.define('users', {
       type: db.Sequelize.STRING
    },
    email: {
-      type: db.Sequelize.STRING
+      type: db.Sequelize.STRING,
+      unique: true
    },
    phone: {
       type: db.Sequelize.STRING

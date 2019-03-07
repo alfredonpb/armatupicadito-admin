@@ -1,3 +1,5 @@
+'use strict';
+
 /** models */
 const User = require('./users');
 const Profile = require('./profiles');
