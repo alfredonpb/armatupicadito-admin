@@ -8,6 +8,10 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 /** directives */
 
+/** services */
+import { ProfileService } from '../services/profile.service'; 
+import { UserService } from '../services/user.service'; 
+
 /** componenets */
 import { LayoutRoutingModule } from './layout-routing.module';
 import { LayoutComponent } from './layout.component';
@@ -38,7 +42,8 @@ import { ListUserComponent } from './components/users/index';
       ListUserComponent
    ],
    providers: [
-      
+      ProfileService,
+      UserService
    ]
 })
 export class LayoutModule { }

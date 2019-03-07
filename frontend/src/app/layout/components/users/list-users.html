@@ -36,8 +36,7 @@
             <div class="col-md-2">
                <select class="form-control">
                   <option value="">Ningún perfil...</option>
-                  <option value="true">Habilitados</option>
-                  <option value="false">Deshabilitados</option>
+                  <option *ngFor="let profile of cmbProfiles" [value]="profile.id">{{ profile.name }}</option>
                </select>
             </div>
 
