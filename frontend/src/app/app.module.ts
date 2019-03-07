@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { APP_BASE_HREF } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -27,6 +27,13 @@ import { AlertService } from './shared/alert.service';
 
 /** guards */
 import { AuthGuard } from './guards/index';
+
+// locale
+import { registerLocaleData } from '@angular/common';
+import localeAr from '@angular/common/locales/es-AR';
+import localeArExtra from '@angular/common/locales/extra/es-AR';
+
+registerLocaleData(localeAr, 'es-Ar', localeArExtra);
 
 @NgModule({
    declarations: [
@@ -56,6 +63,10 @@ import { AuthGuard } from './guards/index';
          provide: APP_BASE_HREF,
          useValue: environment.baseUrl
       },
+      {
+         provide: LOCALE_ID,
+         useValue: 'es-AR'
+      }
    ],
    bootstrap: [AppComponent]
 })

@@ -6,13 +6,20 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class HomeComponent implements OnInit {
-   dataTest: any;
+   time: Date;
 
    constructor(
    ) { }
 
    ngOnInit() { 
+      this.getTime();
+   }
 
+   /** get current time */
+   getTime() {
+      setInterval(() => {
+         this.time = new Date();
+      }, 1000);
    }
 
 }

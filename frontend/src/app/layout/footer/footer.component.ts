@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment.test';
 
 @Component({
    selector: 'app-footer',
@@ -6,7 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class FooterComponent implements OnInit {
+   version: string = environment.version;
+
    constructor() { }
 
-   ngOnInit() { }
+   ngOnInit() { 
+   }
 }
