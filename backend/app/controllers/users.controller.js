@@ -7,9 +7,12 @@ const response = require('../shared/response');
 const services = require('../services/index');
 
 /**
- * Registro de usuarios
- * @param {*} req [request recibidos por http]
- * @param {*} res [response respuesta http]
+ * register of users
+ * 
+ * @param   {Request}  req  request
+ * @param   {Response}  res  response
+ *
+ * @return  {Response}       response to front
  */
 function register(req, res) {
 
@@ -61,4 +64,38 @@ function register(req, res) {
 
 }
 
-module.exports = { register };
+/**
+ * get list of users by filter
+ *
+ * @param   {Request}  req  request
+ * @param   {Response}  res  response
+ *
+ * @return  {Response}       response to front
+ */
+function getByFilter(req, res) {
+
+   try {
+      
+      const User = services.UserService.getByFilter(req.query);
+
+      User.then(
+         (userData) => {
+            return response.success(res, userData); 
+         }
+      ).catch(
+         (error) => { 
+            return response.error(res, error.message, 500); 
+         }
+      );
+
+   } catch (exception) {
+      console.log(`Error en filter de usuarios ${exception}`);
+      return response.error(res, exception.message, 500);
+   }
+
+}
+
+module.exports = { 
+   register,
+   getByFilter 
+};

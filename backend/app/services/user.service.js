@@ -2,11 +2,51 @@
 
 const models = require('../models/index');
 const db = require('../database/sequelize');
+const Op = db.Sequelize.Op;
+
+const LIMIT_PAGE = process.env.LIMIT_PAGE;
 
 /**
- * get usuarios dado email  
- * @param {string} email
- * @return {Promise}
+ * get list of users by filter
+ *
+ * @param   {Request}  filter  query params
+ *
+ * @return  {Premise}          promise
+ */
+function getByFilter(filter) {
+
+   const limitPage = Number(LIMIT_PAGE);
+   const offsetPage = (filter.page * limitPage);
+
+   const criteria = filter.search ? filter.search : '';
+
+   const query = models.User.findAll({
+      where: {
+         name: {
+            [Op.like]: `%${criteria}%`
+         }
+      },
+      include: [{
+         model: models.Profile
+      }],
+      order: [
+         ['name', 'ASC'],
+         ['lastname', 'ASC']
+      ],
+      limit: limitPage,
+      offset: offsetPage
+   });
+
+   return query;
+
+}
+
+/**
+ * get users by email 
+ * 
+ * @param {string} email email of users
+ * 
+ * @return {Promise}    Promise
  */
 function getUserByEmail(email) {
 
@@ -24,8 +64,10 @@ function getUserByEmail(email) {
 }
 
 /**
- * get usaurio dado su id
- * @param   {number}  id  id del usuario
+ * get user by id
+ * 
+ * @param   {number}  id  id of user
+ * 
  * @return  {Promise}      Promise
  */
 function getById(id) {
@@ -37,9 +79,11 @@ function getById(id) {
 }
 
 /**
- * creacion de usuario
- * @param   {request}  request  parametros para guardar usuario
- * @return  {Promise}          Promesa
+ * create users by params http
+ * 
+ * @param   {Request}  request  http params
+ * 
+ * @return  {Promise}          Promise
  */
 function create(request) {
 
@@ -70,6 +114,7 @@ function create(request) {
 }
 
 module.exports = {
+   getByFilter,
    getUserByEmail,
    getById,
    create
