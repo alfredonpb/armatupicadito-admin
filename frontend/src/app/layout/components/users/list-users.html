@@ -1,3 +1,5 @@
+<loader [loader]="loader"></loader>
+
 <div class="container-fluid">
 
    <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -24,9 +26,9 @@
 
             <div class="col-md-3">
                <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Buscar..." tooltip="Búsqueda por nombre completo, email, telefóno y perfil">
+                  <input type="text" class="form-control" placeholder="Buscar..." [(ngModel)]="filterFields.search" #ctrl="ngModel" tooltip="Búsqueda por nombre completo, email, telefóno">
                   <div class="input-group-append">
-                     <button class="btn btn-primary" type="button">
+                     <button (click)="initFilter(filterFields)" class="btn btn-primary" type="button">
                         <i class="fas fa-search fa-sm"></i>
                      </button>
                   </div>
@@ -34,19 +36,24 @@
             </div>
 
             <div class="col-md-2">
-               <select class="form-control">
+               <select class="form-control" [(ngModel)]="filterFields.profile" #ctrl="ngModel" (change)="initFilter(filterFields)">
                   <option value="">Ningún perfil...</option>
+                  <option *ngFor="let profile of cmbProfiles" [value]="profile.id">{{ profile.name }}</option>
+               </select>
+            </div>
+
+            <div class="col-md-2">
+               <select class="form-control" [(ngModel)]="filterFields.enabled" #ctrl="ngModel" (change)="initFilter(filterFields)">
+                  <option value="">Ningún estado...</option>
                   <option value="true">Habilitados</option>
                   <option value="false">Deshabilitados</option>
                </select>
             </div>
 
-            <div class="col-md-2">
-               <select class="form-control">
-                  <option value="">Ningún estado...</option>
-                  <option value="true">Habilitados</option>
-                  <option value="false">Deshabilitados</option>
-               </select>
+            <div class="offset-md-3 col-md-2 text-right">
+               <button (click)="resetFilter()" class="btn btn-primary btn-circle" tooltip="Limpiar filtro" placement="left">
+                  <i class="fas fa-broom"></i>
+                </button>
             </div>
 
          </div>
@@ -61,52 +68,22 @@
                      <th width="20%">Nombre completo</th>
                      <th width="20%">Email</th>
                      <th width="20%">Teléfono</th>
-                     <th width="20%">Perfil</th>
-                     <th width="10%">Estado</th>
+                     <th width="15%">Perfil</th>
+                     <th width="15%">Estado</th>
                      <th width="10%">Acciones</th>
                   </tr>
                </thead>
                <tbody>
-                  <tr>
-                     <td>Donna Snider</td>
-                     <td>Customer Support</td>
-                     <td>New York</td>
-                     <td>27</td>
-                     <td>27</td>
+                  <tr *ngFor="let user of listUsers; let i = index">
+                     <td>{{ user.name }} {{ user.lastname }}</td>
+                     <td>{{ user.email }}</td>
+                     <td>{{ user.phone }}</td>
+                     <td>{{ user.profile.name }}</td>
                      <td>
-                        <button class="btn btn-success btn-circle" tooltip="Editar">
-                           <i class="fas fa-edit"></i>
-                        </button>
-                        &nbsp;
-                        <button class="btn btn-danger btn-circle" tooltip="Eliminar">
-                           <i class="fas fa-trash-alt"></i>
-                        </button>
+                        <span class="badge" [ngClass]="{ 'badge-success': user.enabled, 'badge-warning': !user.enabled }">{{ user.enabled ? 'Habilitado' : 'Deshabilitado' }}</span>
                      </td>
-                  </tr>
-                  <tr>
-                     <td>Donna Snider</td>
-                     <td>Customer Support</td>
-                     <td>New York</td>
-                     <td>27</td>
-                     <td>27</td>
                      <td>
-                        <button class="btn btn-success btn-circle" tooltip="Editar">
-                           <i class="fas fa-edit"></i>
-                        </button>
-                        &nbsp;
-                        <button class="btn btn-danger btn-circle" tooltip="Eliminar">
-                           <i class="fas fa-trash-alt"></i>
-                        </button>
-                     </td>
-                  </tr>
-                  <tr>
-                     <td>Donna Snider</td>
-                     <td>Customer Support</td>
-                     <td>New York</td>
-                     <td>27</td>
-                     <td>27</td>
-                     <td>
-                        <button class="btn btn-success btn-circle" tooltip="Editar">
+                        <button class="btn btn-info btn-circle" tooltip="Editar">
                            <i class="fas fa-edit"></i>
                         </button>
                         &nbsp;
@@ -118,7 +95,11 @@
                </tbody>
             </table>
 
-            <button class="btn btn-primary btn-block">
+            <h2 *ngIf="emptyList" class="text-center">
+               No hay resultados para la búsqueda <br><br>
+            </h2>
+
+            <button *ngIf="nextPage" (click)="doSearch(filterFields)" class="btn btn-primary btn-block font-weight-bold">
                <i class="fas fa-arrow-down"></i> Ver más registros
             </button>
 

@@ -13,7 +13,8 @@ const response = require('./shared/response');
 
 /** routing */
 const authRoute = require('./routes/auth.route');
-const usersRoute = require('./routes/user.route');
+const userRoute = require('./routes/user.route');
+const ProfileRoute = require('./routes/profile.route');
 
 /** middlewares */
 const middlewares = require('./middlewares/index');
@@ -33,8 +34,11 @@ app.get(`${PREFIX}/`, (req, res) => {
 /** routing auth */
 app.use(`${PREFIX}/auth`, authRoute);
 
+/** routing profiles */
+app.use(`${PREFIX}/profiles`, middlewares.AuthMiddleware.validToken, middlewares.UserEnabledMiddleware.validEnabled, ProfileRoute);
+
 /** routing users */
-app.use(`${PREFIX}/users`, middlewares.AuthMiddleware.validToken, middlewares.UserEnabledMiddleware.validEnabled, usersRoute);
+app.use(`${PREFIX}/users`, middlewares.AuthMiddleware.validToken, middlewares.UserEnabledMiddleware.validEnabled, userRoute);
 
 // server corriendo
 app.listen(PORT, SERVER_HOST, () => {

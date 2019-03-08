@@ -6,7 +6,8 @@ export class CustomHeaders {
 
    public static jwt() {
       const currentUser = SessionStorageClass.getItem(environment.keySessionStorage);
-      let headers: HttpHeaders; // instancio el objecto cabeceras
+      let headers: HttpHeaders;
+      const params = new HttpParams(); 
 
       // si existe un usuario en local storage y su token
       if (currentUser) {
@@ -15,7 +16,7 @@ export class CustomHeaders {
          ); // creo el header con el token
       }
 
-      return { headers };
+      return { headers, params };
 
    }
 

@@ -8,6 +8,10 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 /** directives */
 
+/** services */
+import { ProfileService } from '../services/profile.service'; 
+import { UserService } from '../services/user.service'; 
+
 /** componenets */
 import { LayoutRoutingModule } from './layout-routing.module';
 import { LayoutComponent } from './layout.component';
@@ -20,6 +24,9 @@ import { HomeComponent } from './home/index';
 
 import { ListUserComponent } from './components/users/index';
 
+/** shared */
+import { LoaderComponent } from '../shared/loader/index';
+
 @NgModule({
    imports: [
       CommonModule,
@@ -30,6 +37,7 @@ import { ListUserComponent } from './components/users/index';
       TooltipModule.forRoot()
    ],
    declarations: [
+      LoaderComponent,
       LayoutComponent,
       HeaderComponent,
       SidebarComponent,
@@ -38,7 +46,8 @@ import { ListUserComponent } from './components/users/index';
       ListUserComponent
    ],
    providers: [
-      
+      ProfileService,
+      UserService
    ]
 })
 export class LayoutModule { }

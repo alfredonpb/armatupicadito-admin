@@ -10,4 +10,7 @@ const route = express.Router();
 /** register users */
 route.post('/register', validators.UserValidator.checkRules, validators.UserValidator.validate, controllers.UserController.register);
 
+/** filter users */
+route.get('/get-by-filter', controllers.UserController.getByFilter);
+
 module.exports = route;

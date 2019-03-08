@@ -1,1 +1,1 @@
-export { ListUserComponent } from './list-users.componenet';
+export { ListUserComponent } from './list-users.component';

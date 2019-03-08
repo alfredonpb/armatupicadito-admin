@@ -4,8 +4,8 @@ Arma tu picadito, es un software de gestión de canchas de fútbol.
 
 ## Installation
 
-Backend (nodejs)
-Frontend (Angular 7)
+Backend (nodejs): instalar dependencias
+Frontend (Angular 7): instalar dependencias
 
 ## Usage
 
