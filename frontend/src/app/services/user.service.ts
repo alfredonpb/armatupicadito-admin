@@ -13,8 +13,18 @@ export class UserService {
    ) { }
 
    /** get by filters */
-   getByFilters(filter: any): Observable<any> {
-      return this.http.get(`${this.apiUrl}/get-by-filters`, CustomHeaders.jwt());
+   getByFilter(filter: any): Observable<any> {
+      const customRequest = CustomHeaders.jwt();
+
+      const params = customRequest.params
+         .append('search', filter.search)
+         .append('profile', filter.profile)
+         .append('enabled', filter.enabled)
+         .append('page', filter.page);
+
+      const options = { headers: customRequest.headers, params: params };
+
+      return this.http.get(`${this.apiUrl}/get-by-filters`, options);
    }
 
 }
