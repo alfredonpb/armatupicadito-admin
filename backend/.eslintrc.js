@@ -25,6 +25,7 @@ module.exports = {
       'eol-last': 0,
       'no-empty': 0,
       'import/newline-after-import': 0,
-      'eqeqeq': 0
+      'eqeqeq': 0,
+      'no-unneeded-ternary': 0
    },
 };

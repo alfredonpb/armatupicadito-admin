@@ -18,13 +18,34 @@ function getByFilter(filter) {
    const limitPage = Number(LIMIT_PAGE);
    const offsetPage = (filter.page * limitPage);
 
-   const criteria = filter.search ? filter.search : '';
+   const criteriaSearch = filter.search ? filter.search : '';
+
+   /** when profile is received */
+   const profile = Number(filter.profile);
+   let profileWhere = '';
+
+   if (profile > 0) {
+      profileWhere = { profile_id: profile };
+   }
+
+   /** whern enabled is received */
+   let enabledWhere = '';
+   if (filter.enabled) {
+      enabledWhere = { enabled: filter.enabled == 'true' ? true : false };
+   }
 
    const query = models.User.findAll({
       where: {
-         name: {
-            [Op.like]: `%${criteria}%`
-         }
+         [Op.or]: [
+            { name: { [Op.like]: `%${criteriaSearch}%` } },
+            { lastname: { [Op.like]: `%${criteriaSearch}%` } },
+            { email: { [Op.like]: `%${criteriaSearch}%` } },
+            { phone: { [Op.like]: `%${criteriaSearch}%` } }
+         ],
+         [Op.and]: [
+            profileWhere,
+            enabledWhere
+         ]
       },
       include: [{
          model: models.Profile

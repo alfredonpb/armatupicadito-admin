@@ -139,7 +139,7 @@ export class ListUserComponent implements OnInit {
    /** resetear filtro a valores por default */
    resetFilter() {
       this.filterFields.search = '';
-      this.filterFields.profile = 1;
+      this.filterFields.profile = '';
       this.filterFields.enabled = '';
 
       this.filter();
