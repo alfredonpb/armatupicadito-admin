@@ -24,7 +24,7 @@ export class UserService {
 
       const options = { headers: customRequest.headers, params: params };
 
-      return this.http.get(`${this.apiUrl}/get-by-filters`, options);
+      return this.http.get(`${this.apiUrl}/get-by-filter`, options);
    }
 
 }

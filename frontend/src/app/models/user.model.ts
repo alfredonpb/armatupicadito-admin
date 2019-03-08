@@ -7,7 +7,7 @@ export interface User {
    email: string;
    password: string;
    phone: string;
-   disabled: boolean;
+   enabled: boolean;
    profile_id: number;
    profile: Profile;
 }
