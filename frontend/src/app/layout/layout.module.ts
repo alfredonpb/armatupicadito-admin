@@ -24,6 +24,9 @@ import { HomeComponent } from './home/index';
 
 import { ListUserComponent } from './components/users/index';
 
+/** shared */
+import { LoaderComponent } from '../shared/loader/index';
+
 @NgModule({
    imports: [
       CommonModule,
@@ -34,6 +37,7 @@ import { ListUserComponent } from './components/users/index';
       TooltipModule.forRoot()
    ],
    declarations: [
+      LoaderComponent,
       LayoutComponent,
       HeaderComponent,
       SidebarComponent,
