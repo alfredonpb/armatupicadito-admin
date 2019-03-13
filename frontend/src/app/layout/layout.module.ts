@@ -27,6 +27,7 @@ import { HomeComponent } from './home/index';
 
 import { ListUserComponent } from './components/users/index';
 import { CreateUserComponent } from './components/users/create/index';
+import { EditUserComponent } from './components/users/edit/index';
 
 /** shared */
 import { LoaderComponent } from '../shared/loader/index';
@@ -49,7 +50,8 @@ import { LoaderComponent } from '../shared/loader/index';
       FooterComponent,
       HomeComponent,
       ListUserComponent,
-      CreateUserComponent
+      CreateUserComponent,
+      EditUserComponent
    ],
    providers: [
       ProfileService,

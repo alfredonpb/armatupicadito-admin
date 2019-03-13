@@ -10,7 +10,6 @@ const checkRules = [
    check('name').exists().isLength({ min: 1 }).withMessage('Name is required'),
    check('lastname').exists().isLength({ min: 1 }).withMessage('Lastname is required'),
    check('email').exists().isLength({ min: 1 }).withMessage('Email is required'),
-   check('password').exists().isLength({ min: 1 }).withMessage('Password is required'),
    check('phone').exists().isLength({ min: 1 }).withMessage('Phone is required'),
    check('profile_id').exists().isLength({ min: 1 }).withMessage('Profile is required'),
    check('enabled').exists().isLength({ min: 1 }).withMessage('Enabled is required'),

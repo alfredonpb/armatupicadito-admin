@@ -7,6 +7,37 @@ const response = require('../shared/response');
 const services = require('../services/index');
 
 /**
+ * get list of users by filter
+ *
+ * @param   {Request}  req  request
+ * @param   {Response}  res  response
+ *
+ * @return  {Response}       response to front
+ */
+function getByFilter(req, res) {
+
+   try {
+      
+      const User = services.UserService.getByFilter(req.query);
+
+      User.then(
+         (userData) => {
+            return response.success(res, userData); 
+         }
+      ).catch(
+         (error) => { 
+            return response.error(res, error.message, 500); 
+         }
+      );
+
+   } catch (exception) {
+      console.log(`Error en filter de usuarios ${exception}`);
+      return response.error(res, exception.message, 500);
+   }
+
+}
+
+/**
  * register of users
  * 
  * @param   {Request}  req  request
@@ -72,30 +103,12 @@ function register(req, res) {
  *
  * @return  {Response}       response to front
  */
-function getByFilter(req, res) {
-
-   try {
-      
-      const User = services.UserService.getByFilter(req.query);
-
-      User.then(
-         (userData) => {
-            return response.success(res, userData); 
-         }
-      ).catch(
-         (error) => { 
-            return response.error(res, error.message, 500); 
-         }
-      );
-
-   } catch (exception) {
-      console.log(`Error en filter de usuarios ${exception}`);
-      return response.error(res, exception.message, 500);
-   }
-
+function update(req, res) {
+   return response.success(res, 'updated user'); 
 }
 
 module.exports = { 
+   getByFilter, 
    register,
-   getByFilter 
+   update
 };

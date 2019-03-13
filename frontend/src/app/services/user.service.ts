@@ -33,4 +33,9 @@ export class UserService {
       return this.http.post(`${this.apiUrl}/register`, values, CustomHeaders.jwt());
    }
 
+   /** update user */
+   update(values: User, id: number) {
+      return this.http.put(`${this.apiUrl}/update/${id}`, values, CustomHeaders.jwt());
+   }
+
 }

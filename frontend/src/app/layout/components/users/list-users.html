@@ -74,15 +74,15 @@
                </thead>
                <tbody>
                   <tr *ngFor="let user of listUsers; let i = index">
-                     <td>{{ user.name }} {{ user.lastname }}</td>
-                     <td>{{ user.email }}</td>
-                     <td>{{ user.phone }}</td>
-                     <td>{{ user.profile.name }}</td>
+                     <td (click)="modalEditUser.showModal(user)" style="cursor: pointer;">{{ user.name }} {{ user.lastname }}</td>
+                     <td (click)="modalEditUser.showModal(user)" style="cursor: pointer;">{{ user.email }}</td>
+                     <td (click)="modalEditUser.showModal(user)" style="cursor: pointer;">{{ user.phone }}</td>
+                     <td (click)="modalEditUser.showModal(user)" style="cursor: pointer;">{{ user.profile.name }}</td>
                      <td>
                         <span class="badge" [ngClass]="{ 'badge-success': user.enabled, 'badge-warning': !user.enabled }">{{ user.enabled ? 'Habilitado' : 'Deshabilitado' }}</span>
                      </td>
                      <td>
-                        <button class="btn btn-info btn-circle" tooltip="Editar">
+                        <button (click)="modalEditUser.showModal(user)" class="btn btn-info btn-circle" tooltip="Modificar">
                            <i class="fas fa-edit"></i>
                         </button>
                         &nbsp;
@@ -111,3 +111,6 @@
 
 <!-- create user -->
 <create-user #modalCreateUser [cmbProfiles]="cmbProfiles" (dispatchEvent)="filter()"></create-user>
+
+<!-- edit user -->
+<edit-user #modalEditUser [cmbProfiles]="cmbProfiles" (dispatchEvent)="updateList($event)"></edit-user>
