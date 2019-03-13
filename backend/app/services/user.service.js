@@ -188,7 +188,7 @@ function update(request, id) {
       (user) => {
          return db.connection.transaction((t) => {
 
-            return user.updat(values, { transaction: t });
+            return user.update(values, { transaction: t });
       
          }).then((result) => {
             return result;

@@ -3,7 +3,8 @@ import { ProfileService } from 'src/app/services/profile.service';
 import { AlertService } from 'src/app/shared/alert.service';
 import { Profile, User } from 'src/app/models';
 import { UserService } from 'src/app/services/user.service';
-import { CreateUserComponent } from './create';
+import { CreateUserComponent } from './create/index';
+import { EditUserComponent } from './edit/index';
 
 @Component({
    selector: 'list-users',
@@ -12,6 +13,7 @@ import { CreateUserComponent } from './create';
 
 export class ListUserComponent implements OnInit {
    @ViewChild('modalCreateUser') modalCreateUser: CreateUserComponent;
+   @ViewChild('modalEditUser') modalEditUser: EditUserComponent;
    listUsers: User[] = [];
    cmbProfiles: Profile[] = [];
    page: number = -1;
@@ -40,7 +42,7 @@ export class ListUserComponent implements OnInit {
    /** event entet to filter */
    @HostListener('keydown', ['$event'])
    eventSearch(event: any) {
-      if (event.keyCode === 13 && !this.modalCreateUser.modalCreateUser.isShown) { 
+      if (event.keyCode === 13 && !this.modalCreateUser.modalCreateUser.isShown && !this.modalEditUser.modalEditUser.isShown) { 
          this.initFilter(this.filterFields);
       }
    }
