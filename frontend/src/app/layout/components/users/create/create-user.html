@@ -1,0 +1,142 @@
+<div bsModal #modalCreateUser="bs-modal" class="modal fade" tabindex="-1" [config]="{ backdrop: 'static', keyboard: false }">
+   <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+         <div class="modal-header">
+            <h4 id="dialog-child-name" class="modal-title pull-left">Nuevo usuario</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="hideModal()">
+               <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+
+         <div class="modal-body">
+
+            <form [formGroup]="form" novalidate class="container">
+
+               <div class="form-group row" [ngClass]="{ 'has-error': form.controls.name.errors && form.controls.name.pristine && submit }">
+                  <label for="name" class="col-sm-3 col-form-label">
+                     Nombre <strong class="text-danger">*</strong>
+                  </label>
+                  <div class="col-md-9">
+                     <input type="name" class="form-control input-error" formControlName="name" placeholder="Nombre">
+                  </div>
+
+                  <div class="offset-md-3 col-md-9">
+                     <small *ngIf="form.controls.name.errors && form.controls.name.pristine && submit" class="form-text text-danger">
+                        <b *ngIf="form.controls.name.errors.required">Éste campo es requerido</b>
+                     </small>
+                  </div>
+               </div>
+
+               <div class="form-group row" [ngClass]="{ 'has-error': form.controls.lastname.errors && form.controls.lastname.pristine && submit }">
+                  <label for="lastname" class="col-sm-3 col-form-label">
+                     Apellido <strong class="text-danger">*</strong>
+                  </label>
+                  <div class="col-md-9">
+                     <input type="text" class="form-control input-error" formControlName="lastname" placeholder="Apellido">
+                  </div>
+
+                  <div class="offset-md-3 col-md-9">
+                     <small *ngIf="form.controls.lastname.errors && form.controls.lastname.pristine && submit" class="form-text text-danger">
+                        <b *ngIf="form.controls.lastname.errors.required">Éste campo es requerido</b>
+                     </small>
+                  </div>
+               </div>
+
+               <div class="form-group row" [ngClass]="{ 'has-error': form.controls.email.errors && form.controls.email.pristine && submit }">
+                  <label for="email" class="col-sm-3 col-form-label">
+                     Email <strong class="text-danger">*</strong>
+                  </label>
+                  <div class="col-md-9">
+                     <input type="email" class="form-control input-error" formControlName="email" placeholder="Email">
+                  </div>
+
+                  <div class="offset-md-3 col-md-9">
+                     <small *ngIf="form.controls.email.errors && form.controls.email.pristine && submit" class="form-text text-danger">
+                        <b *ngIf="form.controls.email.errors.required">Éste campo es requerido</b>
+                        <b *ngIf="form.controls.email.errors.pattern">Formato de email incorrecto</b>
+                     </small>
+                  </div>
+               </div>
+
+               <div class="form-group row" [ngClass]="{ 'has-error': form.controls.phone.errors && form.controls.phone.pristine && submit }">
+                  <label for="phone" class="col-sm-3 col-form-label">
+                     Teléfono <strong class="text-danger">*</strong>
+                  </label>
+                  <div class="col-md-9">
+                     <input type="text" class="form-control input-error" formControlName="phone" placeholder="Teléfono">
+                  </div>
+
+                  <div class="offset-md-3 col-md-9">
+                     <small *ngIf="form.controls.phone.errors && form.controls.phone.pristine && submit" class="form-text text-danger">
+                        <b *ngIf="form.controls.phone.errors.required">Éste campo es requerido</b>
+                     </small>
+                  </div>
+               </div>
+
+               <div class="form-group row" [ngClass]="{ 'has-error': form.controls.profile_id.errors && form.controls.profile_id.pristine && submit }">
+                  <label for="profile_id" class="col-sm-3 col-form-label">
+                     Perfil <strong class="text-danger">*</strong>
+                  </label>
+                  <div class="col-md-9">
+                     <select class="form-control input-error" formControlName="profile_id">
+                        <option value="" disabled>Ninguno...</option>
+                        <option *ngFor="let profile of cmbProfiles" [value]="profile.id">{{ profile.name }}</option>
+                     </select>
+                  </div>
+
+                  <div class="offset-md-3 col-md-9">
+                     <small *ngIf="form.controls.profile_id.errors && form.controls.profile_id.pristine && submit" class="form-text text-danger">
+                        <b *ngIf="form.controls.profile_id.errors.required">Éste campo es requerido</b>
+                     </small>
+                  </div>
+               </div>
+
+               <br> <hr> <br>
+
+               <div class="form-group row" [ngClass]="{ 'has-error': form.controls.password.errors && form.controls.password.pristine && submit }">
+                  <label for="password" class="col-sm-3 col-form-label">
+                     Contraseña <strong class="text-danger">*</strong>
+                  </label>
+                  <div class="col-md-9">
+                     <input type="password" class="form-control input-error" formControlName="password" placeholder="Contraseña">
+                  </div>
+
+                  <div class="offset-md-3 col-md-9">
+                     <small *ngIf="form.controls.password.errors && form.controls.password.pristine && submit" class="form-text text-danger">
+                        <b *ngIf="form.controls.password.errors.required">Éste campo es requerido</b>
+                        <b *ngIf="form.controls.password.errors.minlength">Debe poseer más de cinco (5) caracteres</b>
+                     </small>
+                  </div>
+               </div>
+
+               <div class="form-group row" [ngClass]="{ 'has-error': form.controls.repeat_password.errors && form.controls.repeat_password.pristine && submit }">
+                  <label for="repeat_password" class="col-sm-3 col-form-label">
+                     Confirmar con. <strong class="text-danger">*</strong>
+                  </label>
+                  <div class="col-md-9">
+                     <input type="password" class="form-control input-error" formControlName="repeat_password" placeholder="Confirmar contraseña">
+                  </div>
+
+                  <div class="offset-md-3 col-md-9">
+                     <small *ngIf="form.controls.repeat_password.errors && form.controls.repeat_password.pristine && submit" class="form-text text-danger">
+                        <b *ngIf="form.controls.repeat_password.errors.required">Éste campo es requerido</b>
+                        <b *ngIf="form.controls.repeat_password.errors.minlength">Debe poseer más de cinco (5) caracteres</b>
+                     </small>
+                  </div>
+               </div>
+
+            </form>
+
+         </div>
+
+         <div class="modal-footer">
+            <button (click)="save(form)" [disabled]="loaderButton" class="btn btn-primary btn-circle" tooltip="Guardar" container="body">
+               <i class="fas fa-check"></i>
+               <loader-button [loaderButton]="loaderButton"></loader-button>
+            </button>
+         </div>
+
+      </div>
+   </div>
+</div>

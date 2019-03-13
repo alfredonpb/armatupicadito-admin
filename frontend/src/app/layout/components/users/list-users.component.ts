@@ -1,8 +1,9 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
 import { ProfileService } from 'src/app/services/profile.service';
 import { AlertService } from 'src/app/shared/alert.service';
 import { Profile, User } from 'src/app/models';
 import { UserService } from 'src/app/services/user.service';
+import { CreateUserComponent } from './create';
 
 @Component({
    selector: 'list-users',
@@ -10,6 +11,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 
 export class ListUserComponent implements OnInit {
+   @ViewChild('modalCreateUser') modalCreateUser: CreateUserComponent;
    listUsers: User[] = [];
    cmbProfiles: Profile[] = [];
    page: number = -1;
@@ -38,7 +40,7 @@ export class ListUserComponent implements OnInit {
    /** event entet to filter */
    @HostListener('keydown', ['$event'])
    eventSearch(event: any) {
-      if (event.keyCode === 13) { 
+      if (event.keyCode === 13 && !this.modalCreateUser.modalCreateUser.isShown) { 
          this.initFilter(this.filterFields);
       }
    }

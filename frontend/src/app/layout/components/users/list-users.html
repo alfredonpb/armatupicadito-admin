@@ -8,7 +8,7 @@
          Usuarios
       </h2>
 
-      <button class="btn btn-primary btn-icon-split">
+      <button (click)="modalCreateUser.showModal()" class="btn btn-primary btn-icon-split">
          <span class="icon text-white">
             <i class="fas fa-plus"></i>
          </span>
@@ -108,3 +108,6 @@
    </div>
 
 </div>
+
+<!-- create user -->
+<create-user #modalCreateUser [cmbProfiles]="cmbProfiles" (dispatchEvent)="filter()"></create-user>

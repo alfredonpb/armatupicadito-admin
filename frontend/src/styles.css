@@ -11,19 +11,30 @@
    margin-left: -180px;
    margin-top: -110px;
 }
+
+/* errors forms */
+.has-error:click {
+   background-color: red;
+}
+/* login errors form */
+.has-error > .input-error, .select-error {
+   border-color: #dc3545 !important;
+   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px #dc3545 !important;;
+   outline: 0 none;
+}
+/* system errors forms */
+.has-error > div > .input-error, .has-error > div > .select-error {
+   border-color: #dc3545 !important;
+   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px #dc3545 !important;;
+   outline: 0 none;
+}
+
+/* loader componenets */
 .loader-button {
    width: 100%;
    max-width: 20px;
    margin-left: 10px;
    margin-top: -5px;
-}
-.has-error:click {
-   background-color: red;
-}
-.has-error > .input-error, .select-error {
-   border-color: #dc3545 !important;
-   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px #dc3545 !important;;
-   outline: 0 none;
 }
 .loader-pp {
    width: 100%;

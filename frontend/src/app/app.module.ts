@@ -1,13 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { CommonModule, LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { APP_BASE_HREF } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-/** shared */
-import { LoaderButtonComponent } from './shared/loader-button/index';
+/** modules */
+import { SharedModule } from './shared/shared.module';
 
 /** plugins */
 import { ToastrModule } from 'ngx-toastr';
@@ -37,12 +37,13 @@ registerLocaleData(localeAr, 'es-Ar', localeArExtra);
 
 @NgModule({
    declarations: [
-      LoaderButtonComponent,
       AppComponent,
       NotFoundComponent,
       LoginComponent
    ],
    imports: [
+      SharedModule,
+      CommonModule,
       FormsModule,
       ReactiveFormsModule,
       HttpClientModule,

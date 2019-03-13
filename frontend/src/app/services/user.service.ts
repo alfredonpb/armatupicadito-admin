@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
+import { User } from '../models/index';
 import { CustomHeaders } from './custom-headers';  
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class UserService {
@@ -25,6 +26,11 @@ export class UserService {
       const options = { headers: customRequest.headers, params: params };
 
       return this.http.get(`${this.apiUrl}/get-by-filter`, options);
+   }
+
+   /** create user */
+   create(values: User) {
+      return this.http.post(`${this.apiUrl}/register`, values, CustomHeaders.jwt());
    }
 
 }
