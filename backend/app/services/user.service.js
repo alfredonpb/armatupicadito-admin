@@ -35,6 +35,15 @@ function getByFilter(filter) {
    }
 
    const query = models.User.findAll({
+      attributes: [
+         'id',
+         'name',
+         'lastname',
+         'email',
+         'phone',
+         'profile_id',
+         'enabled'
+      ],
       where: {
          [Op.or]: [
             { name: { [Op.like]: `%${criteriaSearch}%` } },
@@ -96,7 +105,20 @@ function getUserByEmail(email) {
  */
 function getById(id) {
 
-   const query = models.User.findById(id);
+   const query = models.User.findById(id, {
+      attributes: [
+         'id',
+         'name',
+         'lastname',
+         'email',
+         'phone',
+         'profile_id',
+         'enabled'
+      ],
+      include: [{
+         model: models.Profile
+      }]
+   });
 
    return query;
    
@@ -111,19 +133,21 @@ function getById(id) {
  */
 function create(request) {
 
+   const values = {
+      name: request.name,
+      lastname: request.lastname,
+      email: request.email,
+      password: request.hash,
+      phone: request.phone,
+      profile_id: Number(request.profile_id),
+      enabled: request.enabled,
+      created_at: request.now,
+      updated_at: request.now
+   };
+
    return db.connection.transaction((t) => {
 
-      return models.User.create({
-         name: request.name,
-         lastname: request.lastname,
-         email: request.email,
-         password: request.hash,
-         phone: request.phone,
-         profile_id: request.profile_id,
-         enabled: request.enabled,
-         created_at: request.now,
-         updated_at: request.now
-      }, { transaction: t }).then((user) => {
+      return models.User.create(values, { transaction: t }).then((user) => {
          return user;
       });
 
@@ -137,9 +161,51 @@ function create(request) {
 
 }
 
+/**
+ * update user by params http and id
+ * 
+ * @param   {Request}  request  http params
+ * @param   {number}   id id of user
+ * 
+ * @return  {Promise}  Promise
+ */
+function update(request, id) {
+
+   const values = {
+      name: request.name,
+      lastname: request.lastname,
+      email: request.email,
+      phone: request.phone,
+      profile_id: Number(request.profile_id),
+      enabled: request.enabled,
+      created_at: request.now,
+      updated_at: request.now
+   };
+
+   const User = this.getById(id);
+
+   return User.then(
+      (user) => {
+         return db.connection.transaction((t) => {
+
+            return user.updat(values, { transaction: t });
+      
+         }).then((result) => {
+            return result;
+      
+         }).catch((error) => {
+            throw new Error(error);
+      
+         });
+      }
+   );
+
+}
+
 module.exports = {
    getByFilter,
    getUserByEmail,
    getById,
-   create
+   create,
+   update
 };

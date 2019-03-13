@@ -91,6 +91,24 @@
                         </small>
                      </div>
                   </div>
+
+                  <div class="form-group row" [ngClass]="{ 'has-error': form.controls.enabled.errors && form.controls.enabled.pristine && submit }">
+                     <label for="enabled" class="col-sm-3 col-form-label">
+                        ¿Habilitado? <strong class="text-danger">*</strong>
+                     </label>
+                     <div class="col-md-9">
+                        <select class="form-control input-error" formControlName="enabled">
+                           <option value="true">Sí</option>
+                           <option value="false">No</option>
+                        </select>
+                     </div>
+   
+                     <div class="offset-md-3 col-md-9">
+                        <small *ngIf="form.controls.enabled.errors && form.controls.enabled.pristine && submit" class="form-text text-danger">
+                           <b *ngIf="form.controls.enabled.errors.required">Éste campo es requerido</b>
+                        </small>
+                     </div>
+                  </div>
    
                </form>
    

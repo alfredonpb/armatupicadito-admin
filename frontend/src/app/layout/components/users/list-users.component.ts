@@ -147,4 +147,10 @@ export class ListUserComponent implements OnInit {
       this.filter();
    }
 
+   /** update list of user */
+   updateList(event: any) {
+      console.log(event);
+      this.listUsers[event.index] = event.user;
+   }
+
 }

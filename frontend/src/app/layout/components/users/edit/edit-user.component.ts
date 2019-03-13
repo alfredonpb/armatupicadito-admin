@@ -19,6 +19,7 @@ export class EditUserComponent implements OnInit {
    loaderButton: boolean = false;
    submit: boolean = false;
    selectedUser: User;
+   selectedIndex: number;
    
    constructor(
       private service: UserService,
@@ -41,8 +42,10 @@ export class EditUserComponent implements OnInit {
    }
 
    /** show modal */
-   showModal(user: User) {
+   showModal(user: User, index: number) {
       this.selectedUser = user;
+      this.selectedIndex = index;
+
       this.createForm(this.selectedUser);
       this.modalEditUser.show();
    }
@@ -84,13 +87,12 @@ export class EditUserComponent implements OnInit {
       this.submit = true;
       if (form.valid && this.submit) {
          const values = form.value;
-         values.enabled = true;
          
          this.loaderButton = true;
          this.service.update(values, this.selectedUser.id).subscribe(
             (data: any) => {
                this.alertService.showMessage('Usuarios', 'Se modificó con éxito', 'success');
-               this.dispatchEvent.emit({ user: data.data });
+               this.dispatchEvent.emit({ user: data.data, index: this.selectedIndex });
                this.hideModal();
                this.loaderButton = false;
             },

@@ -104,7 +104,34 @@ function register(req, res) {
  * @return  {Response}       response to front
  */
 function update(req, res) {
-   return response.success(res, 'updated user'); 
+
+   const params = req.body;
+   params.id = Number(req.params.id);
+   params.now = moment();
+
+   const User = services.UserService.update(params, params.id);
+
+   User.then(
+      (user) => { 
+
+         const findUser = services.UserService.getById(user.id);
+         findUser.then(
+            (userData) => {
+               return response.success(res, userData); 
+            }
+         ).catch(
+            (error) => { 
+               return response.error(res, error.message, 500); 
+            }
+         );
+         
+      }
+   ).catch(
+      (error) => { 
+         return response.error(res, error.message, 500); 
+      }
+   );
+
 }
 
 module.exports = { 
