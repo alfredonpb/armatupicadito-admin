@@ -48,7 +48,10 @@ function getByFilter(filter) {
          ]
       },
       include: [{
-         model: models.Profile
+         model: models.Profile,
+         where: {
+            id: { [Op.not]: 1 }
+         }
       }],
       order: [
          ['name', 'ASC'],

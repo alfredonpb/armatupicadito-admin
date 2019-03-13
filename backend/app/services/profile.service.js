@@ -1,6 +1,8 @@
 'use strict';
 
 const models = require('../models/index');
+const db = require('../database/sequelize');
+const Op = db.Sequelize.Op;
 
 /**
  * get all profiles
@@ -10,6 +12,9 @@ const models = require('../models/index');
 function getAll() {
 
    const query = models.Profile.findAll({
+      where: {
+         id: { [Op.not]: 1 }
+      },
       order: [
          ['name', 'ASC']
       ]
