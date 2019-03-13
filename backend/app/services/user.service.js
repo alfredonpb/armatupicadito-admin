@@ -29,7 +29,7 @@ function getByFilter(filter) {
    }
 
    /** whern enabled is received */
-   let enabledWhere = '';
+   let enabledWhere = { enabled: true };
    if (filter.enabled) {
       enabledWhere = { enabled: filter.enabled == 'true' ? true : false };
    }

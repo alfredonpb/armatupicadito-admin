@@ -21,7 +21,7 @@ export class ListUserComponent implements OnInit {
    filterFields: any = {
       search: '',
       profile: '',
-      enabled: ''
+      enabled: true
    };
 
    constructor(
@@ -140,7 +140,7 @@ export class ListUserComponent implements OnInit {
    resetFilter() {
       this.filterFields.search = '';
       this.filterFields.profile = '';
-      this.filterFields.enabled = '';
+      this.filterFields.enabled = true;
 
       this.filter();
    }
