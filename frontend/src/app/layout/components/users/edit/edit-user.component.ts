@@ -75,9 +75,6 @@ export class EditUserComponent implements OnInit {
          ])],
          profile_id: [user.profile_id, Validators.compose([
             Validators.required,
-         ])],
-         enabled: [user.enabled, Validators.compose([
-            Validators.required,
          ])]
       });
    }
@@ -87,6 +84,7 @@ export class EditUserComponent implements OnInit {
       this.submit = true;
       if (form.valid && this.submit) {
          const values = form.value;
+         values.enabled = this.selectedUser.enabled;
          
          this.loaderButton = true;
          this.service.update(values, this.selectedUser.id).subscribe(

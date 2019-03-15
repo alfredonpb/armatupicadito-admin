@@ -59,9 +59,6 @@ export class CreateUserComponent implements OnInit {
          profile_id: ['', Validators.compose([
             Validators.required,
          ])],
-         enabled: [true, Validators.compose([
-            Validators.required,
-         ])],
          password: ['', Validators.compose([
             Validators.required,
             Validators.minLength(6)
