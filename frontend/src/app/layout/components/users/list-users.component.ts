@@ -155,4 +155,23 @@ export class ListUserComponent implements OnInit {
       this.listUsers[event.index] = event.user;
    }
 
+   /** change status of user */
+   changeStatus(user: User, index: number, enabled: boolean) {
+      this.loader = true;
+      user.enabled = enabled;
+      this.service.update(user, user.id).subscribe(
+         (data: any) => {
+            this.alertService.showMessage('Cambio de estado', `Usuario ${user.enabled ? 'habilitado' : 'deshabilitado'} correctamente`, 'info');
+            
+            const event = { index, user: data.data };
+            this.updateList(event);
+            this.loader = false;
+         },
+         (error) => {
+            this.alertService.showMessageServer(error);
+            this.loader = false;
+         }
+      );
+   }
+
 }

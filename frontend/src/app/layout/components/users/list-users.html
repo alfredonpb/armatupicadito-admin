@@ -85,10 +85,20 @@
                         <button (click)="modalEditUser.showModal(user, i)" class="btn btn-info btn-circle" tooltip="Modificar">
                            <i class="fas fa-edit"></i>
                         </button>
-                        &nbsp;
-                        <button class="btn btn-danger btn-circle" tooltip="Eliminar">
-                           <i class="fas fa-trash-alt"></i>
-                        </button>
+
+                        <span *ngIf="user.enabled">
+                           &nbsp;
+                           <button (click)="changeStatus(user, i, false)" class="btn btn-warning btn-circle" tooltip="Deshabilitar">
+                              <i class="fas fa-user-minus"></i>
+                           </button>            
+                        </span>
+
+                        <span *ngIf="!user.enabled">
+                           &nbsp;
+                           <button (click)="changeStatus(user, i, true)" class="btn btn-success btn-circle" tooltip="Habilitar">
+                              <i class="fas fa-user-plus"></i>
+                           </button>
+                        </span>
                      </td>
                   </tr>
                </tbody>
