@@ -88,14 +88,14 @@
 
                         <span *ngIf="user.enabled">
                            &nbsp;
-                           <button (click)="changeStatus(user, i, false)" class="btn btn-warning btn-circle" tooltip="Deshabilitar">
+                           <button (click)="confirmChangeStatus(user, i, false)" class="btn btn-warning btn-circle" tooltip="Deshabilitar">
                               <i class="fas fa-user-minus"></i>
                            </button>            
                         </span>
 
                         <span *ngIf="!user.enabled">
                            &nbsp;
-                           <button (click)="changeStatus(user, i, true)" class="btn btn-success btn-circle" tooltip="Habilitar">
+                           <button (click)="confirmChangeStatus(user, i, true)" class="btn btn-success btn-circle" tooltip="Habilitar">
                               <i class="fas fa-user-plus"></i>
                            </button>
                         </span>
@@ -124,3 +124,6 @@
 
 <!-- edit user -->
 <edit-user #modalEditUser [cmbProfiles]="cmbProfiles" (dispatchEvent)="updateList($event)"></edit-user>
+
+<!-- modal confirm operation -->
+<modal-confirm #modalConfirm (confirmOperation)="confirmOperation()" (declineOperation)="declineOperation()"></modal-confirm>
