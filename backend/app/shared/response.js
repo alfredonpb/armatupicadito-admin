@@ -13,4 +13,13 @@ function error(res, message, code) {
    });
 }
 
-module.exports = { success, error };
+function errorLog(res, exception, logMessage, code) {
+   console.error(`Error en ${logMessage}: ${exception.stack}`);
+   return this.error(res, exception.message, code);
+}
+
+module.exports = { 
+   success, 
+   error, 
+   errorLog 
+};

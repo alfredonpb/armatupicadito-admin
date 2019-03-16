@@ -6,6 +6,8 @@ const response = require('../shared/response');
 
 const services = require('../services/index');
 
+const logMessage = 'user controller';
+
 /**
  * get list of users by filter
  *
@@ -25,14 +27,13 @@ function getByFilter(req, res) {
             return response.success(res, userData); 
          }
       ).catch(
-         (error) => { 
-            return response.error(res, error.message, 500); 
+         (exception) => { 
+            return response.errorLog(res, exception, `${logMessage} -> getByFilter`, 500); 
          }
       );
 
    } catch (exception) {
-      console.log(`Error en filter de usuarios ${exception}`);
-      return response.error(res, exception.message, 500);
+      return response.errorLog(res, exception, `${logMessage} -> getByFilter`, 500); 
    }
 
 }
@@ -78,19 +79,18 @@ function register(req, res) {
 
             }).catch(
                (exception) => { 
-                  return response.error(res, exception.message, 500); 
+                  return response.errorLog(res, exception, `${logMessage} -> register`, 500);
                }
             );
          }
       ).catch(
          (exception) => { 
-            return response.error(res, exception.message, 500); 
+            return response.errorLog(res, exception, `${logMessage} -> register`, 500); 
          }
       );
 
    } catch (exception) {
-      console.log(`Error en registro de usuarios ${exception}`);
-      return response.error(res, exception.message, 500);
+      return response.errorLog(res, exception, `${logMessage} -> register`, 500);
    }
 
 }
@@ -105,32 +105,38 @@ function register(req, res) {
  */
 function update(req, res) {
 
-   const params = req.body;
-   params.id = Number(req.params.id);
-   params.now = moment();
+   try {
 
-   const User = services.UserService.update(params, params.id);
+      const params = req.body;
+      params.id = Number(req.params.id);
+      params.now = moment();
 
-   User.then(
-      (user) => { 
+      const User = services.UserService.update(params, params.id);
 
-         const findUser = services.UserService.getById(user.id);
-         findUser.then(
-            (userData) => {
-               return response.success(res, userData); 
-            }
-         ).catch(
-            (error) => { 
-               return response.error(res, error.message, 500); 
-            }
-         );
-         
-      }
-   ).catch(
-      (error) => { 
-         return response.error(res, error.message, 500); 
-      }
-   );
+      User.then(
+         (user) => { 
+
+            const findUser = services.UserService.getById(user.id);
+            findUser.then(
+               (userData) => {
+                  return response.success(res, userData); 
+               }
+            ).catch(
+               (exception) => { 
+                  return response.errorLog(res, exception, `${logMessage} -> update`, 500);
+               }
+            );
+            
+         }
+      ).catch(
+         (exception) => { 
+            return response.errorLog(res, exception, `${logMessage} -> update`, 500);
+         }
+      );
+      
+   } catch (exception) {
+      return response.errorLog(res, exception, `${logMessage} -> update`, 500);
+   }
 
 }
 

@@ -4,6 +4,8 @@ const bcrypt = require('bcrypt');
 const response = require('../shared/response');
 const services = require('../services/index');
 
+const logMessage = 'auth controller';
+
 /**
  * login a sistema
  * @param {*} req [request recibidos por http]
@@ -55,13 +57,14 @@ function login(req, res) {
 
                      } 
 
-                     return response.error(res, 'Password incorrecto', 500);
+                     return response.error(res, 'Contraseña incorrecta', 500);
                      
                   }
+                  
 
                ).catch(
                   (exception) => { 
-                     return response.error(res, exception.message, 500); 
+                     return response.errorLog(res, exception, `${logMessage} -> login`, 500); 
                   }
                );
 
@@ -72,13 +75,12 @@ function login(req, res) {
          }
       ).catch(
          (exception) => { 
-            return response.error(res, exception.message, 500); 
+            return response.errorLog(res, exception, `${logMessage} -> login`, 500);  
          }
       );
       
    } catch (exception) {
-      console.log(`Error en login ${exception}`);
-      return response.error(res, exception.message, 500);
+      return response.errorLog(res, exception, `${logMessage} -> login`, 500); 
    }
 
 }

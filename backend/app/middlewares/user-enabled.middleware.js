@@ -4,6 +4,8 @@ const response = require('../shared/response');
 
 const services = require('../services/index');
 
+const logMessage = 'user enabled middleware';
+
 /**
  * verificador de token valido para peticiones
  *
@@ -30,14 +32,13 @@ function validEnabled(req, res, next) {
 
          }
       ).catch(
-         (error) => { 
-            return response.error(res, error.message, 500); 
+         (exception) => { 
+            return response.errorLog(res, exception, `${logMessage} -> validEnabled`, 500); 
          }
       );
 
    } catch (exception) {
-      console.log(`Error jwt valid enabled ${exception}`);
-      return response.error(res, exception.message, 500);
+      return response.errorLog(res, exception, `${logMessage} -> validEnabled`, 500); 
    }
 
 }

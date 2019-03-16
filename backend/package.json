@@ -5,7 +5,7 @@
    "main": "app.js",
    "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
-      "run-server": "pm2 start app/run.js --name 'server' -o ./server-out.log -e ./server-error.log"
+      "run-server": "pm2 start run.js --name 'server' -o ./server-out.log -e ./server-error.log"
    },
    "author": "Darryn Josue",
    "license": "MIT",

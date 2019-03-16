@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const response = require('../shared/response');
 
 const SECRET = process.env.SECRET_JWT;
+const logMessage = 'auth middleware';
 
 /**
  * verificador de token valido para peticiones
@@ -43,8 +44,7 @@ function validToken(req, res, next) {
       next();
 
    } catch (exception) {
-      console.log(`Error jwt middleware ${exception}`);
-      return response.error(res, exception.message, 500);
+      return response.errorLog(res, exception, `${logMessage} -> validToken`, 500); 
    }
 
 }

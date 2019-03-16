@@ -1,10 +1,10 @@
 'use strict';
 
-const moment = require('moment');
-const bcrypt = require('bcrypt');
 const response = require('../shared/response');
 
 const services = require('../services/index');
+
+const logMessage = 'profile controller';
 
 /**
  * Registro de usuarios
@@ -23,13 +23,12 @@ function getAll(req, res) {
          }
       ).catch(
          (exception) => { 
-            return response.error(res, exception.message, 500); 
+            return response.errorLog(res, exception, `${logMessage} -> getAll`, 500); 
          }
       );
       
    } catch (exception) {
-      console.log(`Error en profile get all ${exception}`);
-      return response.error(res, exception.message, 500);
+      return response.errorLog(res, exception, `${logMessage} -> getAll`, 500); 
    }
 
 }
