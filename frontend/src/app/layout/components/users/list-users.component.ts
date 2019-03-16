@@ -1,10 +1,11 @@
 import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
-import { ProfileService } from 'src/app/services/profile.service';
-import { AlertService } from 'src/app/shared/alert.service';
-import { Profile, User } from 'src/app/models';
-import { UserService } from 'src/app/services/user.service';
+import { ProfileService } from '../../../services/profile.service';
+import { AlertService } from '../../../shared/alert.service';
+import { Profile, User } from '../../../models';
+import { UserService } from '../../../services/user.service';
 import { CreateUserComponent } from './create/index';
 import { EditUserComponent } from './edit/index';
+import { ModalConfirmComponent } from '../../../shared/modal-confirm/index';
 
 @Component({
    selector: 'list-users',
@@ -14,6 +15,8 @@ import { EditUserComponent } from './edit/index';
 export class ListUserComponent implements OnInit {
    @ViewChild('modalCreateUser') modalCreateUser: CreateUserComponent;
    @ViewChild('modalEditUser') modalEditUser: EditUserComponent;
+   @ViewChild('modalConfirm') modalConfirm: ModalConfirmComponent;
+   objectChangeStatus: any;
    listUsers: User[] = [];
    cmbProfiles: Profile[] = [];
    page: number = -1;
@@ -151,8 +154,42 @@ export class ListUserComponent implements OnInit {
 
    /** update list of user */
    updateList(event: any) {
-      console.log(event);
       this.listUsers[event.index] = event.user;
+   }
+
+   /** confirm change status */
+   confirmChangeStatus(user: User, index: number, enabled: boolean) {
+      this.objectChangeStatus = { user, index, enabled };
+      this.modalConfirm.showModal(`cambiar estado de ${user.name} ${user.lastname} a ${enabled ? 'habilitado' : 'deshabilitado'}`);
+   }
+
+   /** change status of user */
+   changeStatus() {
+      this.loader = true;
+      this.objectChangeStatus.user.enabled = this.objectChangeStatus.enabled;
+      this.service.update(this.objectChangeStatus.user, this.objectChangeStatus.user.id).subscribe(
+         (data: any) => {
+            this.alertService.showMessage('Confirmación', `Cambio de estado exitoso`, 'info');
+            
+            const event = { index: this.objectChangeStatus.index, user: data.data };
+            this.updateList(event);
+            this.loader = false;
+         },
+         (error) => {
+            this.alertService.showMessageServer(error);
+            this.loader = false;
+         }
+      );
+   }
+
+   /** confirm operation */
+   confirmOperation() {
+      this.changeStatus();
+   }
+
+   /** decline operation */
+   declineOperation() {
+      this.objectChangeStatus = null;
    }
 
 }

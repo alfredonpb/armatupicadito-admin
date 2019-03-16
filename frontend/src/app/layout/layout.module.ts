@@ -31,6 +31,7 @@ import { EditUserComponent } from './components/users/edit/index';
 
 /** shared */
 import { LoaderComponent } from '../shared/loader/index';
+import { ModalConfirmComponent } from '../shared/modal-confirm/index';
 
 @NgModule({
    imports: [
@@ -44,6 +45,7 @@ import { LoaderComponent } from '../shared/loader/index';
    ],
    declarations: [
       LoaderComponent,
+      ModalConfirmComponent,
       LayoutComponent,
       HeaderComponent,
       SidebarComponent,
