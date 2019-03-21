@@ -1,11 +1,14 @@
-# armatupicadito
+# armatupicadito-admin
 
-Arma tu picadito, es un software de gestión de canchas de fútbol.
+software for managing reserves of soccer fields
 
 ## Installation
 
-Backend (nodejs): instalar dependencias
-Frontend (Angular 7): instalar dependencias
+Backend (nodejs)   
+Frontend (Angular 7)
+
+install dependencies
+set environment variables
 
 ## Usage
 
