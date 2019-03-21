@@ -1,8 +1,6 @@
 'use strict';
 
 const models = require('../models/index');
-const db = require('../database/sequelize');
-const Op = db.Sequelize.Op;
 
 /**
  * get all profiles
@@ -11,10 +9,7 @@ const Op = db.Sequelize.Op;
  */
 function getAll() {
 
-   const query = models.Profile.findAll({
-      where: {
-         id: { [Op.not]: 1 }
-      },
+   const query = models.Profile.scope(['distinctSuperadmin']).findAll({
       order: [
          ['name', 'ASC']
       ]

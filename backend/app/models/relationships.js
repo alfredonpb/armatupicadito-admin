@@ -1,8 +1,8 @@
 'use strict';
 
 /** models */
-const User = require('./users');
-const Profile = require('./profiles');
+const User = require('./user');
+const Profile = require('./profile');
 
 /** users */
 User.belongsTo(Profile, { foreignKey: 'profile_id' });

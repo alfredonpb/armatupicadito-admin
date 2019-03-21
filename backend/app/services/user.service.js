@@ -34,7 +34,7 @@ function getByFilter(filter) {
       enabledWhere = { enabled: filter.enabled == 'true' ? true : false };
    }
 
-   const query = models.User.findAll({
+   const query = models.User.scope(['distinctSuperadmin']).findAll({
       attributes: [
          'id',
          'name',
@@ -56,12 +56,6 @@ function getByFilter(filter) {
             enabledWhere
          ]
       },
-      include: [{
-         model: models.Profile,
-         where: {
-            id: { [Op.not]: 1 }
-         }
-      }],
       order: [
          ['name', 'ASC'],
          ['lastname', 'ASC']

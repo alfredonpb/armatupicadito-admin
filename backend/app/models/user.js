@@ -1,6 +1,9 @@
 'use strict';
 
 const db = require('../database/sequelize');
+const Op = db.Sequelize.Op;
+
+const Profile = require('./profile');
 
 const User = db.connection.define('users', {
    id: {
@@ -35,6 +38,14 @@ const User = db.connection.define('users', {
    },
    updated_at: {
       type: db.Sequelize.DATE
+   }
+}, {
+   scopes: {
+      distinctSuperadmin: {
+         include: [
+            { model: Profile, where: { id: { [Op.not]: 1 } } }
+         ]
+      }
    }
 });
 
