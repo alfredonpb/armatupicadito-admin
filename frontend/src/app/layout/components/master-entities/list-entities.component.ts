@@ -4,11 +4,11 @@ import { AlertService } from '../../../shared/alert.service';
 import { Profile } from '../../../models/index';
 
 @Component({
-   selector: 'tabla-maestra',
-   templateUrl: 'tabla-maestra.html'
+   selector: 'list-entities',
+   templateUrl: 'list-entities.html'
 })
 
-export class TablaMaestraComponent implements OnInit {
+export class ListEntitieComponent implements OnInit {
    listProfiles: Profile[] = [];
    loader: boolean = false;
 

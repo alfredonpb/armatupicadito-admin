@@ -5,7 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './layout.component';
 import { HomeComponent } from './home';
 import { ListUserComponent } from './components/users/index';
-import { TablaMaestraComponent } from './components/tablas-maestras';
+import { ListEntitieComponent } from './components/master-entities';
 
 const routes: Routes = [
    {
@@ -13,7 +13,7 @@ const routes: Routes = [
       children: [
          { path: 'home', component: HomeComponent },
          { path: 'users', component: ListUserComponent },
-         { path: 'tablas-maestras', component: TablaMaestraComponent }
+         { path: 'tablas-maestras', component: ListEntitieComponent }
       ]
    }
 ];
