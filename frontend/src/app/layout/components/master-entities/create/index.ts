@@ -1,1 +1,1 @@
-export { CreateMasterEntitieComponent } from './create-entitie.component';
+export { CreateEntitieComponent } from './create-entitie.component';

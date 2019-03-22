@@ -1,12 +1,97 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter, HostListener } from '@angular/core';
+import { ModalDirective } from 'ngx-bootstrap';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AlertService } from '../../../../shared/alert.service';
+import { SharedService } from '../../../../services/shared.service';
 
 @Component({
    selector: 'create-entitie',
    templateUrl: 'create-entitie.html'
 })
 
-export class CreateMasterEntitieComponent implements OnInit {
-   constructor() { }
+export class CreateEntitieComponent implements OnInit {
+   @ViewChild('modalCreateEntitie') modalCreateEntitie: ModalDirective;
+   @Output() dispatchEvent = new EventEmitter();
+   cmbEntities: any[] = [{ id: 'perfil', value: 'Perfiles' }];
+   form: FormGroup;
+   loaderButton: boolean = false;
+   submit: boolean = false;
 
-   ngOnInit() { }
+   constructor(
+      private fb: FormBuilder,
+      private sharedService: SharedService, 
+      private alertService: AlertService
+   ) { }
+
+   ngOnInit() { 
+      this.createForm();
+   }
+   
+   /** event scape modal */
+   @HostListener('keydown.esc', ['$event'])
+   eventEscModal(event: any) {
+      if (event.keyCode === 27) { this.hideModal(); }
+   }
+
+   /** event enter modal */
+   @HostListener('keydown.enter', ['$event'])
+   eventEnterModal(event: any) {
+      if (event.keyCode === 13) { this.save(this.form); }
+   }
+   
+   /** create form create user */
+   createForm() {
+      this.form = this.fb.group({
+         master_entitie: ['', Validators.compose([
+            Validators.required,
+         ])],
+         records: ['', Validators.compose([
+            Validators.required,
+         ])]
+      });
+   }
+
+   /** show modal */
+   showModal() {
+      this.modalCreateEntitie.show();
+   }
+
+   /** hide modal */
+   hideModal() {
+      this.submit = false;
+      this.form.reset({ master_entitie: '' });
+      this.modalCreateEntitie.hide();
+   }
+
+   /** save user */
+   save(form: FormGroup) {
+      this.submit = true;
+      if (form.valid && this.submit) {
+         const values = form.value;
+         values.records = this.separateRecords(values.records);
+         console.log(values);
+
+         this.loaderButton = true;
+         this.sharedService.createEntitie(values).subscribe(
+            (data) => {
+               this.alertService.showMessage('Tablas maestras', 'Registro exitoso', 'success');
+               this.dispatchEvent.emit();
+               this.hideModal();
+               this.loaderButton = false;
+            },
+            (error) => {
+               this.alertService.showMessageServer(error);
+               this.loaderButton = false;
+            }
+         );
+      }else{
+         form.markAsPristine();
+      }
+   }
+
+   /** separate records */
+   separateRecords(records: string){ 
+      records = records.trim();
+      return records.split(',');
+   }
 }

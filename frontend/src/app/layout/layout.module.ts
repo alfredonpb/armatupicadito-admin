@@ -14,6 +14,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 /** services */
 import { ProfileService } from '../services/profile.service'; 
 import { UserService } from '../services/user.service'; 
+import { SharedService } from '../services/shared.service'; 
 
 /** componenets */
 import { LayoutRoutingModule } from './layout-routing.module';
@@ -30,7 +31,7 @@ import { CreateUserComponent } from './components/users/create/index';
 import { EditUserComponent } from './components/users/edit/index';
 
 import { ListEntitieComponent } from './components/master-entities/index';
-import { CreateMasterEntitieComponent } from './components/master-entities/create/index';
+import { CreateEntitieComponent } from './components/master-entities/create/index';
 
 /** shared */
 import { LoaderComponent } from '../shared/loader/index';
@@ -58,11 +59,12 @@ import { ModalConfirmComponent } from '../shared/modal-confirm/index';
       CreateUserComponent,
       EditUserComponent,
       ListEntitieComponent,
-      CreateMasterEntitieComponent
+      CreateEntitieComponent
    ],
    providers: [
       ProfileService,
-      UserService
+      UserService,
+      SharedService
    ]
 })
 export class LayoutModule { }
