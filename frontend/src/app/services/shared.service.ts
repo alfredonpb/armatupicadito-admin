@@ -14,7 +14,7 @@ export class SharedService {
 
    /** create entities */
    createEntitie(values: any): Observable<any> {
-      return this.http.get(`${this.apiUrl}/create-entitie`, CustomHeaders.jwt());
+      return this.http.post(`${this.apiUrl}/create-entitie`, values, CustomHeaders.jwt());
    }
 
 }

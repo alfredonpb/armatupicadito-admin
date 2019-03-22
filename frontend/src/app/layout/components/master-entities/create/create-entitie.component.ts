@@ -12,7 +12,7 @@ import { SharedService } from '../../../../services/shared.service';
 export class CreateEntitieComponent implements OnInit {
    @ViewChild('modalCreateEntitie') modalCreateEntitie: ModalDirective;
    @Output() dispatchEvent = new EventEmitter();
-   cmbEntities: any[] = [{ id: 'perfil', value: 'Perfiles' }];
+   cmbEntities: any[] = [{ id: 'profile', value: 'Perfiles' }];
    form: FormGroup;
    loaderButton: boolean = false;
    submit: boolean = false;
@@ -69,13 +69,12 @@ export class CreateEntitieComponent implements OnInit {
       if (form.valid && this.submit) {
          const values = form.value;
          values.records = this.separateRecords(values.records);
-         console.log(values);
 
          this.loaderButton = true;
          this.sharedService.createEntitie(values).subscribe(
             (data) => {
                this.alertService.showMessage('Tablas maestras', 'Registro exitoso', 'success');
-               this.dispatchEvent.emit();
+               this.dispatchEvent.emit({ type: values.master_entitie, data: data.data });
                this.hideModal();
                this.loaderButton = false;
             },

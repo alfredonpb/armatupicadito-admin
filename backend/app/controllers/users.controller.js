@@ -72,8 +72,8 @@ function register(req, res) {
                      return response.success(res, 'Register ok'); 
                   }
                ).catch(
-                  (error) => { 
-                     return response.error(res, error.message, 500); 
+                  (exception) => { 
+                     return response.errorLog(res, exception, `${logMessage} -> register`, 500);
                   }
                );
 

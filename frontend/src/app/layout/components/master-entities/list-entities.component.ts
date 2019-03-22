@@ -35,4 +35,10 @@ export class ListEntitieComponent implements OnInit {
          }
       );
    }
+
+   /** refresh list */
+   refreshList(event: any) {
+      if (event.type === 'profile') { this.getListProfiles(); }
+   }
+
 }

@@ -14,7 +14,8 @@ const response = require('./shared/response');
 /** routing */
 const authRoute = require('./routes/auth.route');
 const userRoute = require('./routes/user.route');
-const ProfileRoute = require('./routes/profile.route');
+const profileRoute = require('./routes/profile.route');
+const sharedRoute = require('./routes/shared.route');
 
 /** middlewares */
 const middlewares = require('./middlewares/index');
@@ -35,10 +36,13 @@ app.get(`${PREFIX}/`, (req, res) => {
 app.use(`${PREFIX}/auth`, authRoute);
 
 /** routing profiles */
-app.use(`${PREFIX}/profiles`, middlewares.AuthMiddleware.validToken, middlewares.UserEnabledMiddleware.validEnabled, ProfileRoute);
+app.use(`${PREFIX}/profiles`, middlewares.AuthMiddleware.validToken, middlewares.UserEnabledMiddleware.validEnabled, profileRoute);
 
 /** routing users */
 app.use(`${PREFIX}/users`, middlewares.AuthMiddleware.validToken, middlewares.UserEnabledMiddleware.validEnabled, userRoute);
+
+/** rounting shared */
+app.use(`${PREFIX}/shared`, middlewares.AuthMiddleware.validToken, middlewares.UserEnabledMiddleware.validEnabled, sharedRoute);
 
 // server corriendo
 app.listen(PORT, SERVER_HOST, () => {
