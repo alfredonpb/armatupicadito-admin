@@ -5,13 +5,15 @@ import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './layout.component';
 import { HomeComponent } from './home';
 import { ListUserComponent } from './components/users/index';
+import { TablaMaestraComponent } from './components/tablas-maestras';
 
 const routes: Routes = [
    {
       path: '', component: LayoutComponent,
       children: [
          { path: 'home', component: HomeComponent },
-         { path: 'users', component: ListUserComponent }
+         { path: 'users', component: ListUserComponent },
+         { path: 'tablas-maestras', component: TablaMaestraComponent }
       ]
    }
 ];

@@ -29,6 +29,8 @@ import { ListUserComponent } from './components/users/index';
 import { CreateUserComponent } from './components/users/create/index';
 import { EditUserComponent } from './components/users/edit/index';
 
+import { TablaMaestraComponent } from './components/tablas-maestras';
+
 /** shared */
 import { LoaderComponent } from '../shared/loader/index';
 import { ModalConfirmComponent } from '../shared/modal-confirm/index';
@@ -53,7 +55,8 @@ import { ModalConfirmComponent } from '../shared/modal-confirm/index';
       HomeComponent,
       ListUserComponent,
       CreateUserComponent,
-      EditUserComponent
+      EditUserComponent,
+      TablaMaestraComponent
    ],
    providers: [
       ProfileService,
