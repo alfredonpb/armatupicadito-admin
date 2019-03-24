@@ -7,8 +7,10 @@ const services = require('../services/index');
 const logMessage = 'profile controller';
 
 /**
- * Registro de usuarios
+ * get de todos los perfiles
+ * 
  * @param {*} req [request recibidos por http]
+ * 
  * @param {*} res [response respuesta http]
  */
 function getAll(req, res) {
@@ -33,4 +35,32 @@ function getAll(req, res) {
 
 }
 
-module.exports = { getAll };
+/**
+ * eliminacion de perfil
+ * 
+ * @param {*} req [request recibidos por http]
+ * 
+ * @param {*} res [response respuesta http]
+ */
+function destroy(req, res) {
+
+   const id = Number(req.params.id);
+
+   const Profile = services.ProfileService.destroy(id);
+
+   Profile.then(
+      () => {
+         return response.success(res, 'Destroy ok');
+      }
+   ).catch(
+      (exception) => { 
+         return response.errorLog(res, exception, `${logMessage} -> delete`, 500); 
+      }
+   );
+
+}
+
+module.exports = { 
+   getAll, 
+   destroy
+};

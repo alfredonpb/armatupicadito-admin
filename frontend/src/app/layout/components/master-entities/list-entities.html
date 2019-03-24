@@ -24,7 +24,18 @@
             <div class="row no-gutters align-items-center">
                <div class="col mr-2">
                   <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Perfiles</div>
-                  <div *ngFor="let profile of listProfiles" class="h5 mb-0 font-weight-bold text-gray-800">- {{ profile.name }}</div>
+
+                  <div *ngFor="let profile of listProfiles; let i = index" class="h5 mb-0 font-weight-bold text-gray-800">
+                     <div class="row" style="padding: 10px;">
+                        <div class="col-md-9">
+                           - {{ profile.name }}
+                        </div>
+                        <div class="col-md-3">
+                           <i class="fas fa-trash-alt" (click)="confirmDeleteProfile(profile, i)" tooltip="Eliminar" style="cursor: pointer;"></i>
+                        </div>
+                     </div>
+                  </div>
+
                </div>
                <div class="col-auto">
                   <i class="fas fa-id-badge fa-2x text-gray-300"></i>
@@ -36,4 +47,8 @@
 
 </div>
 
+<!-- create entitie -->
 <create-entitie #modalCreateEntitie (dispatchEvent)="refreshList($event)"></create-entitie>
+
+<!-- modal confirm operation -->
+<modal-confirm #modalConfirm (confirmOperation)="deleteProfile()" (declineOperation)="declineOperation()"></modal-confirm>

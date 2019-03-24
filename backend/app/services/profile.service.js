@@ -49,7 +49,33 @@ function create(request) {
 
 }
 
+/**
+ * destroy profile
+ *
+ * @param   {Request}  request  http params
+ *
+ * @return  {Promise}          Promise
+ */
+function destroy(id) {
+
+   return db.connection.transaction((t) => {
+
+      return models.Profile.destroy({ where: { id } }, { transaction: t }).then(() => {
+         return true;
+      });
+
+   }).then((result) => {
+      return result;
+
+   }).catch((error) => {
+      throw new Error(error);
+
+   });
+
+}
+
 module.exports = {
    getAll,
-   create
+   create,
+   destroy
 };
