@@ -56,7 +56,7 @@ export class ListEntitieComponent implements OnInit {
       this.profileService.delete(this.objectDeleteProfile.profile.id).subscribe(
          (data) => {
             this.loader = false;
-            this.alertService.showMessage('Eliminación', 'El perfil seleccionado fué eliminado', 'warning');
+            this.alertService.showMessage('Tablas maestras', 'El registro seleccionado fue eliminado', 'warning');
             this.removeItemList('profile', this.objectDeleteProfile.index);
          },
          (error) => {

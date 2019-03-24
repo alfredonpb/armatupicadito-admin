@@ -10,7 +10,9 @@ const logMessage = 'user enabled middleware';
  * verificador de token valido para peticiones
  *
  * @param {*} req [request recibidos por http]
+ * 
  * @param {*} res [response respuesta http]
+ * 
  * @param {*} next [sequir con la peticion]
  *
  */
@@ -43,4 +45,6 @@ function validEnabled(req, res, next) {
 
 }
 
-module.exports = { validEnabled };
+module.exports = { 
+   validEnabled 
+};

@@ -4,9 +4,9 @@ const db = require('../database/sequelize');
 const models = require('../models/index');
 
 /**
- * get all profiles
-
- * @return  {Promise}      Promise
+ * todos los perfiles
+ *
+ * @return  {Promise} [Promise]
  */
 function getAll() {
 
@@ -21,11 +21,11 @@ function getAll() {
 }
 
 /**
- * create profile
+ * creacion de perfil
  *
- * @param   {Request}  request  http params
+ * @param {Request} req [datos para la creacion de un perfil]
  *
- * @return  {Promise}          Promise
+ * @return  {Promise} [Promise]
  */
 function create(request) {
 
@@ -50,11 +50,11 @@ function create(request) {
 }
 
 /**
- * destroy profile
+ * eliminacion de perfil
  *
- * @param   {Request}  request  http params
+ * @param {Number} id [id del perfil]
  *
- * @return  {Promise}          Promise
+ * @return  {Promise} [Promise]
  */
 function destroy(id) {
 

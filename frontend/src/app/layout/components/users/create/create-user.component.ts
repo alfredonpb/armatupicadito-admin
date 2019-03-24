@@ -97,7 +97,7 @@ export class CreateUserComponent implements OnInit {
          this.loaderButton = true;
          this.service.create(values).subscribe(
             (data) => {
-               this.alertService.showMessage('Usuarios', 'Registro exitoso', 'success');
+               this.alertService.showMessage('Usuarios', 'Se creó el registro correctamente', 'success');
                this.dispatchEvent.emit();
                this.hideModal();
                this.loaderButton = false;

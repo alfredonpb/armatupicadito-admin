@@ -169,7 +169,7 @@ export class ListUserComponent implements OnInit {
       this.objectChangeStatus.user.enabled = this.objectChangeStatus.enabled;
       this.service.update(this.objectChangeStatus.user, this.objectChangeStatus.user.id).subscribe(
          (data: any) => {
-            this.alertService.showMessage('Confirmación', `Cambio de estado exitoso`, 'info');
+            this.alertService.showMessage('Usuarios', 'Se cambio el estado del usuario correctamente', 'info');
             
             const event = { index: this.objectChangeStatus.index, user: data.data };
             this.updateList(event);

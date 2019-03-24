@@ -73,7 +73,7 @@ export class CreateEntitieComponent implements OnInit {
          this.loaderButton = true;
          this.sharedService.createEntitie(values).subscribe(
             (data) => {
-               this.alertService.showMessage('Tablas maestras', 'Registro exitoso', 'success');
+               this.alertService.showMessage('Tablas maestras', 'Se creó el registro correctamente', 'success');
                this.dispatchEvent.emit({ type: values.master_entitie, data: data.data });
                this.hideModal();
                this.loaderButton = false;

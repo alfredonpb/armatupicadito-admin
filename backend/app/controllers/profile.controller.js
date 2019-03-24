@@ -9,9 +9,10 @@ const logMessage = 'profile controller';
 /**
  * get de todos los perfiles
  * 
- * @param {*} req [request recibidos por http]
+ * @param {Request} req [recibidos por http]
+ * @param {Response} res [respuesta http]
  * 
- * @param {*} res [response respuesta http]
+ * @return  {Response} res [respuesta a front]
  */
 function getAll(req, res) {
 
@@ -38,9 +39,10 @@ function getAll(req, res) {
 /**
  * eliminacion de perfil
  * 
- * @param {*} req [request recibidos por http]
+ * @param {Request} req [recibidos por http]
+ * @param {Response} res [respuesta http]
  * 
- * @param {*} res [response respuesta http]
+ * @return  {Response} res [respuesta a front]
  */
 function destroy(req, res) {
 

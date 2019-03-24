@@ -8,8 +8,11 @@ const logMessage = 'auth controller';
 
 /**
  * login a sistema
- * @param {*} req [request recibidos por http]
- * @param {*} res [response respuesta http]
+ * 
+ * @param {Request} req [recibidos por http]
+ * @param {Response} res [respuesta http]
+ * 
+ * @return  {Response} res [respuesta a front]
  */
 function login(req, res) {
 

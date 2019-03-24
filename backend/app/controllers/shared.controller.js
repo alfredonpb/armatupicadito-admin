@@ -7,8 +7,10 @@ const services = require('../services/index');
 const logMessage = 'shared controller';
 
 /**
- * Registro de usuarios
+ * Creacion de entidad
+ * 
  * @param {*} req [request recibidos por http]
+ * 
  * @param {*} res [response respuesta http]
  */
 function createEntitie(req, res) {
@@ -47,4 +49,6 @@ function createEntitie(req, res) {
 }
 
 
-module.exports = { createEntitie };
+module.exports = { 
+   createEntitie 
+};

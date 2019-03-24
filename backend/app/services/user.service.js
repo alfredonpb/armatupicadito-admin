@@ -7,11 +7,11 @@ const Op = db.Sequelize.Op;
 const LIMIT_PAGE = process.env.LIMIT_PAGE;
 
 /**
- * get list of users by filter
+ * get usuarios dado filtrado
  *
- * @param   {Request}  filter  query params
+ * @param {Request} filter [request con objecto para filtrado]
  *
- * @return  {Premise}          promise
+ * @return  {Promise} [Promise]
  */
 function getByFilter(filter) {
 
@@ -69,11 +69,11 @@ function getByFilter(filter) {
 }
 
 /**
- * get users by email 
+ * usuarios dado su email 
  * 
- * @param {string} email email of users
+ * @param {String} email [email de usuario a consultar]
  * 
- * @return {Promise}    Promise
+ * @return  {Promise} [Promise]
  */
 function getUserByEmail(email) {
 
@@ -91,11 +91,11 @@ function getUserByEmail(email) {
 }
 
 /**
- * get user by id
+ * usuario dado su id
  * 
- * @param   {number}  id  id of user
+ * @param   {Number} id [id de usuario]
  * 
- * @return  {Promise}      Promise
+ * @return  {Promise} [Promise]
  */
 function getById(id) {
 
@@ -119,24 +119,24 @@ function getById(id) {
 }
 
 /**
- * create users by params http
+ * creacion de usuarios
  * 
- * @param   {Request}  request  http params
+ * @param   {Request}  req [datos para creacion de usuario]
  * 
- * @return  {Promise}          Promise
+ * @return  {Promise} [Promise]
  */
-function create(request) {
+function create(req) {
 
    const values = {
-      name: request.name,
-      lastname: request.lastname,
-      email: request.email,
-      password: request.hash,
-      phone: request.phone,
-      profile_id: Number(request.profile_id),
-      enabled: request.enabled,
-      created_at: request.now,
-      updated_at: request.now
+      name: req.name,
+      lastname: req.lastname,
+      email: req.email,
+      password: req.hash,
+      phone: req.phone,
+      profile_id: Number(req.profile_id),
+      enabled: req.enabled,
+      created_at: req.now,
+      updated_at: req.now
    };
 
    return db.connection.transaction((t) => {
@@ -156,12 +156,13 @@ function create(request) {
 }
 
 /**
- * update user by params http and id
+ * modificacion de usuario dado su id
  * 
- * @param   {Request}  request  http params
- * @param   {number}   id id of user
+ * @param   {Request} req [datos para actualizacion de usuario]
  * 
- * @return  {Promise}  Promise
+ * @param   {number} id [id de usaurio]
+ * 
+ * @return  {Promise} [Promise]
  */
 function update(request, id) {
 
