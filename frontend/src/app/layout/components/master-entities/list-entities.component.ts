@@ -71,4 +71,14 @@ export class ListEntitieComponent implements OnInit {
       if (type === 'profile') { this.listProfiles.splice(index, 1); }
    }
 
+   /** confirm operation */
+   confirmOperation() {
+      this.deleteProfile();
+   }
+
+   /** decline operation */
+   declineOperation() {
+      this.objectDeleteProfile = null;
+   }
+
 }
