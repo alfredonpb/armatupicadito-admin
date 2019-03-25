@@ -1,0 +1,69 @@
+<div bsModal #modalCreateEntitie="bs-modal" class="modal fade" tabindex="-1" [config]="{ backdrop: 'static', keyboard: false }">
+   <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+         <div class="modal-header">
+            <h4 id="dialog-child-name" class="modal-title pull-left">Agregar registros</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="hideModal()">
+               <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+
+         <div class="modal-body">
+
+            <form [formGroup]="form" novalidate class="container">
+
+               <div class="form-group row" [ngClass]="{ 'has-error': form.controls.master_entitie.errors && form.controls.master_entitie.pristine && submit }">
+                  <label for="master_entitie" class="col-sm-3 col-form-label">
+                     Tabla maestra <strong class="text-danger">*</strong>
+                  </label>
+                  <div class="col-md-9">
+                     <select class="form-control input-error" formControlName="master_entitie">
+                        <option value="" disabled>Ninguno...</option>
+                        <option *ngFor="let entitie of cmbEntities" [value]="entitie.id">{{ entitie.value }}</option>
+                     </select>
+                  </div>
+
+                  <div class="offset-md-3 col-md-9">
+                     <small *ngIf="form.controls.master_entitie.errors && form.controls.master_entitie.pristine && submit" class="form-text text-danger">
+                        <b *ngIf="form.controls.master_entitie.errors.required">Éste campo es requerido</b>
+                     </small>
+                  </div>
+               </div>
+
+               <div class="form-group row" [ngClass]="{ 'has-error': form.controls.records.errors && form.controls.records.pristine && submit }">
+                  <label for="records" class="col-sm-3 col-form-label">
+                     Registros <strong class="text-danger">*</strong>
+                  </label>
+                  <div class="col-md-9">
+                     <input type="records" class="form-control input-error" formControlName="records" placeholder="Registros">
+                  </div>
+
+                  <div class="offset-md-3 col-md-9">
+                     <small *ngIf="form.controls.records.errors && form.controls.records.pristine && submit" class="form-text text-danger">
+                        <b *ngIf="form.controls.records.errors.required">Éste campo es requerido</b>
+                     </small>
+                  </div>
+               </div>
+
+               <div class="alert alert-warning" role="alert">
+                  <ul class="font-weight-bold" style="margin-bottom: 0px;">
+                     <li>Los registros serás agregador a la entidad que seleccione.</li>
+                     <li>Para agregar registros masivamente escriba cada uno separado por coma (sin espacios en blanco entre comas).</li>
+                  </ul>
+               </div>
+
+            </form>
+
+         </div>
+
+         <div class="modal-footer">
+            <button (click)="save(form)" [disabled]="loaderButton" class="btn btn-primary btn-circle" tooltip="Guardar" container="body">
+               <i class="fas fa-check"></i>
+               <loader-button [loaderButton]="loaderButton"></loader-button>
+            </button>
+         </div>
+
+      </div>
+   </div>
+</div>

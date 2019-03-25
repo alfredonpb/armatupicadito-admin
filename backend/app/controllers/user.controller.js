@@ -9,12 +9,12 @@ const services = require('../services/index');
 const logMessage = 'user controller';
 
 /**
- * get list of users by filter
+ * listado de usuarios dado un filtrado
  *
- * @param   {Request}  req  request
- * @param   {Response}  res  response
- *
- * @return  {Response}       response to front
+ * @param {Request} req [recibidos por http]
+ * @param {Response} res [respuesta http]
+ * 
+ * @return  {Response} res [respuesta a front]
  */
 function getByFilter(req, res) {
 
@@ -39,12 +39,12 @@ function getByFilter(req, res) {
 }
 
 /**
- * register of users
+ * registros de usuarios
  * 
- * @param   {Request}  req  request
- * @param   {Response}  res  response
- *
- * @return  {Response}       response to front
+ * @param {Request} req [recibidos por http]
+ * @param {Response} res [respuesta http]
+ * 
+ * @return  {Response} res [respuesta a front]
  */
 function register(req, res) {
 
@@ -72,8 +72,8 @@ function register(req, res) {
                      return response.success(res, 'Register ok'); 
                   }
                ).catch(
-                  (error) => { 
-                     return response.error(res, error.message, 500); 
+                  (exception) => { 
+                     return response.errorLog(res, exception, `${logMessage} -> register`, 500);
                   }
                );
 
@@ -96,12 +96,12 @@ function register(req, res) {
 }
 
 /**
- * get list of users by filter
+ * actualizacion de usuario
  *
- * @param   {Request}  req  request
- * @param   {Response}  res  response
- *
- * @return  {Response}       response to front
+ * @param {Request} req [recibidos por http]
+ * @param {Response} res [respuesta http]
+ * 
+ * @return  {Response} res [respuesta a front]
  */
 function update(req, res) {
 

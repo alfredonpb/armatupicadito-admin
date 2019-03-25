@@ -6,8 +6,11 @@ const moment = require('moment');
 const SECRET = process.env.SECRET_JWT;
 
 /**
- * generar token dado usuario
- * @param {User} user [objeto usuario] 
+ * generacion de token dado un usuario
+ *
+ * @param   {User}  user  [objecto usuario]
+ *
+ * @return  {Promise} [Promise]
  */
 function generateToken(user) {
 

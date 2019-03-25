@@ -17,4 +17,9 @@ export class ProfileService {
       return this.http.get(`${this.apiUrl}/get-all`, CustomHeaders.jwt());
    }
 
+   /** delete */
+   delete(id: number) {
+      return this.http.delete(`${this.apiUrl}/delete/${id}`, CustomHeaders.jwt());
+   }
+
 }

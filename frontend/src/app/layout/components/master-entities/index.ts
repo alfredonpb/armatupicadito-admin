@@ -1,0 +1,1 @@
+export { ListEntitieComponent } from './list-entities.component';

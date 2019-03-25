@@ -89,7 +89,7 @@ export class EditUserComponent implements OnInit {
          this.loaderButton = true;
          this.service.update(values, this.selectedUser.id).subscribe(
             (data: any) => {
-               this.alertService.showMessage('Usuarios', 'Se modificó con éxito', 'success');
+               this.alertService.showMessage('Usuarios', 'Se modificó el registro correctamente', 'success');
                this.dispatchEvent.emit({ user: data.data, index: this.selectedIndex });
                this.hideModal();
                this.loaderButton = false;

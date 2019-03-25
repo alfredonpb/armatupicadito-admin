@@ -1,0 +1,1 @@
+export { CreateEntitieComponent } from './create-entitie.component';
