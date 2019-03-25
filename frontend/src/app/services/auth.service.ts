@@ -24,7 +24,6 @@ export class AuthService {
    logout() {
       SessionStorageClass.remoteItem(environment.keySessionStorage);
       this.router.navigate(['/login']);
-      
    }
 
 }

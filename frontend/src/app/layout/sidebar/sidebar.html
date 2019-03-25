@@ -23,12 +23,12 @@
    <hr class="sidebar-divider">
 
    <!-- Heading -->
-   <div class="sidebar-heading">
+   <div *ngIf="routing.configuration" class="sidebar-heading">
       Utilidades
    </div>
 
    <!-- Nav Item - Pages Collapse Menu -->
-   <li class="nav-item">
+   <li *ngIf="routing.configuration" class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
          aria-controls="collapseTwo">
          <i class="fas fa-cog"></i>
@@ -50,6 +50,6 @@
    </li>
 
    <!-- Divider -->
-   <hr class="sidebar-divider d-none d-md-block">
+   <hr *ngIf="routing.configuration" class="sidebar-divider d-none d-md-block">
 
 </ul>

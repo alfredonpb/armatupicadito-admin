@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+/** guards */
+import { SuperadminGuard } from '../guards/index';
+
 /** modules */
 import { SharedModule } from '../shared/shared.module';
 
@@ -62,6 +65,7 @@ import { ModalConfirmComponent } from '../shared/modal-confirm/index';
       CreateEntitieComponent
    ],
    providers: [
+      SuperadminGuard,
       ProfileService,
       UserService,
       SharedService
