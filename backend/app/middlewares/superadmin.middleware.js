@@ -13,7 +13,7 @@ const logMessage = 'user enabled middleware';
  * @param {Response} res [respuesta http]
  * @param {Next} next [sequir con la peticion]
  */
-function verifyEnabled(req, res, next) {
+function verifySuperadmin(req, res, next) {
 
    try {
 
@@ -21,10 +21,10 @@ function verifyEnabled(req, res, next) {
       const User = services.UserService.getById(userActive.data.id);
 
       User.then(
-         (data) => { 
+         (userData) => { 
 
-            if (!data.enabled) {
-               return response.error(res, 'El usuario está deshabilitado', 401);
+            if (userData.profile.name != 'Superadmin') {
+               return response.error(res, 'El usuario no tiene permisos para realizar ésta operación', 403);
             }
 
             next();
@@ -43,5 +43,5 @@ function verifyEnabled(req, res, next) {
 }
 
 module.exports = { 
-   verifyEnabled 
+   verifySuperadmin 
 };

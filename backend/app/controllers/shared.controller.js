@@ -9,9 +9,8 @@ const logMessage = 'shared controller';
 /**
  * Creacion de entidad
  * 
- * @param {*} req [request recibidos por http]
- * 
- * @param {*} res [response respuesta http]
+ * @param {Request} req [request recibidos por http]
+ * @param {Request} res [response respuesta http]
  */
 function createEntitie(req, res) {
 

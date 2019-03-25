@@ -36,13 +36,23 @@ app.get(`${PREFIX}/`, (req, res) => {
 app.use(`${PREFIX}/auth`, authRoute);
 
 /** routing profiles */
-app.use(`${PREFIX}/profiles`, middlewares.AuthMiddleware.validToken, middlewares.UserEnabledMiddleware.validEnabled, profileRoute);
+app.use(`${PREFIX}/profiles`, 
+   middlewares.AuthMiddleware.validToken, 
+   middlewares.UserEnabledMiddleware.verifyEnabled, middlewares.SuperadminMiddleware.verifySuperadmin,
+   profileRoute);
 
 /** routing users */
-app.use(`${PREFIX}/users`, middlewares.AuthMiddleware.validToken, middlewares.UserEnabledMiddleware.validEnabled, userRoute);
+app.use(`${PREFIX}/users`, 
+   middlewares.AuthMiddleware.validToken, 
+   middlewares.UserEnabledMiddleware.verifyEnabled, middlewares.SuperadminMiddleware.verifySuperadmin,
+   userRoute);
 
 /** rounting shared */
-app.use(`${PREFIX}/shared`, middlewares.AuthMiddleware.validToken, middlewares.UserEnabledMiddleware.validEnabled, sharedRoute);
+app.use(`${PREFIX}/shared`, 
+   middlewares.AuthMiddleware.validToken,
+   middlewares.UserEnabledMiddleware.verifyEnabled,
+   middlewares.SuperadminMiddleware.verifySuperadmin,
+   sharedRoute);
 
 // server corriendo
 app.listen(PORT, SERVER_HOST, () => {

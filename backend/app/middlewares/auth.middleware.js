@@ -10,12 +10,9 @@ const logMessage = 'auth middleware';
 /**
  * verificador de token valido para peticiones
  *
- * @param {*} req [request recibidos por http]
- * 
- * @param {*} res [response respuesta http]
- * 
- * @param {*} next [sequir con la peticion]
- *
+ * @param {Request} req [recibidos por http]
+ * @param {Response} res [respuesta http]
+ * @param {Next} next [sequir con la peticion]
  */
 function validToken(req, res, next) {
 
