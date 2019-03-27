@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProfileService } from '../../../services/profile.service';
+import { TypeFieldService } from '../../../services/type-field.service';
 import { AlertService } from '../../../shared/alert.service';
-import { Profile } from '../../../models/index';
+import { Profile, TypeField } from '../../../models/index';
 import { ModalConfirmComponent } from '../../../shared/modal-confirm/index';
 
 @Component({
@@ -12,16 +13,19 @@ import { ModalConfirmComponent } from '../../../shared/modal-confirm/index';
 export class ListEntitieComponent implements OnInit {
    @ViewChild('modalConfirm') modalConfirm: ModalConfirmComponent;
    listProfiles: Profile[] = [];
+   listTypesFields: TypeField[] = [];
    loader: boolean = false;
    objectDeleteProfile: any;
 
    constructor(
       private profileService: ProfileService,
+      private typeFieldService: TypeFieldService,
       private alertService: AlertService
    ) { }
 
    ngOnInit() { 
       this.getListProfiles();
+      this.getListTypesFields();
    }
 
    /** get list of profiles */
@@ -39,14 +43,30 @@ export class ListEntitieComponent implements OnInit {
       );
    }
 
+   /** get list of types fields */
+   getListTypesFields() {
+      this.loader = true;
+      this.typeFieldService.getAll().subscribe(
+         (data) => {
+            this.listTypesFields = data.data;
+            this.loader = false;
+         },
+         (error) => {
+            this.alertService.showMessageServer(error);
+            this.loader = false;
+         }
+      );
+   }
+
    /** refresh list */
    refreshList(event: any) {
       if (event.type === 'profile') { this.getListProfiles(); }
+      if (event.type === 'type_field') { this.getListTypesFields(); }
    }
 
    /** show modal confirm */
-   confirmDeleteProfile(profile: Profile, index: number) {
-      this.objectDeleteProfile = { profile, index };
+   confirmDeleteProfile(entitie: Profile | TypeField, index: number) {
+      this.objectDeleteProfile = { entitie, index };
       this.modalConfirm.showModal('eliminar el perfil seleccionado');
    }
 

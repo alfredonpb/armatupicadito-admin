@@ -2,7 +2,7 @@
 
 const db = require('../database/sequelize');
 
-const TypeField = db.connection.define('profiles', {
+const TypeField = db.connection.define('types_fields', {
    id: {
       type: db.Sequelize.INTEGER,
       primaryKey: true,

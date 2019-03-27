@@ -18,6 +18,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ProfileService } from '../services/profile.service'; 
 import { UserService } from '../services/user.service'; 
 import { SharedService } from '../services/shared.service'; 
+import { TypeFieldService } from '../services/type-field.service'; 
 
 /** componenets */
 import { LayoutRoutingModule } from './layout-routing.module';
@@ -68,7 +69,8 @@ import { ModalConfirmComponent } from '../shared/modal-confirm/index';
       SuperadminGuard,
       ProfileService,
       UserService,
-      SharedService
+      SharedService,
+      TypeFieldService
    ]
 })
 export class LayoutModule { }
