@@ -58,24 +58,74 @@ function create(request) {
  */
 function destroy(id) {
 
-   return db.connection.transaction((t) => {
+   const Profile = this.getById(id); 
 
-      return models.Profile.destroy({ where: { id } }, { transaction: t }).then(() => {
-         return true;
-      });
+   return Profile.then(
+      (profile) => {
 
-   }).then((result) => {
-      return result;
+         if (profile.users.length < 1) {
 
-   }).catch((error) => {
-      throw new Error(error);
+            return db.connection.transaction((t) => {
 
+               return profile.destroy({ transaction: t });
+         
+            }).then((result) => {
+               return result;
+         
+            }).catch((error) => {
+               throw new Error(error);
+         
+            });
+            
+         }
+
+         throw new Error('No se puede eliminar el perfil ya que tiene usuarios asociados');
+      
+      }
+   );
+
+   // return db.connection.transaction((t) => {
+
+   //    return models.Profile.destroy({ where: { id } }, { transaction: t }).then(() => {
+   //       return true;
+   //    });
+
+   // }).then((result) => {
+   //    return result;
+
+   // }).catch((error) => {
+   //    throw new Error(error);
+
+   // });
+
+}
+
+/**
+ * tipo de cancha dado su id
+ * 
+ * @param   {Number} id [id de tipo de cancha]
+ * 
+ * @return  {Promise} [Promise]
+ */
+function getById(id) {
+
+   const query = models.Profile.findById(id, {
+      attributes: [
+         'id',
+         'name'
+      ],
+      include: [{
+         model: models.User
+      }]
    });
 
+   return query;
+   
 }
 
 module.exports = {
    getAll,
    create,
-   destroy
+   destroy,
+   getById
 };
