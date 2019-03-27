@@ -1,11 +1,13 @@
 'use strict';
 
+const JwtService = require('./jwt.service');
 const UserService = require('./user.service');
 const ProfileService = require('./profile.service');
-const JwtService = require('./jwt.service');
+const TypeFieldService = require('./type-field.service');
 
 module.exports = {
+   JwtService,
    ProfileService,
    UserService,
-   JwtService
+   TypeFieldService
 };

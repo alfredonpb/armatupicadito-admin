@@ -6,7 +6,7 @@ const controllers = require('../controllers/index');
 
 const route = express.Router();
 
-/** get all profiles */
+/** create entities */
 route.post('/create-entitie', controllers.SharedController.createEntitie);
 
 module.exports = route;
