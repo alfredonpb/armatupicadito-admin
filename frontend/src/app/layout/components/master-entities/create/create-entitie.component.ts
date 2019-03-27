@@ -12,7 +12,7 @@ import { SharedService } from '../../../../services/shared.service';
 export class CreateEntitieComponent implements OnInit {
    @ViewChild('modalCreateEntitie') modalCreateEntitie: ModalDirective;
    @Output() dispatchEvent = new EventEmitter();
-   cmbEntities: any[] = [{ id: 'profile', value: 'Perfiles' }];
+   cmbEntities: any[] = [{ id: 'profile', value: 'Perfiles' }, { id: 'type_field', value: 'Tipos de canchas' }];
    form: FormGroup;
    loaderButton: boolean = false;
    submit: boolean = false;

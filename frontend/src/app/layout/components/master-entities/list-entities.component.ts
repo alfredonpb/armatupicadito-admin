@@ -15,7 +15,7 @@ export class ListEntitieComponent implements OnInit {
    listProfiles: Profile[] = [];
    listTypesFields: TypeField[] = [];
    loader: boolean = false;
-   objectDeleteProfile: any;
+   objectDeleteEntitie: any;
 
    constructor(
       private profileService: ProfileService,
@@ -64,20 +64,30 @@ export class ListEntitieComponent implements OnInit {
       if (event.type === 'type_field') { this.getListTypesFields(); }
    }
 
-   /** show modal confirm */
-   confirmDeleteProfile(entitie: Profile | TypeField, index: number) {
-      this.objectDeleteProfile = { entitie, index };
-      this.modalConfirm.showModal('eliminar el perfil seleccionado');
+   /** show modal confirm delete profiles */
+   confirmDelete(type: string, entitie: Profile | TypeField, index: number) {
+      this.objectDeleteEntitie = { type, entitie, index };
+
+      let textModalConfirm: string;
+      if (type === 'profile') { textModalConfirm = 'eliminar el perfil seleccionado'; }
+      if (type === 'type_field') { textModalConfirm = 'eliminar el tipo de cancha seleccionada'; }
+
+      this.modalConfirm.showModal(textModalConfirm);
    }
 
    /** delete item entitie profile */
    deleteProfile() {
       this.loader = true;
-      this.profileService.delete(this.objectDeleteProfile.profile.id).subscribe(
+
+      let service;
+      if (this.objectDeleteEntitie.type === 'profile') {  service =  this.profileService.delete(this.objectDeleteEntitie.entitie.id); }
+      if (this.objectDeleteEntitie.type === 'type_field') {  service =  this.typeFieldService.delete(this.objectDeleteEntitie.entitie.id); }
+
+      service.subscribe(
          (data) => {
             this.loader = false;
             this.alertService.showMessage('Tablas maestras', 'El registro seleccionado fue eliminado', 'warning');
-            this.removeItemList('profile', this.objectDeleteProfile.index);
+            this.removeItemList(this.objectDeleteEntitie.type, this.objectDeleteEntitie.index);
          },
          (error) => {
             this.alertService.showMessageServer(error);
@@ -89,6 +99,7 @@ export class ListEntitieComponent implements OnInit {
    /** remove item list */
    removeItemList(type: string, index: number) {
       if (type === 'profile') { this.listProfiles.splice(index, 1); }
+      if (type === 'type_field') { this.listTypesFields.splice(index, 1); }
    }
 
    /** confirm operation */
@@ -98,7 +109,7 @@ export class ListEntitieComponent implements OnInit {
 
    /** decline operation */
    declineOperation() {
-      this.objectDeleteProfile = null;
+      this.objectDeleteEntitie = null;
    }
 
 }

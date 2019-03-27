@@ -33,7 +33,7 @@
                               - {{ profile.name }}
                            </div>
                            <div class="col-md-3">
-                              <i class="fas fa-trash-alt" (click)="confirmDeleteProfile(profile, i)" tooltip="Eliminar" style="cursor: pointer;"></i>
+                              <i class="fas fa-trash-alt" (click)="confirmDelete('profile', profile, i)" tooltip="Eliminar" style="cursor: pointer;"></i>
                            </div>
                         </div>
                      </div>
@@ -62,7 +62,7 @@
                               - {{ type.name }}
                            </div>
                            <div class="col-md-3">
-                              <i class="fas fa-trash-alt" (click)="confirmDeleteProfile(type, i)" tooltip="Eliminar" style="cursor: pointer;"></i>
+                              <i class="fas fa-trash-alt" (click)="confirmDelete('type_field', type, i)" tooltip="Eliminar" style="cursor: pointer;"></i>
                            </div>
                         </div>
                      </div>

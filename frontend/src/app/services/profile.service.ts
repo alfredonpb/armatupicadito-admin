@@ -18,7 +18,7 @@ export class ProfileService {
    }
 
    /** delete */
-   delete(id: number) {
+   delete(id: number): Observable<any> {
       return this.http.delete(`${this.apiUrl}/delete/${id}`, CustomHeaders.jwt());
    }
 
