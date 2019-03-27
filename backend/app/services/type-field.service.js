@@ -4,6 +4,23 @@ const db = require('../database/sequelize');
 const models = require('../models/index');
 
 /**
+ * todos los tipos de cancha
+ *
+ * @return  {Promise} [Promise]
+ */
+function getAll() {
+
+   const query = models.TypeField.findAll({
+      order: [
+         ['name', 'ASC']
+      ]
+   });
+
+   return query;
+   
+}
+
+/**
  * creacion de tipos de canchas
  *
  * @param {Request} req [datos para la creacion de un tipo de cancha]
@@ -58,6 +75,7 @@ function destroy(id) {
 }
 
 module.exports = {
+   getAll,
    create,
    destroy
 };
