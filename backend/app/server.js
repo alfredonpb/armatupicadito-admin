@@ -39,26 +39,29 @@ app.use(`${PREFIX}/auth`, authRoute);
 /** routing profiles */
 app.use(`${PREFIX}/profiles`, 
    middlewares.AuthMiddleware.validToken, 
-   middlewares.UserEnabledMiddleware.verifyEnabled, middlewares.SuperadminMiddleware.verifySuperadmin,
+   middlewares.UserEnabledMiddleware.verifyEnabled, 
+   middlewares.PermissionMiddleware.verify({ superadmin: 'Superadmin', admin: 'Administrador' }),
    profileRoute);
 
 /** routing users */
 app.use(`${PREFIX}/users`, 
    middlewares.AuthMiddleware.validToken, 
-   middlewares.UserEnabledMiddleware.verifyEnabled, middlewares.SuperadminMiddleware.verifySuperadmin,
+   middlewares.UserEnabledMiddleware.verifyEnabled, 
+   middlewares.PermissionMiddleware.verify({ superadmin: 'Superadmin', admin: 'Administrador' }),
    userRoute);
 
 /** rounting shared */
 app.use(`${PREFIX}/shared`, 
    middlewares.AuthMiddleware.validToken,
    middlewares.UserEnabledMiddleware.verifyEnabled,
-   middlewares.SuperadminMiddleware.verifySuperadmin,
+   middlewares.PermissionMiddleware.verify({ superadmin: 'Superadmin' }),
    sharedRoute);
 
 /** routing types fields */
 app.use(`${PREFIX}/types-fields`, 
    middlewares.AuthMiddleware.validToken, 
-   middlewares.UserEnabledMiddleware.verifyEnabled, middlewares.SuperadminMiddleware.verifySuperadmin,
+   middlewares.UserEnabledMiddleware.verifyEnabled, 
+   middlewares.PermissionMiddleware.verify({ superadmin: 'Superadmin' }),
    typeFieldRoute);
 
 // server corriendo

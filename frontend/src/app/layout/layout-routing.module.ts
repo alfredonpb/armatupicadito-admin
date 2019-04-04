@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 /** guards */
-import { SuperadminGuard } from '../guards/index';
+import { AdminGuard, SuperadminGuard } from '../guards/index';
 
 /** components */
 import { LayoutComponent } from './layout.component';
@@ -15,7 +15,7 @@ const routes: Routes = [
       path: '', component: LayoutComponent,
       children: [
          { path: 'home', component: HomeComponent },
-         { path: 'users', component: ListUserComponent, canActivate: [SuperadminGuard] },
+         { path: 'users', component: ListUserComponent, canActivate: [AdminGuard] },
          { path: 'tablas-maestras', component: ListEntitieComponent, canActivate: [SuperadminGuard] }
       ]
    }

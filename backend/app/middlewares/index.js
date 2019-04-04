@@ -2,10 +2,10 @@
 
 const AuthMiddleware = require('./auth.middleware');
 const UserEnabledMiddleware = require('./user-enabled.middleware');
-const SuperadminMiddleware = require('./superadmin.middleware');
+const PermissionMiddleware = require('./permission.middleware');
 
 module.exports = {
    AuthMiddleware,
    UserEnabledMiddleware,
-   SuperadminMiddleware
+   PermissionMiddleware
 };

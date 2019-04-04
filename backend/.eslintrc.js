@@ -27,6 +27,7 @@ module.exports = {
       'import/newline-after-import': 0,
       'eqeqeq': 0,
       'no-unneeded-ternary': 0,
-      "max-len": 0
+      "max-len": 0,
+      "no-unreachable": 0
    },
 };
