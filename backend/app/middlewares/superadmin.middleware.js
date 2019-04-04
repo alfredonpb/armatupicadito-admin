@@ -4,7 +4,7 @@ const response = require('../shared/response');
 
 const services = require('../services/index');
 
-const logMessage = 'user enabled middleware';
+const logMessage = 'superadmin middleware';
 
 /**
  * verificador de token valido para peticiones
@@ -32,12 +32,12 @@ function verifySuperadmin(req, res, next) {
          }
       ).catch(
          (exception) => { 
-            return response.errorLog(res, exception, `${logMessage} -> validEnabled`, 500); 
+            return response.errorLog(res, exception, `${logMessage} -> verifySuperadmin`, 500); 
          }
       );
 
    } catch (exception) {
-      return response.errorLog(res, exception, `${logMessage} -> validEnabled`, 500); 
+      return response.errorLog(res, exception, `${logMessage} -> verifySuperadmin`, 500); 
    }
 
 }

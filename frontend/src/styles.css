@@ -11,6 +11,9 @@
    margin-left: -180px;
    margin-top: -110px;
 }
+.btn-margin {
+   margin-left: 5px;
+}
 
 /* errors forms */
 .has-error:click {

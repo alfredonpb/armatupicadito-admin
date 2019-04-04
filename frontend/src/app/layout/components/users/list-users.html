@@ -82,23 +82,17 @@
                         <span class="badge" [ngClass]="{ 'badge-success': user.enabled, 'badge-warning': !user.enabled }">{{ user.enabled ? 'Habilitado' : 'Deshabilitado' }}</span>
                      </td>
                      <td>
-                        <button (click)="modalEditUser.showModal(user, i)" class="btn btn-info btn-circle" tooltip="Modificar">
+                        <button (click)="modalEditUser.showModal(user, i)" class="btn btn-primary btn-circle btn-sm" tooltip="Modificar">
                            <i class="fas fa-edit"></i>
                         </button>
 
-                        <span *ngIf="user.enabled">
-                           &nbsp;
-                           <button (click)="confirmChangeStatus(user, i, false)" class="btn btn-warning btn-circle" tooltip="Deshabilitar">
-                              <i class="fas fa-user-minus"></i>
-                           </button>            
-                        </span>
+                        <button *ngIf="user.enabled" (click)="confirmChangeStatus(user, i, false)" class="btn btn-warning btn-circle btn-sm btn-margin" tooltip="Deshabilitar">
+                           <i class="fas fa-user-minus"></i>
+                        </button>            
 
-                        <span *ngIf="!user.enabled">
-                           &nbsp;
-                           <button (click)="confirmChangeStatus(user, i, true)" class="btn btn-success btn-circle" tooltip="Habilitar">
-                              <i class="fas fa-user-plus"></i>
-                           </button>
-                        </span>
+                        <button *ngIf="!user.enabled" (click)="confirmChangeStatus(user, i, true)" class="btn btn-success btn-circle btn-sm btn-margin" tooltip="Habilitar">
+                           <i class="fas fa-user-plus"></i>
+                        </button>
                      </td>
                   </tr>
                </tbody>

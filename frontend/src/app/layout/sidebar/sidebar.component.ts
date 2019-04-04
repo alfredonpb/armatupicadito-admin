@@ -9,7 +9,8 @@ import { environment } from '../../../environments/environment';
 
 export class SidebarComponent implements OnInit {
    routing = {
-      configuration: false
+      users: false,
+      entities: false
    };
    
    constructor(
@@ -22,9 +23,15 @@ export class SidebarComponent implements OnInit {
    /** set permissionf of routing */
    setRoutingPermissions() {
       const activeUser: SessionStorageModel = SessionStorageClass.getItem(environment.keySessionStorage);
-      if (activeUser.profile.name == 'Superadmin') {
-         this.routing.configuration = true;
 
+      if (activeUser.profile.name == 'Superadmin') {
+         this.routing.users = true;
+         this.routing.entities = true;
       }
+
+      if (activeUser.profile.name == 'Administrador') {
+         this.routing.users = true;
+      }
+
    }
 }

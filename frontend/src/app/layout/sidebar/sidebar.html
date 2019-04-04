@@ -1,6 +1,5 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-   <!-- Sidebar - Brand -->
    <a class="sidebar-brand d-flex align-items-center justify-content-center" [routerLink]="['/home']">
       <div class="sidebar-brand-icon rotate-n-15">
          <i class="fas fa-futbol"></i>
@@ -11,7 +10,6 @@
    <!-- Divider -->
    <hr class="sidebar-divider my-0">
 
-   <!-- Nav Item - Dashboard -->
    <li class="nav-item" [routerLink]="['/home']" routerLinkActive="active">
       <a class="nav-link" [routerLink]="['/home']" routerLinkActive="active">
          <i class="fas fa-home"></i>
@@ -22,13 +20,7 @@
    <!-- Divider -->
    <hr class="sidebar-divider">
 
-   <!-- Heading -->
-   <div *ngIf="routing.configuration" class="sidebar-heading">
-      Utilidades
-   </div>
-
-   <!-- Nav Item - Pages Collapse Menu -->
-   <li *ngIf="routing.configuration" class="nav-item">
+   <li *ngIf="routing.users || routing.entities" class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
          aria-controls="collapseTwo">
          <i class="fas fa-cog"></i>
@@ -36,20 +28,19 @@
       </a>
       <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
          <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" [routerLink]="['/users']" routerLinkActive="active">
+
+            <a *ngIf="routing.users" class="collapse-item" [routerLink]="['/users']" routerLinkActive="active">
                <i class="fas fa-users"></i>
                Usuarios
             </a>
 
-            <a class="collapse-item" [routerLink]="['/tablas-maestras']" routerLinkActive="active">
+            <a *ngIf="routing.entities" class="collapse-item" [routerLink]="['/tablas-maestras']" routerLinkActive="active">
                <i class="fas fa-list-alt"></i>
                Tablas maestras
             </a>
+
          </div>
       </div>
    </li>
-
-   <!-- Divider -->
-   <hr *ngIf="routing.configuration" class="sidebar-divider d-none d-md-block">
 
 </ul>
