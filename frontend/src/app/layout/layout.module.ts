@@ -38,6 +38,8 @@ import { EditUserComponent } from './components/users/edit/index';
 import { ListEntitieComponent } from './components/master-entities/index';
 import { CreateEntitieComponent } from './components/master-entities/create/index';
 
+import { ListFieldComponent } from './components/fields/index';
+
 /** shared */
 import { LoaderComponent } from '../shared/loader/index';
 import { ModalConfirmComponent } from '../shared/modal-confirm/index';
@@ -64,7 +66,8 @@ import { ModalConfirmComponent } from '../shared/modal-confirm/index';
       CreateUserComponent,
       EditUserComponent,
       ListEntitieComponent,
-      CreateEntitieComponent
+      CreateEntitieComponent,
+      ListFieldComponent
    ],
    providers: [
       AdminGuard,
