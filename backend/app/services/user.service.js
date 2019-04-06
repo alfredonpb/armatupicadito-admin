@@ -164,17 +164,16 @@ function create(req) {
  * 
  * @return  {Promise} [Promise]
  */
-function update(request, id) {
+function update(req, id) {
 
    const values = {
-      name: request.name,
-      lastname: request.lastname,
-      email: request.email,
-      phone: request.phone,
-      profile_id: Number(request.profile_id),
-      enabled: request.enabled,
-      created_at: request.now,
-      updated_at: request.now
+      name: req.name,
+      lastname: req.lastname,
+      email: req.email,
+      phone: req.phone,
+      profile_id: Number(req.profile_id),
+      enabled: req.enabled,
+      updated_at: req.now
    };
 
    const User = this.getById(id);

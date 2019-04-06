@@ -41,6 +41,7 @@ import { CreateEntitieComponent } from './components/master-entities/create/inde
 
 import { ListFieldComponent } from './components/fields/index';
 import { CreateFieldComponent } from './components/fields/create/index';
+import { EditFieldComponent } from './components/fields/edit/index';
 
 /** shared */
 import { LoaderComponent } from '../shared/loader/index';
@@ -71,7 +72,8 @@ import { ModalConfirmComponent } from '../shared/modal-confirm/index';
       ListEntitieComponent,
       CreateEntitieComponent,
       ListFieldComponent,
-      CreateFieldComponent
+      CreateFieldComponent,
+      EditFieldComponent
    ],
    providers: [
       AdminGuard,

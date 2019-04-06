@@ -14,6 +14,6 @@ route.get('/get-by-filter', controllers.FieldController.getByFilter);
 route.post('/create', validators.FieldValidator.checkRules, validators.FieldValidator.validate, controllers.FieldController.create);
 
 /** register users */
-// route.put('/update/:id', validators.FieldValidator.checkRules, validators.FieldValidator.validate, controllers.FieldController.update);
+route.put('/update/:id', validators.FieldValidator.checkRules, validators.FieldValidator.validate, controllers.FieldController.update);
 
 module.exports = route;

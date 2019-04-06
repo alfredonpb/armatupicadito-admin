@@ -108,7 +108,7 @@
 <create-field #modalCreateField [cmbTypesFields]="cmbTypesFields" (dispatchEvent)="filter()"></create-field>
 
 <!-- edit field -->
-<!-- <edit-field #modalEditField [cmbProfiles]="cmbProfiles" (dispatchEvent)="updateList($event)"></edit-field> -->
+<edit-field #modalEditField [cmbTypesFields]="cmbTypesFields" (dispatchEvent)="updateList($event)"></edit-field>
 
 <!-- modal confirm operation -->
 <modal-confirm #modalConfirm (confirmOperation)="confirmOperation()" (declineOperation)="declineOperation()"></modal-confirm>

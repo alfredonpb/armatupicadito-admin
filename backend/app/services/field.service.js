@@ -58,6 +58,32 @@ function getByFilter(filter) {
 }
 
 /**
+ * cancha dado su id
+ * 
+ * @param   {Number} id [id de cancha]
+ * 
+ * @return  {Promise} [Promise]
+ */
+function getById(id) {
+
+   const query = models.Field.findById(id, {
+      attributes: [
+         'id',
+         'name',
+         'qt_players',
+         'enabled',
+         'type_field_id'
+      ],
+      include: [{ 
+         model: models.TypeField
+      }]
+   });
+
+   return query;
+   
+}
+
+/**
  * creacion de canchas
  *
  * @param {Request} req [datos para la creacion de un tipo de cancha]
@@ -92,7 +118,48 @@ function create(req) {
 
 }
 
+/**
+ * modificacion de usuario dado su id
+ * 
+ * @param   {Request} req [datos para actualizacion de usuario]
+ * 
+ * @param   {number} id [id de usaurio]
+ * 
+ * @return  {Promise} [Promise]
+ */
+function update(req, id) {
+
+   const values = {
+      name: req.name,
+      qt_players: req.qt_players,
+      type_field_id: Number(req.type_field_id),
+      enabled: req.enabled,
+      updated_at: req.now
+   };
+
+   const Field = this.getById(id);
+
+   return Field.then(
+      (field) => {
+         return db.connection.transaction((t) => {
+
+            return field.update(values, { transaction: t });
+      
+         }).then((result) => {
+            return result;
+      
+         }).catch((error) => {
+            throw new Error(error);
+      
+         });
+      }
+   );
+
+}
+
 module.exports = {
    getByFilter,
-   create
+   getById,
+   create,
+   update
 };

@@ -64,7 +64,53 @@ function create(req, res) {
 
 }
 
+/**
+ * actualizacion de canchas
+ *
+ * @param {Request} req [recibidos por http]
+ * @param {Response} res [respuesta http]
+ * 
+ * @return  {Response} res [respuesta a front]
+ */
+function update(req, res) {
+
+   try {
+
+      const params = req.body;
+      params.id = Number(req.params.id);
+      params.now = moment();
+
+      const Field = services.FieldService.update(params, params.id);
+
+      Field.then(
+         (field) => { 
+
+            const findField = services.FieldService.getById(field.id);
+            findField.then(
+               (fieldData) => {
+                  return response.success(res, fieldData); 
+               }
+            ).catch(
+               (exception) => { 
+                  return response.errorLog(res, exception, `${logMessage} -> update`, 500);
+               }
+            );
+            
+         }
+      ).catch(
+         (exception) => { 
+            return response.errorLog(res, exception, `${logMessage} -> update`, 500);
+         }
+      );
+      
+   } catch (exception) {
+      return response.errorLog(res, exception, `${logMessage} -> update`, 500);
+   }
+
+}
+
 module.exports = { 
    getByFilter,
-   create
+   create,
+   update
 };

@@ -4,7 +4,7 @@ import { TypeFieldService } from '../../../services/type-field.service';
 import { AlertService } from '../../../shared/alert.service';
 import { Field, TypeField } from '../../../models';
 import { CreateFieldComponent } from './create/index';
-// import { EditUserComponent } from './edit/index';
+import { EditFieldComponent } from './edit/index';
 import { ModalConfirmComponent } from '../../../shared/modal-confirm/index';
 
 @Component({
@@ -14,7 +14,7 @@ import { ModalConfirmComponent } from '../../../shared/modal-confirm/index';
 
 export class ListFieldComponent implements OnInit {
    @ViewChild('modalCreateField') modalCreateField: CreateFieldComponent;
-   // @ViewChild('modalEditUser') modalEditUser: EditUserComponent;
+   @ViewChild('modalEditField') modalEditField: EditFieldComponent;
    @ViewChild('modalConfirm') modalConfirm: ModalConfirmComponent;
    listFields: Field[] = [];
    cmbTypesFields: TypeField[] = [];
@@ -44,7 +44,7 @@ export class ListFieldComponent implements OnInit {
    /** event entet to filter */
    @HostListener('keydown', ['$event'])
    eventSearch(event: any) {
-      if (event.keyCode === 13 && !this.modalCreateField.modalCreateField.isShown) { 
+      if (event.keyCode === 13 && !this.modalCreateField.modalCreateField.isShown && !this.modalEditField.modalEditField.isShown) { 
          this.initFilter(this.filterFields);
       }
    }
@@ -150,9 +150,9 @@ export class ListFieldComponent implements OnInit {
       this.filter();
    }
 
-   /** update list of user */
+   /** update list of field */
    updateList(event: any) {
-      this.listFields[event.index] = event.user;
+      this.listFields[event.index] = event.field;
    }
 
    /** confirm change status */
@@ -161,15 +161,15 @@ export class ListFieldComponent implements OnInit {
       this.modalConfirm.showModal(`cambiar estado de ${field.name} a ${enabled ? 'habilitado' : 'deshabilitado'}`);
    }
 
-   /** change status of user */
+   /** change status of field */
    changeStatus() {
       this.loader = true;
-      this.objectChangeStatus.user.enabled = this.objectChangeStatus.enabled;
-      this.service.update(this.objectChangeStatus.user, this.objectChangeStatus.user.id).subscribe(
+      this.objectChangeStatus.field.enabled = this.objectChangeStatus.enabled;
+      this.service.update(this.objectChangeStatus.field, this.objectChangeStatus.field.id).subscribe(
          (data: any) => {
             this.alertService.showMessage('Canchas', 'Se cambió el estado correctamente', 'info');
             
-            const event = { index: this.objectChangeStatus.index, user: data.data };
+            const event = { index: this.objectChangeStatus.index, field: data.data };
             this.updateList(event);
             this.loader = false;
          },

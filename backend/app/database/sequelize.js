@@ -14,6 +14,7 @@ const connection = new Sequelize(MYSQL_TABLE, MYSQL_USER, MYSQL_PASSWORD, {
    define: {
       timestamps: false
    },
+   timezone: 'America/Argentina/Buenos_Aires',
    pool: {
       max: 5,
       min: 0,
