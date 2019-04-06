@@ -57,6 +57,42 @@ function getByFilter(filter) {
 
 }
 
+/**
+ * creacion de canchas
+ *
+ * @param {Request} req [datos para la creacion de un tipo de cancha]
+ *
+ * @return  {Promise} [Promise]
+ */
+function create(req) {
+
+   const values = {
+      name: req.name,
+      qt_players: req.qt_players,
+      enabled: req.enabled,
+      type_field_id: Number(req.type_field_id),
+      created_by: Number(req.created_by),
+      created_at: req.now,
+      updated_at: req.now
+   };
+
+   return db.connection.transaction((t) => {
+
+      return models.Field.create(values, { transaction: t }).then((Field) => {
+         return Field;
+      });
+
+   }).then((result) => {
+      return result;
+
+   }).catch((error) => {
+      throw new Error(error);
+
+   });
+
+}
+
 module.exports = {
-   getByFilter
+   getByFilter,
+   create
 };

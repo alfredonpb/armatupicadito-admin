@@ -58,7 +58,7 @@
                <thead class="thead-light">
                   <tr>
                      <th width="25%">Nombre</th>
-                     <th width="20%">Cant. de jugadores</th>
+                     <th width="20%">Cant. jugadores</th>
                      <th width="25%">Tipo de cancha</th>
                      <th width="20%">Estado</th>
                      <th width="10%">Acciones</th>
@@ -105,7 +105,7 @@
 </div>
 
 <!-- create field -->
-<!-- <create-field #modalCreatefield [cmbProfiles]="cmbProfiles" (dispatchEvent)="filter()"></create-field> -->
+<create-field #modalCreateField [cmbTypesFields]="cmbTypesFields" (dispatchEvent)="filter()"></create-field>
 
 <!-- edit field -->
 <!-- <edit-field #modalEditField [cmbProfiles]="cmbProfiles" (dispatchEvent)="updateList($event)"></edit-field> -->

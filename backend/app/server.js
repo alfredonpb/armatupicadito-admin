@@ -61,8 +61,7 @@ app.use(`${PREFIX}/shared`,
 /** routing types fields */
 app.use(`${PREFIX}/types-fields`, 
    middlewares.AuthMiddleware.validToken, 
-   middlewares.UserEnabledMiddleware.verifyEnabled, 
-   middlewares.PermissionMiddleware.verify({ superadmin: 'Superadmin' }),
+   middlewares.UserEnabledMiddleware.verifyEnabled,
    typeFieldRoute);
 
 app.use(`${PREFIX}/fields`,

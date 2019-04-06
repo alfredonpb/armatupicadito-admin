@@ -1,8 +1,9 @@
 import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
 import { FieldService } from '../../../services/field.service';
+import { TypeFieldService } from '../../../services/type-field.service';
 import { AlertService } from '../../../shared/alert.service';
-import { Field } from '../../../models';
-// import { CreateUserComponent } from './create/index';
+import { Field, TypeField } from '../../../models';
+import { CreateFieldComponent } from './create/index';
 // import { EditUserComponent } from './edit/index';
 import { ModalConfirmComponent } from '../../../shared/modal-confirm/index';
 
@@ -12,15 +13,16 @@ import { ModalConfirmComponent } from '../../../shared/modal-confirm/index';
 })
 
 export class ListFieldComponent implements OnInit {
-   // @ViewChild('modalCreateUser') modalCreateUser: CreateUserComponent;
+   @ViewChild('modalCreateField') modalCreateField: CreateFieldComponent;
    // @ViewChild('modalEditUser') modalEditUser: EditUserComponent;
    @ViewChild('modalConfirm') modalConfirm: ModalConfirmComponent;
-   objectChangeStatus: any;
    listFields: Field[] = [];
+   cmbTypesFields: TypeField[] = [];
    page: number = -1;
    emptyList: boolean = false;
    nextPage: boolean = false;
    loader: boolean = false;
+   objectChangeStatus: any;
 
    /** filter */
    filterFields: any = {
@@ -30,20 +32,34 @@ export class ListFieldComponent implements OnInit {
 
    constructor(
       private service: FieldService,
+      private typeFieldService: TypeFieldService,
       private alertService: AlertService
    ) { }
 
    ngOnInit() { 
       this.filter();
+      this.getCmbTypesFields();
    }
 
    /** event entet to filter */
-   // @HostListener('keydown', ['$event'])
-   // eventSearch(event: any) {
-   //    if (event.keyCode === 13 && !this.modalCreateUser.modalCreateUser.isShown && !this.modalEditUser.modalEditUser.isShown) { 
-   //       this.initFilter(this.filterFields);
-   //    }
-   // }
+   @HostListener('keydown', ['$event'])
+   eventSearch(event: any) {
+      if (event.keyCode === 13 && !this.modalCreateField.modalCreateField.isShown) { 
+         this.initFilter(this.filterFields);
+      }
+   }
+
+   /** get cmb of types fields */
+   getCmbTypesFields() {
+      this.typeFieldService.getAll().subscribe(
+         (data) => {
+            this.cmbTypesFields = data.data;
+         },
+         (error) => {
+            this.alertService.showMessageServer(error);
+         }
+      );
+   }
 
    /** busqueda */
    search() {
