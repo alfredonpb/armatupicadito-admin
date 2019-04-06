@@ -20,45 +20,34 @@ function getByFilter(filter) {
 
    const criteriaSearch = filter.search ? filter.search : '';
 
-   /** when profile is received */
-   const profile = Number(filter.profile);
-   let profileWhere = '';
-
-   if (profile > 0) {
-      profileWhere = { profile_id: profile };
-   }
-
    /** whern enabled is received */
    let enabledWhere = { enabled: true };
    if (filter.enabled) {
       enabledWhere = { enabled: filter.enabled == 'true' ? true : false };
    }
 
-   const query = models.User.scope(['distinctSuperadmin']).findAll({
+   const query = models.Field.findAll({
       attributes: [
          'id',
          'name',
-         'lastname',
-         'email',
-         'phone',
-         'profile_id',
-         'enabled'
+         'qt_players',
+         'enabled',
+         'type_field_id'
       ],
       where: {
          [Op.or]: [
             { name: { [Op.like]: `%${criteriaSearch}%` } },
-            { lastname: { [Op.like]: `%${criteriaSearch}%` } },
-            { email: { [Op.like]: `%${criteriaSearch}%` } },
-            { phone: { [Op.like]: `%${criteriaSearch}%` } }
+            { qt_players: { [Op.like]: `%${criteriaSearch}%` } } 
          ],
          [Op.and]: [
-            profileWhere,
             enabledWhere
          ]
       },
+      include: [{ 
+         model: models.TypeField
+      }],
       order: [
-         ['name', 'ASC'],
-         ['lastname', 'ASC']
+         ['name', 'ASC']
       ],
       limit: limitPage,
       offset: offsetPage
@@ -69,48 +58,24 @@ function getByFilter(filter) {
 }
 
 /**
- * usuarios dado su email 
+ * cancha dado su id
  * 
- * @param {String} email [email de usuario a consultar]
- * 
- * @return  {Promise} [Promise]
- */
-function getUserByEmail(email) {
-
-   const query = models.User.findOne({
-      where: {
-         email
-      },
-      include: [{
-         model: models.Profile
-      }]
-   });
-
-   return query;
-
-}
-
-/**
- * usuario dado su id
- * 
- * @param   {Number} id [id de usuario]
+ * @param   {Number} id [id de cancha]
  * 
  * @return  {Promise} [Promise]
  */
 function getById(id) {
 
-   const query = models.User.findById(id, {
+   const query = models.Field.findById(id, {
       attributes: [
          'id',
          'name',
-         'lastname',
-         'email',
-         'phone',
-         'profile_id',
-         'enabled'
+         'qt_players',
+         'enabled',
+         'type_field_id'
       ],
-      include: [{
-         model: models.Profile
+      include: [{ 
+         model: models.TypeField
       }]
    });
 
@@ -119,30 +84,28 @@ function getById(id) {
 }
 
 /**
- * creacion de usuarios
- * 
- * @param   {Request}  req [datos para creacion de usuario]
- * 
+ * creacion de canchas
+ *
+ * @param {Request} req [datos para la creacion de un tipo de cancha]
+ *
  * @return  {Promise} [Promise]
  */
 function create(req) {
 
    const values = {
       name: req.name,
-      lastname: req.lastname,
-      email: req.email,
-      password: req.hash,
-      phone: req.phone,
-      profile_id: Number(req.profile_id),
+      qt_players: req.qt_players,
       enabled: req.enabled,
+      type_field_id: Number(req.type_field_id),
+      created_by: Number(req.created_by),
       created_at: req.now,
       updated_at: req.now
    };
 
    return db.connection.transaction((t) => {
 
-      return models.User.create(values, { transaction: t }).then((user) => {
-         return user;
+      return models.Field.create(values, { transaction: t }).then((Field) => {
+         return Field;
       });
 
    }).then((result) => {
@@ -168,21 +131,19 @@ function update(req, id) {
 
    const values = {
       name: req.name,
-      lastname: req.lastname,
-      email: req.email,
-      phone: req.phone,
-      profile_id: Number(req.profile_id),
+      qt_players: req.qt_players,
+      type_field_id: Number(req.type_field_id),
       enabled: req.enabled,
       updated_at: req.now
    };
 
-   const User = this.getById(id);
+   const Field = this.getById(id);
 
-   return User.then(
-      (user) => {
+   return Field.then(
+      (field) => {
          return db.connection.transaction((t) => {
 
-            return user.update(values, { transaction: t });
+            return field.update(values, { transaction: t });
       
          }).then((result) => {
             return result;
@@ -198,7 +159,6 @@ function update(req, id) {
 
 module.exports = {
    getByFilter,
-   getUserByEmail,
    getById,
    create,
    update

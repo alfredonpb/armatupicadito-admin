@@ -9,6 +9,7 @@ import { LayoutComponent } from './layout.component';
 import { HomeComponent } from './home';
 import { ListUserComponent } from './components/users/index';
 import { ListEntitieComponent } from './components/master-entities';
+import { ListFieldComponent } from './components/fields/index';
 
 const routes: Routes = [
    {
@@ -16,7 +17,8 @@ const routes: Routes = [
       children: [
          { path: 'home', component: HomeComponent },
          { path: 'users', component: ListUserComponent, canActivate: [AdminGuard] },
-         { path: 'tablas-maestras', component: ListEntitieComponent, canActivate: [SuperadminGuard] }
+         { path: 'tablas-maestras', component: ListEntitieComponent, canActivate: [SuperadminGuard] },
+         { path: 'canchas', component: ListFieldComponent }
       ]
    }
 ];

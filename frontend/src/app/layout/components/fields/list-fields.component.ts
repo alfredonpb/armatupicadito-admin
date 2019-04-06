@@ -1,60 +1,59 @@
 import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
-import { ProfileService } from '../../../services/profile.service';
+import { FieldService } from '../../../services/field.service';
+import { TypeFieldService } from '../../../services/type-field.service';
 import { AlertService } from '../../../shared/alert.service';
-import { Profile, User } from '../../../models';
-import { UserService } from '../../../services/user.service';
-import { CreateUserComponent } from './create/index';
-import { EditUserComponent } from './edit/index';
+import { Field, TypeField } from '../../../models';
+import { CreateFieldComponent } from './create/index';
+import { EditFieldComponent } from './edit/index';
 import { ModalConfirmComponent } from '../../../shared/modal-confirm/index';
 
 @Component({
-   selector: 'list-users',
-   templateUrl: 'list-users.html'
+   selector: 'list-fields',
+   templateUrl: 'list-fields.html'
 })
 
-export class ListUserComponent implements OnInit {
-   @ViewChild('modalCreateUser') modalCreateUser: CreateUserComponent;
-   @ViewChild('modalEditUser') modalEditUser: EditUserComponent;
+export class ListFieldComponent implements OnInit {
+   @ViewChild('modalCreateField') modalCreateField: CreateFieldComponent;
+   @ViewChild('modalEditField') modalEditField: EditFieldComponent;
    @ViewChild('modalConfirm') modalConfirm: ModalConfirmComponent;
-   objectChangeStatus: any;
-   listUsers: User[] = [];
-   cmbProfiles: Profile[] = [];
+   listFields: Field[] = [];
+   cmbTypesFields: TypeField[] = [];
    page: number = -1;
    emptyList: boolean = false;
    nextPage: boolean = false;
    loader: boolean = false;
+   objectChangeStatus: any;
 
    /** filter */
    filterFields: any = {
       search: '',
-      profile: '',
       enabled: true
    };
 
    constructor(
-      private service: UserService,
-      private profileService: ProfileService,
+      private service: FieldService,
+      private typeFieldService: TypeFieldService,
       private alertService: AlertService
    ) { }
 
    ngOnInit() { 
       this.filter();
-      this.getCmbProfiles();
+      this.getCmbTypesFields();
    }
 
    /** event entet to filter */
    @HostListener('keydown', ['$event'])
    eventSearch(event: any) {
-      if (event.keyCode === 13 && !this.modalCreateUser.modalCreateUser.isShown && !this.modalEditUser.modalEditUser.isShown) { 
+      if (event.keyCode === 13 && !this.modalCreateField.modalCreateField.isShown && !this.modalEditField.modalEditField.isShown) { 
          this.initFilter(this.filterFields);
       }
    }
 
-   /** get cmb of profiles */
-   getCmbProfiles() {
-      this.profileService.getAll().subscribe(
+   /** get cmb of types fields */
+   getCmbTypesFields() {
+      this.typeFieldService.getAll().subscribe(
          (data) => {
-            this.cmbProfiles = data.data;
+            this.cmbTypesFields = data.data;
          },
          (error) => {
             this.alertService.showMessageServer(error);
@@ -97,22 +96,22 @@ export class ListUserComponent implements OnInit {
    }
 
    /** llenar listado */
-   buildList(users: User[]) {
-      this.listUsers = this.listUsers.concat(users);
+   buildList(fields: Field[]) {
+      this.listFields = this.listFields.concat(fields);
       this.emptyList = false;
-      if (this.listUsers.length < 1) { this.emptyList = true; }
+      if (this.listFields.length < 1) { this.emptyList = true; }
    }
 
    /** verificar datos de proxima pagina */
-   verifyNextPage(users: User[]) {
+   verifyNextPage(fields: Field[]) {
       this.nextPage = false;
-      if (users.length > 0) { this.nextPage = true; }
+      if (fields.length > 0) { this.nextPage = true; }
    }
 
    /** iniciar filtro con valores por defaul */
    initFilter(objectFilter: any) {
       this.page = -1;
-      this.listUsers = [];
+      this.listFields = [];
       this.doSearch(objectFilter);
    }
 
@@ -146,32 +145,31 @@ export class ListUserComponent implements OnInit {
    /** resetear filtro a valores por default */
    resetFilter() {
       this.filterFields.search = '';
-      this.filterFields.profile = '';
       this.filterFields.enabled = true;
 
       this.filter();
    }
 
-   /** update list of user */
+   /** update list of field */
    updateList(event: any) {
-      this.listUsers[event.index] = event.user;
+      this.listFields[event.index] = event.field;
    }
 
    /** confirm change status */
-   confirmChangeStatus(user: User, index: number, enabled: boolean) {
-      this.objectChangeStatus = { user, index, enabled };
-      this.modalConfirm.showModal(`cambiar estado de ${user.name} ${user.lastname} a ${enabled ? 'habilitado' : 'deshabilitado'}`);
+   confirmChangeStatus(field: Field, index: number, enabled: boolean) {
+      this.objectChangeStatus = { field, index, enabled };
+      this.modalConfirm.showModal(`cambiar estado de ${field.name} a ${enabled ? 'habilitado' : 'deshabilitado'}`);
    }
 
-   /** change status of user */
+   /** change status of field */
    changeStatus() {
       this.loader = true;
-      this.objectChangeStatus.user.enabled = this.objectChangeStatus.enabled;
-      this.service.update(this.objectChangeStatus.user, this.objectChangeStatus.user.id).subscribe(
+      this.objectChangeStatus.field.enabled = this.objectChangeStatus.enabled;
+      this.service.update(this.objectChangeStatus.field, this.objectChangeStatus.field.id).subscribe(
          (data: any) => {
-            this.alertService.showMessage('Usuarios', 'Se cambió el estado correctamente', 'info');
+            this.alertService.showMessage('Canchas', 'Se cambió el estado correctamente', 'info');
             
-            const event = { index: this.objectChangeStatus.index, user: data.data };
+            const event = { index: this.objectChangeStatus.index, field: data.data };
             this.updateList(event);
             this.loader = false;
          },

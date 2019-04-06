@@ -13,12 +13,14 @@ import { ModalModule } from 'ngx-bootstrap';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 /** directives */
+import { OnlyNumbericDirective } from '../directives/index';
 
 /** services */
 import { ProfileService } from '../services/profile.service'; 
 import { UserService } from '../services/user.service'; 
 import { SharedService } from '../services/shared.service'; 
-import { TypeFieldService } from '../services/type-field.service'; 
+import { TypeFieldService } from '../services/type-field.service';
+import { FieldService } from '../services/field.service'; 
 
 /** componenets */
 import { LayoutRoutingModule } from './layout-routing.module';
@@ -37,6 +39,10 @@ import { EditUserComponent } from './components/users/edit/index';
 import { ListEntitieComponent } from './components/master-entities/index';
 import { CreateEntitieComponent } from './components/master-entities/create/index';
 
+import { ListFieldComponent } from './components/fields/index';
+import { CreateFieldComponent } from './components/fields/create/index';
+import { EditFieldComponent } from './components/fields/edit/index';
+
 /** shared */
 import { LoaderComponent } from '../shared/loader/index';
 import { ModalConfirmComponent } from '../shared/modal-confirm/index';
@@ -52,6 +58,7 @@ import { ModalConfirmComponent } from '../shared/modal-confirm/index';
       TooltipModule.forRoot()
    ],
    declarations: [
+      OnlyNumbericDirective,
       LoaderComponent,
       ModalConfirmComponent,
       LayoutComponent,
@@ -63,7 +70,10 @@ import { ModalConfirmComponent } from '../shared/modal-confirm/index';
       CreateUserComponent,
       EditUserComponent,
       ListEntitieComponent,
-      CreateEntitieComponent
+      CreateEntitieComponent,
+      ListFieldComponent,
+      CreateFieldComponent,
+      EditFieldComponent
    ],
    providers: [
       AdminGuard,
@@ -71,7 +81,8 @@ import { ModalConfirmComponent } from '../shared/modal-confirm/index';
       ProfileService,
       UserService,
       SharedService,
-      TypeFieldService
+      TypeFieldService,
+      FieldService
    ]
 })
 export class LayoutModule { }

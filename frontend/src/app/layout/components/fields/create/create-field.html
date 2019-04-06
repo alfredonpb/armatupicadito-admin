@@ -1,0 +1,77 @@
+<div bsModal #modalCreateField="bs-modal" class="modal fade" tabindex="-1" [config]="{ backdrop: 'static', keyboard: false }">
+   <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+         <div class="modal-header">
+            <h4 id="dialog-child-name" class="modal-title pull-left">Nueva cancha</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="hideModal()">
+               <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+
+         <div class="modal-body">
+
+            <form [formGroup]="form" novalidate class="container">
+
+               <div class="form-group row" [ngClass]="{ 'has-error': form.controls.name.errors && form.controls.name.pristine && submit }">
+                  <label for="name" class="col-sm-3 col-form-label">
+                     Nombre <strong class="text-danger">*</strong>
+                  </label>
+                  <div class="col-md-9">
+                     <input type="text" class="form-control input-error" formControlName="name" placeholder="Nombre">
+                  </div>
+
+                  <div class="offset-md-3 col-md-9">
+                     <small *ngIf="form.controls.name.errors && form.controls.name.pristine && submit" class="form-text text-danger">
+                        <b *ngIf="form.controls.name.errors.required">Éste campo es requerido</b>
+                     </small>
+                  </div>
+               </div>
+
+               <div class="form-group row" [ngClass]="{ 'has-error': form.controls.qt_players.errors && form.controls.qt_players.pristine && submit }">
+                  <label for="qt_players" class="col-sm-3 col-form-label">
+                     Cant. jugadores <strong class="text-danger">*</strong>
+                  </label>
+                  <div class="col-md-9">
+                     <input type="text" appOnlyNumberic class="form-control input-error" formControlName="qt_players" placeholder="Cant. jugadores">
+                  </div>
+
+                  <div class="offset-md-3 col-md-9">
+                     <small *ngIf="form.controls.qt_players.errors && form.controls.qt_players.pristine && submit" class="form-text text-danger">
+                        <b *ngIf="form.controls.qt_players.errors.required">Éste campo es requerido</b>
+                     </small>
+                  </div>
+               </div>
+
+               <div class="form-group row" [ngClass]="{ 'has-error': form.controls.type_field_id.errors && form.controls.type_field_id.pristine && submit }">
+                  <label for="type_field_id" class="col-sm-3 col-form-label">
+                     Tipo de cancha <strong class="text-danger">*</strong>
+                  </label>
+                  <div class="col-md-9">
+                     <select class="form-control input-error" formControlName="type_field_id">
+                        <option value="" disabled>Ninguno...</option>
+                        <option *ngFor="let type of cmbTypesFields" [value]="type.id">{{ type.name }}</option>
+                     </select>
+                  </div>
+
+                  <div class="offset-md-3 col-md-9">
+                     <small *ngIf="form.controls.type_field_id.errors && form.controls.type_field_id.pristine && submit" class="form-text text-danger">
+                        <b *ngIf="form.controls.type_field_id.errors.required">Éste campo es requerido</b>
+                     </small>
+                  </div>
+               </div>
+
+            </form>
+
+         </div>
+
+         <div class="modal-footer">
+            <button (click)="save(form)" [disabled]="loaderButton" class="btn btn-success btn-circle btn-actions" tooltip="Guardar" container="body">
+               <i *ngIf="!loaderButton" class="fas fa-check"></i>
+               <loader-button [loaderButton]="loaderButton"></loader-button>
+            </button>
+         </div>
+
+      </div>
+   </div>
+</div>

@@ -4,15 +4,15 @@
 
    <div class="d-sm-flex align-items-center justify-content-between mb-4">
       <h2 class="text-gray-800">
-         <i class="fas fa-users"></i>
-         Usuarios
+         <i class="fas fa-socks"></i>
+         Canchas
       </h2>
 
-      <button (click)="modalCreateUser.showModal()" class="btn btn-primary btn-icon-split">
+      <button (click)="modalCreateField.showModal()" class="btn btn-primary btn-icon-split">
          <span class="icon text-white">
             <i class="fas fa-plus"></i>
          </span>
-         <span class="text font-weight-bold">Nuevo usuario</span>
+         <span class="text font-weight-bold">Nueva cancha</span>
       </button>
    </div>
 
@@ -36,20 +36,13 @@
             </div>
 
             <div class="col-md-2">
-               <select class="form-control" [(ngModel)]="filterFields.profile" #ctrl="ngModel" (change)="initFilter(filterFields)">
-                  <option value="">Ningún perfil...</option>
-                  <option *ngFor="let profile of cmbProfiles" [value]="profile.id">{{ profile.name }}</option>
-               </select>
-            </div>
-
-            <div class="col-md-2">
                <select class="form-control" [(ngModel)]="filterFields.enabled" #ctrl="ngModel" (change)="initFilter(filterFields)">
                   <option value="true">Habilitados</option>
                   <option value="false">Deshabilitados</option>
                </select>
             </div>
 
-            <div class="offset-md-3 col-md-2 text-right">
+            <div class="offset-md-5 col-md-2 text-right">
                <button (click)="resetFilter()" class="btn btn-primary btn-circle" tooltip="Limpiar filtro" placement="left">
                   <i class="fas fa-broom"></i>
                 </button>
@@ -64,33 +57,31 @@
             <table class="table table-bordered" width="100%">
                <thead class="thead-light">
                   <tr>
-                     <th width="20%">Nombre completo</th>
-                     <th width="20%">Email</th>
-                     <th width="20%">Teléfono</th>
-                     <th width="15%">Perfil</th>
-                     <th width="15%">Estado</th>
+                     <th width="25%">Nombre</th>
+                     <th width="20%">Cant. jugadores</th>
+                     <th width="25%">Tipo de cancha</th>
+                     <th width="20%">Estado</th>
                      <th width="10%">Acciones</th>
                   </tr>
                </thead>
                <tbody>
-                  <tr *ngFor="let user of listUsers; let i = index">
-                     <td (click)="modalEditUser.showModal(user, i)" style="cursor: pointer;">{{ user.name }} {{ user.lastname }}</td>
-                     <td (click)="modalEditUser.showModal(user, i)" style="cursor: pointer;">{{ user.email }}</td>
-                     <td (click)="modalEditUser.showModal(user, i)" style="cursor: pointer;">{{ user.phone }}</td>
-                     <td (click)="modalEditUser.showModal(user, i)" style="cursor: pointer;">{{ user.profile.name }}</td>
+                  <tr *ngFor="let field of listFields; let i = index">
+                     <td (click)="modalEditField.showModal(field, i)" style="cursor: pointer;">{{ field.name }}</td>
+                     <td (click)="modalEditField.showModal(field, i)" style="cursor: pointer;">{{ field.qt_players }}</td>
+                     <td (click)="modalEditField.showModal(field, i)" style="cursor: pointer;"><b>{{ field.types_field.name }}</b></td>
                      <td>
-                        <span class="badge" [ngClass]="{ 'badge-success': user.enabled, 'badge-warning': !user.enabled }">{{ user.enabled ? 'Habilitado' : 'Deshabilitado' }}</span>
+                        <span class="badge" [ngClass]="{ 'badge-success': field.enabled, 'badge-warning': !field.enabled }">{{ field.enabled ? 'Habilitado' : 'Deshabilitado' }}</span>
                      </td>
                      <td>
-                        <button (click)="modalEditUser.showModal(user, i)" class="btn btn-primary btn-circle btn-sm" tooltip="Modificar">
+                        <button (click)="modalEditField.showModal(field, i)" class="btn btn-primary btn-circle btn-sm" tooltip="Modificar">
                            <i class="fas fa-edit"></i>
                         </button>
 
-                        <button *ngIf="user.enabled" (click)="confirmChangeStatus(user, i, false)" class="btn btn-warning btn-circle btn-sm btn-margin" tooltip="Deshabilitar">
+                        <button *ngIf="field.enabled" (click)="confirmChangeStatus(field, i, false)" class="btn btn-warning btn-circle btn-sm btn-margin" tooltip="Deshabilitar">
                            <i class="fas fa-minus"></i>
                         </button>            
 
-                        <button *ngIf="!user.enabled" (click)="confirmChangeStatus(user, i, true)" class="btn btn-success btn-circle btn-sm btn-margin" tooltip="Habilitar">
+                        <button *ngIf="!field.enabled" (click)="confirmChangeStatus(field, i, true)" class="btn btn-success btn-circle btn-sm btn-margin" tooltip="Habilitar">
                            <i class="fas fa-plus"></i>
                         </button>
                      </td>
@@ -113,11 +104,11 @@
 
 </div>
 
-<!-- create user -->
-<create-user #modalCreateUser [cmbProfiles]="cmbProfiles" (dispatchEvent)="filter()"></create-user>
+<!-- create field -->
+<create-field #modalCreateField [cmbTypesFields]="cmbTypesFields" (dispatchEvent)="filter()"></create-field>
 
-<!-- edit user -->
-<edit-user #modalEditUser [cmbProfiles]="cmbProfiles" (dispatchEvent)="updateList($event)"></edit-user>
+<!-- edit field -->
+<edit-field #modalEditField [cmbTypesFields]="cmbTypesFields" (dispatchEvent)="updateList($event)"></edit-field>
 
 <!-- modal confirm operation -->
 <modal-confirm #modalConfirm (confirmOperation)="confirmOperation()" (declineOperation)="declineOperation()"></modal-confirm>

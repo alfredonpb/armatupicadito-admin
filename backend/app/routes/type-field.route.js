@@ -3,6 +3,7 @@
 const express = require('express');
 
 const controllers = require('../controllers/index');
+const middlewares = require('../middlewares/index');
 
 const route = express.Router();
 
@@ -10,6 +11,8 @@ const route = express.Router();
 route.get('/get-all', controllers.TypeFieldController.getAll);
 
 /** delete type of field */
-route.delete('/delete/:id', controllers.TypeFieldController.destroy);
+route.delete('/delete/:id', 
+   middlewares.PermissionMiddleware.verify({ superadmin: 'Superadmin' }),
+   controllers.TypeFieldController.destroy);
 
 module.exports = route;

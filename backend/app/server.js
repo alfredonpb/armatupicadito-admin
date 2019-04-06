@@ -17,6 +17,7 @@ const userRoute = require('./routes/user.route');
 const profileRoute = require('./routes/profile.route');
 const sharedRoute = require('./routes/shared.route');
 const typeFieldRoute = require('./routes/type-field.route');
+const fieldRoute = require('./routes/field.route');
 
 /** middlewares */
 const middlewares = require('./middlewares/index');
@@ -60,9 +61,13 @@ app.use(`${PREFIX}/shared`,
 /** routing types fields */
 app.use(`${PREFIX}/types-fields`, 
    middlewares.AuthMiddleware.validToken, 
-   middlewares.UserEnabledMiddleware.verifyEnabled, 
-   middlewares.PermissionMiddleware.verify({ superadmin: 'Superadmin' }),
+   middlewares.UserEnabledMiddleware.verifyEnabled,
    typeFieldRoute);
+
+app.use(`${PREFIX}/fields`,
+   middlewares.AuthMiddleware.validToken,
+   middlewares.UserEnabledMiddleware.verifyEnabled,
+   fieldRoute);
 
 // server corriendo
 app.listen(PORT, SERVER_HOST, () => {

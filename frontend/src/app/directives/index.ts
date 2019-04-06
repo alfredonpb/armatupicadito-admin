@@ -1,0 +1,1 @@
+export { OnlyNumbericDirective } from './only-numeric.directive';

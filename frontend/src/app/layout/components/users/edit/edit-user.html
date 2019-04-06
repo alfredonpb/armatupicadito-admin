@@ -97,8 +97,8 @@
             </div>
    
             <div class="modal-footer">
-               <button (click)="edit(form)" [disabled]="loaderButton" class="btn btn-info btn-circle" tooltip="Editar" container="body">
-                  <i class="fas fa-check"></i>
+               <button (click)="edit(form)" [disabled]="loaderButton" class="btn btn-success btn-circle btn-actions" tooltip="Editar" container="body">
+                  <i *ngIf="!loaderButton" class="fas fa-check"></i>
                   <loader-button [loaderButton]="loaderButton"></loader-button>
                </button>
             </div>

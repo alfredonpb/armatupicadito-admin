@@ -27,10 +27,10 @@ function getAll() {
  *
  * @return  {Promise} [Promise]
  */
-function create(request) {
+function create(req) {
 
    const values = {
-      name: request.name
+      name: req.name
    };
 
    return db.connection.transaction((t) => {

@@ -27,10 +27,10 @@ function getAll() {
  *
  * @return  {Promise} [Promise]
  */
-function create(request) {
+function create(req) {
 
    const values = {
-      name: request.name
+      name: req.name
    };
 
    return db.connection.transaction((t) => {
@@ -83,20 +83,6 @@ function destroy(id) {
       
       }
    );
-
-   // return db.connection.transaction((t) => {
-
-   //    return models.Profile.destroy({ where: { id } }, { transaction: t }).then(() => {
-   //       return true;
-   //    });
-
-   // }).then((result) => {
-   //    return result;
-
-   // }).catch((error) => {
-   //    throw new Error(error);
-
-   // });
 
 }
 
