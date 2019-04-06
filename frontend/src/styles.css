@@ -14,6 +14,9 @@
 .btn-margin {
    margin-left: 5px;
 }
+.btn-actions {
+   padding: 8px !important;
+}
 
 /* errors forms */
 .has-error:click {
@@ -35,8 +38,7 @@
 /* loader componenets */
 .loader-button {
    width: 100%;
-   max-width: 20px;
-   margin-left: 10px;
+   max-width: 25px;
    margin-top: -5px;
 }
 .loader-pp {

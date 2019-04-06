@@ -131,8 +131,8 @@
          </div>
 
          <div class="modal-footer">
-            <button (click)="save(form)" [disabled]="loaderButton" class="btn btn-primary btn-circle" tooltip="Guardar" container="body">
-               <i class="fas fa-check"></i>
+            <button (click)="save(form)" [disabled]="loaderButton" class="btn btn-success btn-circle btn-actions" tooltip="Guardar" container="body">
+               <i *ngIf="!loaderButton" class="fas fa-check"></i>
                <loader-button [loaderButton]="loaderButton"></loader-button>
             </button>
          </div>
