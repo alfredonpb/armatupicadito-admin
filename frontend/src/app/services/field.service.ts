@@ -19,7 +19,6 @@ export class FieldService {
 
       const params = customRequest.params
          .append('search', filter.search)
-         .append('profile', filter.profile)
          .append('enabled', filter.enabled)
          .append('page', filter.page);
 

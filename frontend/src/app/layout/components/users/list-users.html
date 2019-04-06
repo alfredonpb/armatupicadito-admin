@@ -87,11 +87,11 @@
                         </button>
 
                         <button *ngIf="user.enabled" (click)="confirmChangeStatus(user, i, false)" class="btn btn-warning btn-circle btn-sm btn-margin" tooltip="Deshabilitar">
-                           <i class="fas fa-user-minus"></i>
+                           <i class="fas fa-minus"></i>
                         </button>            
 
                         <button *ngIf="!user.enabled" (click)="confirmChangeStatus(user, i, true)" class="btn btn-success btn-circle btn-sm btn-margin" tooltip="Habilitar">
-                           <i class="fas fa-user-plus"></i>
+                           <i class="fas fa-plus"></i>
                         </button>
                      </td>
                   </tr>

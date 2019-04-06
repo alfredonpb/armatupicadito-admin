@@ -22,6 +22,12 @@ const Field = db.connection.define('fields', {
    },
    created_by: {
       type: db.Sequelize.INTEGER
+   },
+   created_at: {
+      type: db.Sequelize.DATE
+   },
+   updated_at: {
+      type: db.Sequelize.DATE
    }
 });
 

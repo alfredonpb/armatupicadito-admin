@@ -6,7 +6,7 @@ export interface Field {
    qt_players: number;
    enabled: boolean;
    type_field_id: number;
-   type_field: TypeField;
+   types_field: TypeField;
    created_by: number;
    creator: User;
 }

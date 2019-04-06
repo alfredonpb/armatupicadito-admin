@@ -21,5 +21,6 @@ Field.belongsTo(TypeField, { foreignKey: 'type_field_id' });
 module.exports = {
    User,
    Profile,
-   TypeField
+   TypeField,
+   Field
 };

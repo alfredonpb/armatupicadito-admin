@@ -57,8 +57,9 @@
             <table class="table table-bordered" width="100%">
                <thead class="thead-light">
                   <tr>
-                     <th width="35%">Nombre</th>
-                     <th width="35%">Cant. de jugadores</th>
+                     <th width="25%">Nombre</th>
+                     <th width="20%">Cant. de jugadores</th>
+                     <th width="25%">Tipo de cancha</th>
                      <th width="20%">Estado</th>
                      <th width="10%">Acciones</th>
                   </tr>
@@ -67,6 +68,7 @@
                   <tr *ngFor="let field of listFields; let i = index">
                      <td (click)="modalEditField.showModal(field, i)" style="cursor: pointer;">{{ field.name }}</td>
                      <td (click)="modalEditField.showModal(field, i)" style="cursor: pointer;">{{ field.qt_players }}</td>
+                     <td (click)="modalEditField.showModal(field, i)" style="cursor: pointer;"><b>{{ field.types_field.name }}</b></td>
                      <td>
                         <span class="badge" [ngClass]="{ 'badge-success': field.enabled, 'badge-warning': !field.enabled }">{{ field.enabled ? 'Habilitado' : 'Deshabilitado' }}</span>
                      </td>
@@ -76,11 +78,11 @@
                         </button>
 
                         <button *ngIf="field.enabled" (click)="confirmChangeStatus(field, i, false)" class="btn btn-warning btn-circle btn-sm btn-margin" tooltip="Deshabilitar">
-                           <i class="fas fa-field-minus"></i>
+                           <i class="fas fa-minus"></i>
                         </button>            
 
                         <button *ngIf="!field.enabled" (click)="confirmChangeStatus(field, i, true)" class="btn btn-success btn-circle btn-sm btn-margin" tooltip="Habilitar">
-                           <i class="fas fa-field-plus"></i>
+                           <i class="fas fa-plus"></i>
                         </button>
                      </td>
                   </tr>
