@@ -1,0 +1,1 @@
+export { ListClientComponent } from './list-clients.component';

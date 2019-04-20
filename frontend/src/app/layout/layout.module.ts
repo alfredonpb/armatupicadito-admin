@@ -21,6 +21,7 @@ import { UserService } from '../services/user.service';
 import { SharedService } from '../services/shared.service'; 
 import { TypeFieldService } from '../services/type-field.service';
 import { FieldService } from '../services/field.service'; 
+import { ClientService } from '../services/client.service'; 
 
 /** componenets */
 import { LayoutRoutingModule } from './layout-routing.module';
@@ -42,6 +43,8 @@ import { CreateEntitieComponent } from './components/master-entities/create/inde
 import { ListFieldComponent } from './components/fields/index';
 import { CreateFieldComponent } from './components/fields/create/index';
 import { EditFieldComponent } from './components/fields/edit/index';
+
+import { ListClientComponent } from './components/clients/index';
 
 /** shared */
 import { LoaderComponent } from '../shared/loader/index';
@@ -73,7 +76,8 @@ import { ModalConfirmComponent } from '../shared/modal-confirm/index';
       CreateEntitieComponent,
       ListFieldComponent,
       CreateFieldComponent,
-      EditFieldComponent
+      EditFieldComponent,
+      ListClientComponent
    ],
    providers: [
       AdminGuard,
@@ -82,7 +86,8 @@ import { ModalConfirmComponent } from '../shared/modal-confirm/index';
       UserService,
       SharedService,
       TypeFieldService,
-      FieldService
+      FieldService,
+      ClientService
    ]
 })
 export class LayoutModule { }

@@ -1,30 +1,28 @@
 import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
-import { ProfileService } from '../../../services/profile.service';
+import { ClientService } from '../../../services/client.service';
 import { AlertService } from '../../../shared/alert.service';
-import { Profile, User } from '../../../models';
-import { UserService } from '../../../services/user.service';
-import { CreateUserComponent } from './create/index';
-import { EditUserComponent } from './edit/index';
+import { Client } from '../../../models';
+// import { CreateFieldComponent } from './create/index';
+// import { EditFieldComponent } from './edit/index';
 import { ModalConfirmComponent } from '../../../shared/modal-confirm/index';
 
 @Component({
-   selector: 'list-users',
-   templateUrl: 'list-users.html'
+   selector: 'list-clients',
+   templateUrl: 'list-clients.html'
 })
 
-export class ListUserComponent implements OnInit {
-   @ViewChild('modalCreateUser') modalCreateUser: CreateUserComponent;
-   @ViewChild('modalEditUser') modalEditUser: EditUserComponent;
+export class ListClientComponent implements OnInit {
+   // @ViewChild('modalCreateField') modalCreateField: CreateFieldComponent;
+   // @ViewChild('modalEditField') modalEditField: EditFieldComponent;
    @ViewChild('modalConfirm') modalConfirm: ModalConfirmComponent;
-   listUsers: User[] = [];
-   cmbProfiles: Profile[] = [];
+   listClients: Client[] = [];
    page: number = -1;
    emptyList: boolean = false;
    nextPage: boolean = false;
    loader: boolean = false;
 
    objectChangeStatus: {
-      user: User,
+      client: Client,
       index: number,
       enabled: boolean
    };
@@ -32,39 +30,24 @@ export class ListUserComponent implements OnInit {
    /** filter */
    filterFields: any = {
       search: '',
-      profile: '',
       enabled: true
    };
 
    constructor(
-      private service: UserService,
-      private profileService: ProfileService,
+      private service: ClientService,
       private alertService: AlertService
    ) { }
 
    ngOnInit() { 
       this.filter();
-      this.getCmbProfiles();
    }
 
    /** event entet to filter */
    @HostListener('keydown', ['$event'])
    eventSearch(event: any) {
-      if (event.keyCode === 13 && !this.modalCreateUser.modalCreateUser.isShown && !this.modalEditUser.modalEditUser.isShown) { 
+      if (event.keyCode === 13) { 
          this.initFilter(this.filterFields);
       }
-   }
-
-   /** get cmb of profiles */
-   getCmbProfiles() {
-      this.profileService.getAll().subscribe(
-         (data) => {
-            this.cmbProfiles = data.data;
-         },
-         (error) => {
-            this.alertService.showMessageServer(error);
-         }
-      );
    }
 
    /** busqueda */
@@ -102,22 +85,22 @@ export class ListUserComponent implements OnInit {
    }
 
    /** llenar listado */
-   buildList(users: User[]) {
-      this.listUsers = this.listUsers.concat(users);
+   buildList(clients: Client[]) {
+      this.listClients = this.listClients.concat(clients);
       this.emptyList = false;
-      if (this.listUsers.length < 1) { this.emptyList = true; }
+      if (this.listClients.length < 1) { this.emptyList = true; }
    }
 
    /** verificar datos de proxima pagina */
-   verifyNextPage(users: User[]) {
+   verifyNextPage(clients: Client[]) {
       this.nextPage = false;
-      if (users.length > 0) { this.nextPage = true; }
+      if (clients.length > 0) { this.nextPage = true; }
    }
 
    /** iniciar filtro con valores por defaul */
    initFilter(objectFilter: any) {
       this.page = -1;
-      this.listUsers = [];
+      this.listClients = [];
       this.doSearch(objectFilter);
    }
 
@@ -151,32 +134,31 @@ export class ListUserComponent implements OnInit {
    /** resetear filtro a valores por default */
    resetFilter() {
       this.filterFields.search = '';
-      this.filterFields.profile = '';
       this.filterFields.enabled = true;
 
       this.filter();
    }
 
-   /** update list of user */
+   /** update list of field */
    updateList(event: any) {
-      this.listUsers[event.index] = event.user;
+      this.listClients[event.index] = event.field;
    }
 
    /** confirm change status */
-   confirmChangeStatus(user: User, index: number, enabled: boolean) {
-      this.objectChangeStatus = { user, index, enabled };
-      this.modalConfirm.showModal(`cambiar estado de ${user.name} ${user.lastname} a ${enabled ? 'habilitado' : 'deshabilitado'}`);
+   confirmChangeStatus(client: Client, index: number, enabled: boolean) {
+      this.objectChangeStatus = { client, index, enabled };
+      this.modalConfirm.showModal(`cambiar estado de ${client.name} a ${enabled ? 'habilitado' : 'deshabilitado'}`);
    }
 
-   /** change status of user */
+   /** change status of field */
    changeStatus() {
       this.loader = true;
-      this.objectChangeStatus.user.enabled = this.objectChangeStatus.enabled;
-      this.service.update(this.objectChangeStatus.user, this.objectChangeStatus.user.id).subscribe(
+      this.objectChangeStatus.client.enabled = this.objectChangeStatus.enabled;
+      this.service.update(this.objectChangeStatus.client, this.objectChangeStatus.client.id).subscribe(
          (data: any) => {
-            this.alertService.showMessage('Usuarios', 'Se cambió el estado correctamente', 'info');
+            this.alertService.showMessage('Canchas', 'Se cambió el estado correctamente', 'info');
             
-            const event = { index: this.objectChangeStatus.index, user: data.data };
+            const event = { index: this.objectChangeStatus.index, field: data.data };
             this.updateList(event);
             this.loader = false;
          },

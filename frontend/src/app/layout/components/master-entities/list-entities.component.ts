@@ -15,7 +15,12 @@ export class ListEntitieComponent implements OnInit {
    listProfiles: Profile[] = [];
    listTypesFields: TypeField[] = [];
    loader: boolean = false;
-   objectDeleteEntitie: any;
+
+   objectDeleteEntitie: {
+      type: string,
+      entitie: Profile | TypeField,
+      index: number
+   };
 
    constructor(
       private profileService: ProfileService,

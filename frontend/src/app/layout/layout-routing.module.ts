@@ -10,6 +10,7 @@ import { HomeComponent } from './home';
 import { ListUserComponent } from './components/users/index';
 import { ListEntitieComponent } from './components/master-entities';
 import { ListFieldComponent } from './components/fields/index';
+import { ListClientComponent } from './components/clients/index';
 
 const routes: Routes = [
    {
@@ -18,7 +19,8 @@ const routes: Routes = [
          { path: 'home', component: HomeComponent },
          { path: 'users', component: ListUserComponent, canActivate: [AdminGuard] },
          { path: 'tablas-maestras', component: ListEntitieComponent, canActivate: [SuperadminGuard] },
-         { path: 'canchas', component: ListFieldComponent }
+         { path: 'canchas', component: ListFieldComponent },
+         { path: 'clientes', component: ListClientComponent }
       ]
    }
 ];

@@ -22,7 +22,12 @@ export class ListFieldComponent implements OnInit {
    emptyList: boolean = false;
    nextPage: boolean = false;
    loader: boolean = false;
-   objectChangeStatus: any;
+   
+   objectChangeStatus: {
+      field: Field,
+      index: number,
+      enabled: boolean
+   };
 
    /** filter */
    filterFields: any = {
